@@ -31,11 +31,12 @@ class Hotel
             return false;
         }
 
-        $sql = "INSERT INTO hoteles (nombre, ciudad) VALUES (:nombre, :ciudad)";
+        $sql = "INSERT INTO hoteles (nombre, ciudad, telefono) VALUES (:nombre, :ciudad, :telefono)";
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':nombre', $nombre);
         $consulta->bindParam(':ciudad', $ciudad);
+        $consulta->bindParam(':telefono', $telefono);
 
         return $consulta->execute();
     }

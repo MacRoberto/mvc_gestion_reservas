@@ -18,10 +18,10 @@ include 'views/layouts/menu.php';
         </tr>
         <?php foreach ($hoteles as $fila) { ?>
             <tr>
-                <td><?php echo $fila['id']; ?></td>
+                <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
                 <td><?php echo $fila['nombre']; ?></td>
                 <td><?php echo $fila['ciudad']; ?></td>
-                <td><?php echo $fila['numero']; ?></td>
+                <td><?php echo $fila['telefono']; ?></td>
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
                     |

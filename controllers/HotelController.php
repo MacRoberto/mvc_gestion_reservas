@@ -14,8 +14,8 @@ class HotelController
         } elseif ($accion == 'guardar') {
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : '';
-
-            $hotel->guardar($nombre, $ciudad);
+            $telefono = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $hotel->guardar($nombre, $ciudad, $telefono);
             header('Location: hoteles.php');
             exit;
         } elseif ($accion == 'editar') {
