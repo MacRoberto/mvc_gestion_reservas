@@ -18,7 +18,7 @@ class Hotel
             return array();
         }
 
-        $sql = "SELECT id, nombre, ciudad FROM hoteles WHERE deleted_at IS NULL ORDER BY id DESC";
+        $sql = "SELECT id, nombre, ciudad, telefono FROM hoteles WHERE deleted_at IS NULL ORDER BY id DESC";
         $consulta = $this->conexion->prepare($sql);
         $consulta->execute();
 
