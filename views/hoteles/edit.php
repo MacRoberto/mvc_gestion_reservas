@@ -15,6 +15,9 @@ include 'views/layouts/menu.php';
         <label>Ciudad</label>
         <input type="text" name="ciudad" value="<?php echo $hotelEditar['ciudad']; ?>" required>
 
+        <label>Telefono</label>
+        <input type="numero" name="numero" value="<?php echo $hotelEditar['numero']; ?>" required>
+
         <button type="submit">Actualizar</button>
     </form>
 </div>

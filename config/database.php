@@ -4,7 +4,7 @@ class Database
 {
     private $host = 'localhost';
     private $usuario = 'root';
-    private $password = 'root';
+    private $password = '';
     private $basedatos = 'mvp_reservas_hotel';
 
     public function conectar()

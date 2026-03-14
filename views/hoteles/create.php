@@ -13,6 +13,10 @@ include 'views/layouts/menu.php';
         <label>Ciudad</label>
         <input type="text" name="ciudad" required>
 
+        <label>Telefono</label>
+        <input type="numero" name="numero" required>
+        
+
         <button type="submit">Guardar</button>
     </form>
 </div>

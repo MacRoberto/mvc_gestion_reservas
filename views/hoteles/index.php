@@ -13,6 +13,7 @@ include 'views/layouts/menu.php';
             <th>ID</th>
             <th>Nombre</th>
             <th>Ciudad</th>
+            <th>Numero</th>
             <th>Acciones</th>
         </tr>
         <?php foreach ($hoteles as $fila) { ?>
@@ -20,6 +21,7 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['id']; ?></td>
                 <td><?php echo $fila['nombre']; ?></td>
                 <td><?php echo $fila['ciudad']; ?></td>
+                <td><?php echo $fila['numero']; ?></td>
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
                     |
