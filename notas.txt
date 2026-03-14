@@ -1,0 +1,11 @@
+- CRUD de hoteles
+    - Agregar inputs faltantes en el formulario
+    - Corregir error al insertar registro
+    - Agregar columnas faltantes en la tabla
+    - Recuperar y mostrar información faltante en la tabla
+    - Eliminar registro de hoteles
+    - Agregar campos faltantes en el formulario de editar hoteles
+    - Agregar campos faltantes en update de hoteles
+    - Mostrar opciones faltantes en menú: reservas, usuarios, clientes
+
+- Agregar 3 registros directamente en cada tabla
