@@ -15,7 +15,7 @@ class HotelController
             $nombre_p = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : '';
             $dirreccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
-            $telefono = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
             $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
@@ -37,7 +37,7 @@ class HotelController
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : '';
             $dirreccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
-            $telefono = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
             $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
