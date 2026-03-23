@@ -15,13 +15,16 @@ include 'views/layouts/menu.php';
         <label>Ciudad</label>
         <input type="text" name="ciudad" value="<?php echo $hotelEditar['ciudad']; ?>" required>
 
+        <label>Direccion</label>
+        <input type="text" name="direccion" value="<?php echo $hotelEditar['direccion']; ?>" required>
+
         <label>Telefono</label>
         <input type="numero" name="telefono" value="<?php echo $hotelEditar['telefono']; ?>" required>
 
         <label>Correo electronico</label>
         <input type="email" name="email" value="<?php echo $hotelEditar['email']; ?>" required>
 
-        <label>Descriocion</label>
+        <label>Descripcion</label>
         <input type="text" name="descripcion" value="<?php echo $hotelEditar['descripcion']; ?>" required>
 
         
