@@ -13,7 +13,14 @@ include 'views/layouts/menu.php';
             <th>ID</th>
             <th>Nombre</th>
             <th>Ciudad</th>
-            <th>Numero</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Hora Check In</th>
+            <th>Hora Check Out</th>
+            <th>Diponible General</th>
             <th>Acciones</th>
         </tr>
         <?php foreach ($hoteles as $fila) { ?>
@@ -21,10 +28,17 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
                 <td><?php echo $fila['nombre']; ?></td>
                 <td><?php echo $fila['ciudad']; ?></td>
+                <td><?php echo $fila['direccion']; ?></td>
                 <td><?php echo $fila['telefono']; ?></td>
+                <td><?php echo $fila['email']; ?></td>
+                <td><?php echo $fila['descripcion']; ?></td>
+                <td><?php echo $fila['categoria']; ?></td>
+                <td><?php echo $fila['hora_checkin']; ?></td>
+                <td><?php echo $fila['hora_checkout']; ?></td>
+                <td><?php echo $fila['disponible_general']; ?></td>
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
-                    |
+
                     <a href="hoteles.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
                 </td>
             </tr>

@@ -6,7 +6,7 @@ include 'views/layouts/menu.php';
 <div class="contenedor">
     <h1><?php echo $titulo; ?></h1>
 
-    <form action="hoteles.php?accion=actualizar" method="POST">
+    <form action="habitaciones.php?accion=actualizar" method="POST">
         <input type="hidden" name="id" value="<?php echo $hotelEditar['id']; ?>">
 
         <label>Nombre del hotel</label>
