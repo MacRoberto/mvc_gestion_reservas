@@ -25,7 +25,7 @@ class Habitacion
         return $consulta->fetchAll();
     }
 
-    public function guardar($tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda, $disponible_general)
+    public function guardar($hotel_id,$tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda, $disponible_general)
     {
         if (!$this->conexion) {
             return false;
@@ -34,7 +34,7 @@ class Habitacion
         $sql = "INSERT INTO habitaciones (hotel_id,tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general) VALUES ( :hotel_id, :tipo_abitacion, :descripcion, :capacidad_adultos, :capacidad_ninos, :capacidad_camas, :precio_noche, :moneda, :disponible_general)";
         $consulta = $this->conexion->prepare($sql);
         
-        $consulta->bindParam(':hotel_id', 3);
+        $consulta->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
         $consulta->bindParam(':tipo_habitacion', $tipo_habitacion);
         $consulta->bindParam(':descripcion', $descripcion);
         $consulta->bindParam(':capacidad_adultos', $capacidad_adultos);
