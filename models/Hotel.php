@@ -25,7 +25,7 @@ class Hotel
         return $consulta->fetchAll();
     }
 
-    public function guardar($nombre, $ciudad,$dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_check_out, $disponible)
+    public function guardar($nombre, $ciudad,$dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible)
     {
         if (!$this->conexion) {
             return false;
@@ -41,8 +41,8 @@ class Hotel
         $consulta->bindParam(':email', $email);
         $consulta->bindParam(':descripcion', $descripcion);
         $consulta->bindParam(':categoria', $categoria);
-        $consulta->bindParam(':hora_checkin', $hora_check_in);
-        $consulta->bindParam(':hora_checkout', $hora_check_out);
+        $consulta->bindParam(':hora_checkin', $hora_checkin);
+        $consulta->bindParam(':hora_checkout', $hora_checkout);
         $consulta->bindParam(':disponible_general', $disponible);
        
 
@@ -63,7 +63,7 @@ class Hotel
         return $consulta->fetch();
     }
 
-    public function actualizar($id, $nombre, $ciudad, $dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_check_out, $disponible)
+    public function actualizar($id, $nombre, $ciudad, $dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible)
     {
         if (!$this->conexion) {
             return false;
@@ -80,8 +80,8 @@ class Hotel
         $consulta->bindParam(':email', $email);
         $consulta->bindParam(':descripcion', $descripcion);
         $consulta->bindParam(':categoria', $categoria);
-        $consulta->bindParam(':hora_checkin', $hora_check_in);
-        $consulta->bindParam(':hora_checkout', $hora_check_out);
+        $consulta->bindParam(':hora_checkin', $hora_checkin);
+        $consulta->bindParam(':hora_checkout', $hora_checkout);
         $consulta->bindParam(':disponible_general', $disponible);
 
         return $consulta->execute();

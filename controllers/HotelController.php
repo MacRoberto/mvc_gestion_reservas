@@ -15,12 +15,12 @@ class HotelController
             $nombre_p = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $ciudad = isset($_POST['ciudad']) ? $_POST['ciudad'] : '';
             $dirreccion = isset($_POST['direccion']) ? $_POST['direccion'] : '';
-            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+            $telefono = isset($_POST['telefono']) ? $_POST[''] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
             $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
-            $hora_check_in = isset($_POST['hora_checkin']) ? $_POST['hora_checkin'] : '';
-            $hora_check_out = isset($_POST['hora_checkout']) ? $_POST['hora_checkout'] : '';
+            $hora_checkin = isset($_POST['hora_checkin']) ? $_POST['hora_checkin'] : '';
+            $hora_checkout = isset($_POST['hora_checkout']) ? $_POST['hora_checkout'] : '';
             $disponible = isset($_POST['disponible']) ? $_POST['disponible'] : '';
 
             $hotel->guardar($nombre_p, $ciudad,$dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible);
@@ -41,8 +41,8 @@ class HotelController
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
             $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
-            $hora_check_in = isset($_POST['hora_checkin']) ? $_POST['hora_checkin'] : '';
-            $hora_check_out = isset($_POST['hora_checkout']) ? $_POST['hora_checkout'] : '';
+            $hora_checkin = isset($_POST['hora_checkin']) ? $_POST['hora_checkin'] : '';
+            $hora_checkout = isset($_POST['hora_checkout']) ? $_POST['hora_checkout'] : '';
             $disponible = isset($_POST['disponible']) ? $_POST['disponible'] : '';
 
             $hotel->actualizar($id, $nombre, $ciudad, $dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible);
