@@ -39,7 +39,11 @@ include 'views/layouts/menu.php';
         <label>Check out </label>
         <input type="time" name="hora_checkout" value="<?php echo $hotelEditar['hora_checkout']; ?>" required>
 
-
+        <label>Disponible</label>
+        <select name="disponible">
+            <option value="0" <?php echo $hotelEditar['disponible_general'] == 0 ? 'selected' : ''; ?>>No</option>
+            <option value="1" <?php echo $hotelEditar['disponible_general'] == 1 ? 'selected' : ''; ?>>Si</option>
+        </select>
         <button type="submit">Actualizar</button>
     </form>
 </div>

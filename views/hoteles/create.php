@@ -34,7 +34,7 @@ include 'views/layouts/menu.php';
         <label>Check out </label>
         <input type="time" name="hora_checkout" required>
 
-        <imput>disponible</imput>        
+        <label>disponible</label>        
         <select name="disponible" >
         <option value="0">No</option>
         <option value="1">Si</option>

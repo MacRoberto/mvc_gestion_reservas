@@ -21,12 +21,12 @@ include 'views/layouts/menu.php';
             <th>Disponible General</th>
             <th>Acciones</th>
         </tr>
-        <?php foreach ($tipo_habitacion as $fila) { ?>
+        <?php foreach ($habitaciones as $fila) { ?>
             <tr>
-                <td><?php echo $fila['idhabitacion']; //nombres que vienen de la bd ?></td>
+                <td><?php echo $fila['hotel_id']; //nombres que vienen de la bd ?></td>
                 <td><?php echo $fila['tipo_habitacion']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
-                <td><?php echo $fila['capacidad_adulto']; ?></td>
+                <td><?php echo $fila['capacidad_adultos']; ?></td>
                 <td><?php echo $fila['capacidad_ninos']; ?></td>
                 <td><?php echo $fila['cantidad_camas']; ?></td>
                 <td><?php echo $fila['precio_noche']; ?></td>
