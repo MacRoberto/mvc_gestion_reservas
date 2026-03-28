@@ -12,7 +12,8 @@ class HabitacionController
             $titulo = 'Nuevo habitacion';
             include 'views/habitaciones/create.php';
         } elseif ($accion == 'guardar') {
-            $tipo_habitacion = isset($_POST['tipo_habitacion']) ? $_POST['tipo_habitacion'] : '';
+             $hotel_id = 3;
+             $tipo_habitacion = isset($_POST['tipo_habitacion']) ? $_POST['tipo_habitacion'] : '';
              $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
              $capacidad_adultos = isset($_POST['capacidad_adultos']) ? $_POST['capacidad_adultos'] : '';
              $capacidad_ninos = isset($_POST['capacidad_ninos']) ? $_POST['capacidad_ninos'] : '';
@@ -21,10 +22,9 @@ class HabitacionController
              $moneda = isset($_POST['moneda']) ? $_POST['moneda'] : '';
              $disponible = isset($_POST['disponible']) ? $_POST['disponible'] : '';
         
+            $habitacion->guardar($hotel_id, $tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda,$disponible);
 
-            $habitacion->guardar($tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda,$disponible);
-
-            header('Location: hoteles.php');
+            header('Location: habitaciones.php');
             exit;
         } elseif ($accion == 'editar') {
             $id = isset($_GET['id']) ? $_GET['id'] : 0;
