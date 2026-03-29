@@ -38,8 +38,9 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['disponible_general']; ?></td>
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
-
+                    <a href="hoteles.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
                     <a href="hoteles.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
+
                 </td>
             </tr>
         <?php } ?>

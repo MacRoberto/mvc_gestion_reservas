@@ -7,6 +7,14 @@ include 'views/layouts/menu.php';
     <h1><?php echo $titulo; ?></h1>
 
     <form action="habitaciones.php?accion=guardar" method="POST">
+        <label>Hotel</label>
+        <select name="hotel_id" required>
+            <option value="">Seleccione un hotel</option>
+            <?php foreach ($hoteles as $h) { ?>
+                <option value="<?php echo $h['id']; ?>"><?php echo $h['nombre']; ?></option>
+            <?php } ?>
+        </select>
+
         <label>Tipo de habitación</label>
         <input type="text" name="tipo_habitacion" required>
 

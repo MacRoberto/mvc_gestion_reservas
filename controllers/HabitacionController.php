@@ -1,6 +1,7 @@
 <?php
 
-include_once 'models/habitacion.php';
+include_once 'models/Habitacion.php';
+include_once 'models/Hotel.php';
 
 class HabitacionController
 {
@@ -9,10 +10,12 @@ class HabitacionController
         $habitacion = new Habitacion();
 
         if ($accion == 'nuevo') {
+            $hotel = new Hotel();
+            $hoteles = $hotel->obtenerTodos();
             $titulo = 'Nuevo habitacion';
             include 'views/habitaciones/create.php';
         } elseif ($accion == 'guardar') {
-             $hotel_id = 3;
+             $hotel_id = isset($_POST['hotel_id']) ? $_POST['hotel_id'] : 0;
              $tipo_habitacion = isset($_POST['tipo_habitacion']) ? $_POST['tipo_habitacion'] : '';
              $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
              $capacidad_adultos = isset($_POST['capacidad_adultos']) ? $_POST['capacidad_adultos'] : '';
