@@ -12,60 +12,34 @@ include 'views/layouts/menu.php';
         <label>Tipo de habitación</label>
         <input type="text" name="habitacion_tipo" value="<?php echo $HabitacionEditar['habitacion_tipo']; ?>" required>
 
-        <label>Ciudad</label>
-        <input type="text" name="ciudad" value="<?php echo $HabitacionEditar['ciudad']; ?>" required>
-
-        <label>Telefono</label>
-        <input type="numero" name="telefono" value="<?php echo $HabitacionEditar['telefono']; ?>" required>
-
-        <label>Correo electronico</label>
-        <input type="email" name="email" value="<?php echo $HabitacionEditar['email']; ?>" required>
-
-        <label>Descriocion</label>
+        <label>Descripción</label>
         <input type="text" name="descripcion" value="<?php echo $HabitacionEditar['descripcion']; ?>" required>
 
-        
-        <label>categoria</label>
-        <input type="text" name="categoria" value="<?php echo $HabitacionEditar['categoria']; ?>" required>
-
-
-        <label>Hora check in </label>
-        <input type="time" name="hora_checkin" value="<?php echo $HabitacionEditar['hora_checkin']; ?>" required>
-
-
-        <label>Check out </label>
-        <input type="time" name="hora_checkout" value="<?php echo $HabitacionEditar['hora_checkout']; ?>" required>
-
-
-        <input type="text" name="habitacion_tipo" required>
-
-        <label>Descripción</label>
-        <input type="text" name="descripcion" required>
-
         <label>Capacidad de Adultos</label>
-        <input type="numero" name="num_adultos" required>
+        <input type="numero" name="capacidad_adultos" value="<?php echo $HabitacionEditar['capacidad_adultos']; ?>" required>
 
         <label>Capacidad de Niños</label>
-        <input type="numbero" name="num_niños" required>
+        <input type="numero" name="capacidad_ninos" value="<?php echo $HabitacionEditar['capacidad_ninos']; ?>" required>
 
         <label>Cantidad de Cama</label>
-        <input type="numero" name="num_cama" required>
+        <input type="numero" name="cantidad_camas" value="<?php echo $HabitacionEditar['cantidad_camas']; ?>" required>
 
-        <label>Precio por Noche</label>
-        <input type="numero" name="precio" required>
         
+        <label>Precio por Noche</label>
+        <input type="numero" name="precio_noche" value="<?php echo $HabitacionEditar['precio_noche']; ?>" required>
+
+
         <label>Moneda</label>
-        <input type="numero" name="precio" required>
-
-        <label>Disposición General </label>
-        <input type="text" name="disposicion_general" required>
+        <input type="numero" name="moneda" value="<?php echo $HabitacionEditar['moneda']; ?>" required>
 
 
-
-
-
-
+        <label>Disponible General</label>
+        <select name="disponible">
+            <option value="0" <?php echo $hotelEditar['disponible_general'] == 0 ? 'selected' : ''; ?>>No</option>
+            <option value="1" <?php echo $hotelEditar['disponible_general'] == 1 ? 'selected' : ''; ?>>Si</option>
+        </select>
         <button type="submit">Actualizar</button>
+
     </form>
 </div>
 
