@@ -31,7 +31,15 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['cantidad_camas']; ?></td>
                 <td><?php echo $fila['precio_noche']; ?></td>
                 <td><?php echo $fila['moneda']; ?></td>
-                <td><?php echo $fila['disponible_general']; ?></td>
+                <td>
+                    <?php
+                        if($fila['disponible_general'] == 0){
+                            echo 'No'; 
+                        }else{
+                            echo 'Si';
+                        } 
+                    ?>
+                </td>
                 <td>
                     <a href="habitaciones.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
 

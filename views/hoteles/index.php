@@ -35,7 +35,16 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['categoria']; ?></td>
                 <td><?php echo $fila['hora_checkin']; ?></td>
                 <td><?php echo $fila['hora_checkout']; ?></td>
-                <td><?php echo $fila['disponible_general']; ?></td>
+                <td>
+                    <?php
+                        if($fila['disponible_general'] == 0){
+                            echo 'No'; 
+                        }else{
+                            echo 'Si';
+                        } 
+                    ?>
+                </td>
+
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
                     <a href="hoteles.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>

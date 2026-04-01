@@ -21,13 +21,19 @@ include 'views/layouts/menu.php';
         <label>Contraseña</label>
         <input type="password" name="contrasena" value="<?php echo $usuarioEditar['contrasena']; ?>" required>
 
-        <label>Permiso</label>
-        <input type="text" name="permiso" value="<?php echo $usuarioEditar['permiso']; ?>" required>
+        <label>Permiso</label>        
+        <select name="permiso" >
+        <option value="usuario">Usuario</option>
+        <option value="admin">Admin</option>
+        <option value="propietario">Propietario</option>
+        <option value="IT">IT</option>
+        </select>
 
         <label>Activo</label>
         <select name="activo">
             <option value="0" <?php echo $usuarioEditar['activo'] == 0 ? 'selected' : ''; ?>>No</option>
             <option value="1" <?php echo $usuarioEditar['activo'] == 1 ? 'selected' : ''; ?>>Si</option>
+            if()
         </select>
 
         <button type="submit">Actualizar</button>

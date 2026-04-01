@@ -13,18 +13,16 @@ class UsuarioController
             $titulo = 'Nuevo usuario';
             include 'views/usuarios/create.php';
         } elseif ($accion == 'guardar') {
-            $id = isset($_GET['id']) ? $_GET['id'] : 1;
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
-            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+            $telefono = isset($_POST['numero']) ? $_POST['numero'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
             $permiso = isset($_POST['permiso']) ? $_POST['permiso'] : '';
-            $activo = isset($_POST['activo']) ? $_POST['activo'] : '';
-            $user_uuid = isset($_POST['user_uuid']) ? $_POST['user_uuid'] : '';
+            $estatus = isset($_POST['activo']) ? $_POST['activo'] : '';
            
 
-            $usuario->guardar($id, $nombre, $telefono, $email, $contrasena,
-             $permiso, $activo, $user_uuid);
+            $usuario->guardar($nombre, $telefono, $email, $contrasena,
+             $permiso, $estatus);
 
             header('Location: usuarios.php');
             exit;

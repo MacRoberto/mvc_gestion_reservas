@@ -30,7 +30,15 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['email']; ?></td>
                 <td><?php echo $fila['contrasena']; ?></td>
                 <td><?php echo $fila['permiso']; ?></td>
-                <td><?php echo $fila['activo']; ?></td>
+                <td>
+                    <?php
+                        if($fila['activo'] == 0){
+                            echo 'No'; 
+                        }else{
+                            echo 'Si';
+                        } 
+                    ?>
+                </td>
                 <td><?php echo $fila['user_uuid']; ?></td>
                 <td>
                     <a href="usuarios.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>

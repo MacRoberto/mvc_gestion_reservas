@@ -54,7 +54,7 @@ class Habitacion
             return array('id' => $id, 'tipo_habitacion' => 'Habitacion de ejemplo', 'descripcion' => 'descripcion de ejemplo');
         }
 
-        $sql = "SELECT id, tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general  FROM hoteles WHERE id = :id AND deleted_at IS NULL";
+        $sql = "SELECT id, tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general  FROM habitaciones WHERE id = :id AND deleted_at IS NULL";
         $consulta = $this->conexion->prepare($sql);
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
@@ -62,13 +62,15 @@ class Habitacion
         return $consulta->fetch();
     }
 
-    public function actualizar($id,$tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda, $disponible_general)
+    public function actualizar($id,$tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, 
+    $cantidad_camas, $precio_noche, $moneda, $disponible_general)
     {
         if (!$this->conexion) {
             return false;
         }
 
-        $sql = "UPDATE hoteles SET tipo_habtacion = :tipo_habitacion, descripcion = :descripcion, capacidad_adultos =:capacidad_adultos, capacidad_ninos = :capacidad_ninos, cantidad_camas = :cantidad_camas, precio_noche = :precio_noche, moneda = :moneda, disponible_general = :disponible_general, WHERE id = :id AND deleted_at IS NULL";
+        $sql = "UPDATE habitaciones SET tipo_habitacion = :tipo_habitacion, descripcion = :descripcion, capacidad_adultos =:capacidad_adultos, capacidad_ninos = :capacidad_ninos,
+         cantidad_camas = :cantidad_camas, precio_noche = :precio_noche, moneda = :moneda, disponible_general = :disponible WHERE id = :id AND deleted_at IS NULL";
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
@@ -76,10 +78,10 @@ class Habitacion
         $consulta->bindParam(':descripcion', $descripcion);
         $consulta->bindParam(':capacidad_adultos', $capacidad_adultos);
         $consulta->bindParam(':capacidad_ninos', $capacidad_ninos);
-        $consulta->bindParam(':capacidad_cama', $cantidad_camas);
+        $consulta->bindParam(':cantidad_camas', $cantidad_camas);
         $consulta->bindParam(':precio_noche', $precio_noche);
         $consulta->bindParam(':moneda', $moneda);
-        $consulta->bindParam(':disponible_general', $disponible_general);
+        $consulta->bindParam(':disponible', $disponible_general);
 
         return $consulta->execute();
     }

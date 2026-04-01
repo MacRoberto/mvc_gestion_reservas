@@ -33,9 +33,13 @@ include 'views/layouts/menu.php';
         <label>Precio por Noche</label>
         <input type="numero" name="precio_noche" required>
         
-        <label>Moneda</label>
-        <input type="numero" name="moneda" required>
-
+        <label>Mondea</label>        
+        <select name="moneda" >
+        <option value="MXN">MXN</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        </select>
+        
         <label>disponible</label>        
         <select name="disponible" >
         <option value="0">No</option>

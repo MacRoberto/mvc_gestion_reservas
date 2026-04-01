@@ -25,23 +25,23 @@ class Usuario
 
         return $consulta->fetchAll();
     }
-
-    public function guardar($nombre, $telefono, $email, $contrasena, $permiso, $activo, $user_uuid)
+//Cierra la sesion de live share
+    public function guardar($nombre, $telefono, $email, $contrasena, $permiso, $estatus)
     {
         if (!$this->conexion) {
             return false;
         }
 
-        $sql = "INSERT INTO usuarios (nombre, telefono, email, contrasena, permiso, activo, user_uuid) VALUES (:nombre, :telefono, :email, :contrasena, :permiso, :activo, :user_uuid)";
+        $sql = "INSERT INTO usuarios (nombre, telefono, email, contrasena, permiso, activo, user_uuid) 
+        VALUES (:nombre, :telefono, :email, :contrasena, :permiso, :activo, UUID())";
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':nombre', $nombre);
         $consulta->bindParam(':telefono', $telefono);
         $consulta->bindParam(':email', $email);
-        $consulta->bindParam(':contrasena', sha1($contrasena));
+        $consulta->bindParam(':contrasena', md5($contrasena));
         $consulta->bindParam(':permiso', $permiso);
-        $consulta->bindParam(':activo', $activo);
-        $consulta->bindParam(':user_uuid', $user_uuid);
+        $consulta->bindParam(':activo', $estatus);
 
         return $consulta->execute();
     }
@@ -73,7 +73,7 @@ class Usuario
         $consulta->bindParam(':nombre', $nombre);
         $consulta->bindParam(':telefono', $telefono);
         $consulta->bindParam(':email', $email);
-        $consulta->bindParam(':contrasena', sha1($contrasena));
+        $consulta->bindParam(':contrasena', md5($contrasena));
         $consulta->bindParam(':permiso', $permiso);
         $consulta->bindParam(':activo', $activo);
         $consulta->bindParam(':user_uuid', $user_uuid);

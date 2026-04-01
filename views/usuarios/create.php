@@ -11,19 +11,24 @@ include 'views/layouts/menu.php';
         <input type="text" name="nombre" required>
 
         <label>Telefono</label>
-        <input type="numero" name="numero" required>
+        <input type="number" name="numero" required>
 
         <label>Email</label>
         <input type="email" name="email" required>
 
         <label>Contraseña</label>
-        <input type="password" name="contraseña" required>
+        <input type="password" name="contrasena" required>
 
-        <label>Permiso</label>
-        <input type="text" name="permiso" required>
+        <label>Permiso</label>        
+        <select name="permiso" >
+        <option value="usuario">Usuario</option>
+        <option value="admin">Admin</option>
+        <option value="propietario">Propietario</option>
+        <option value="IT">IT</option>
+        </select>
 
         <label>Activo</label>        
-        <select name="Activo" >
+        <select name="activo" >
         <option value="0">No</option>
         <option value="1">Si</option>
         </select>
