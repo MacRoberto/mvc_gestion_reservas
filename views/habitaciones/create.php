@@ -11,7 +11,7 @@ include 'views/layouts/menu.php';
         <select name="hotel_id" required>
             <option value="">Seleccione un hotel</option>
             <?php foreach ($hoteles as $h) { ?>
-                <option value="<?php echo $h['id']; ?>"><?php echo $h['nombre']; ?></option>
+                <option value="<?php echo $h['id']; ?>" <?php echo isset($_GET['hotel_id']) && $_GET['hotel_id'] == $h['id'] ? 'selected' : ''; ?>><?php echo $h['nombre']; ?></option>
             <?php } ?>
         </select>
 

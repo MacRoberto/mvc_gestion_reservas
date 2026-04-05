@@ -58,8 +58,19 @@ class HabitacionController
             header('Location: habitaciones.php');
             exit;
         } else {
-            $habitaciones = $habitacion->obtenerTodos();//>Consultas
-            $titulo = 'Lista de habitaciones';
+            $hotelId = isset($_GET['hotel_id']) ? (int) $_GET['hotel_id'] : 0;
+
+            if ($hotelId > 0) {
+                $hotel = new Hotel();
+                $hotelInfo = $hotel->obtenerPorId($hotelId);
+                $habitaciones = $habitacion->obtenerPorHotelId($hotelId);
+                $titulo = 'Lista de habitaciones del hotel: ' . $hotelInfo['nombre'];
+            } else {
+                $hotelId = 0;
+                $habitaciones = $habitacion->obtenerTodos();
+                $titulo = 'Lista de habitaciones';
+            }
+
             include 'views/habitaciones/index.php';
         }
     }

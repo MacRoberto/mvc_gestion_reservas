@@ -25,6 +25,23 @@ class Habitacion
         return $consulta->fetchAll();
     }
 
+        public function obtenerPorHotelId($hotelId)
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $sql = "SELECT id, hotel_id, tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general
+                FROM habitaciones
+                WHERE hotel_id = :hotel_id AND deleted_at IS NULL
+                ORDER BY id DESC";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':hotel_id', $hotelId, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchAll();
+    }
+
     public function guardar($hotel_id, $tipo_habitacion, $descripcion, $capacidad_adultos, $capacidad_ninos, $cantidad_camas, $precio_noche, $moneda, $disponible_general)
     {
         if (!$this->conexion) {

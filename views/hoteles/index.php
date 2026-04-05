@@ -4,11 +4,23 @@ include 'views/layouts/menu.php';
 ?>
 
 <div class="contenedor">
-    <h1><?php echo $titulo; ?></h1>
+    <div class="admin-header">
+        <h1><?php echo $titulo; ?></h1>
+        <p><a class="boton" href="hoteles.php?accion=nuevo">Nuevo hotel</a></p>
+    </div>
+    <form action="hoteles.php" method="GET" class="admin-buscador">
+        <select name="campo">
+            <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
+            <option value="nombre" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'nombre' ? 'selected' : ''; ?>>Nombre</option>
+            <option value="ciudad" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'ciudad' ? 'selected' : ''; ?>>Ciudad</option>
+            <option value="direccion" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'direccion' ? 'selected' : ''; ?>>Dirección</option>
+        </select>
+        <input type="text" name="busqueda" value="<?php echo isset($_GET['busqueda']) ? htmlspecialchars($_GET['busqueda']) : ''; ?>">
+        <button type="submit">Buscar</button>
+    </form>
 
-    <p><a class="boton" href="hoteles.php?accion=nuevo">Nuevo hotel</a></p>
-
-    <table>
+    <div class="tabla-scroll">
+    <table class="tabla-admin">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -47,6 +59,7 @@ include 'views/layouts/menu.php';
 
                 <td>
                     <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
+                    <a href="habitaciones.php?hotel_id=<?php echo $fila['id']; ?>">Habitaciones</a>
                     <a href="hoteles.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
                     <a href="hoteles.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
 
@@ -54,6 +67,7 @@ include 'views/layouts/menu.php';
             </tr>
         <?php } ?>
     </table>
+    </div>
 </div>
 
 <?php

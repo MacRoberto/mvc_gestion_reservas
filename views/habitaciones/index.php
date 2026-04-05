@@ -5,8 +5,11 @@ include 'views/layouts/menu.php';
 
 <div class="contenedor">
     <h1><?php echo $titulo; ?></h1>
-     <p><a class="boton" href="habitaciones.php?accion=nuevo">Nueva Habitacion</a></p>
-    <p>Vista base del modulo de habitaciones.</p>
+     <p><a class="boton" href="habitaciones.php?accion=nuevo&hotel_id=<?php echo $hotelId; ?>">Nueva Habitacion</a></p>
+    <?php if (isset($_GET['hotel_id']) && (int) $_GET['hotel_id'] > 0) { ?>
+        <p><a class="boton" href="habitaciones.php">Ver todas las habitaciones</a></p>
+    <?php } ?>
+     <p>Vista base del modulo de habitaciones.</p>
 
         <table>
         <tr>
@@ -23,7 +26,7 @@ include 'views/layouts/menu.php';
         </tr>
         <?php foreach ($habitaciones as $fila) { ?>
             <tr>
-                <td><?php echo $fila['hotel_id']; //nombres que vienen de la bd ?></td>
+                <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
                 <td><?php echo $fila['tipo_habitacion']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['capacidad_adultos']; ?></td>

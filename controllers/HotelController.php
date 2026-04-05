@@ -83,7 +83,10 @@ class HotelController
                 header('Location: hoteles.php?accion=imagenes&id=' . $hotelId . '&mensaje=Imagen quitada correctamente');
                 break;
             default:
-                $hoteles = $hotel->obtenerTodos();
+                $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
+                $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+                $hoteles = $hotel->obtenerTodos($campo, $busqueda);
+                
                 $titulo = 'Lista de hoteles';
                 include 'views/hoteles/index.php';
             break;

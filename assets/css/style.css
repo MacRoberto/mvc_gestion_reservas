@@ -51,6 +51,12 @@ button {
   cursor: pointer;
 }
 
+button:disabled,
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -64,6 +70,27 @@ table td {
   text-align: left;
 }
 
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-admin {
+  min-width: 1400px;
+}
+
+.tabla-admin th:last-child,
+.tabla-admin td:last-child {
+  position: sticky;
+  right: 0;
+  background: #ffffff;
+  z-index: 1;
+}
+
+.tabla-admin th:last-child {
+  z-index: 2;
+}
+
 form label {
   display: block;
   margin-top: 10px;
@@ -75,4 +102,100 @@ form select {
   padding: 10px;
   margin-top: 5px;
   box-sizing: border-box;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.admin-header h1,
+.admin-header p {
+  margin: 0;
+}
+
+.admin-buscador {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.admin-buscador select,
+.admin-buscador input {
+  margin-top: 0;
+}
+
+.admin-buscador select {
+  max-width: 180px;
+}
+
+.admin-buscador input {
+  flex: 1;
+}
+
+.admin-buscador button {
+  white-space: nowrap;
+}
+
+.usuario-form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.usuario-form-row-2 .usuario-form-col {
+  width: 50%;
+}
+
+.usuario-form-row-3 .usuario-form-col {
+  width: 33.3333%;
+}
+
+.usuario-form-col {
+  flex: 1;
+}
+
+.usuario-form-col label {
+  margin-top: 0;
+}
+
+.usuario-check-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario-check-line input[type="checkbox"] {
+  width: auto;
+  margin-top: 0;
+}
+
+.usuario-check-line label {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-header,
+  .admin-buscador {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-buscador select {
+    max-width: none;
+  }
+
+  .usuario-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .usuario-form-row-2 .usuario-form-col,
+  .usuario-form-row-3 .usuario-form-col {
+    width: 100%;
+  }
 }
