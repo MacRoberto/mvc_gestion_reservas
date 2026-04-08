@@ -54,9 +54,15 @@ class UsuarioController
             header('Location: usuarios.php');
             exit;
         } else {
-            $usuarios = $usuario->obtenerTodos();//>Consultas
+
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
+            $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+            $usuarios = $usuario->obtenerTodos($campo, $busqueda);//>Consultas
             $titulo = 'Lista de usuarios';
+
             include 'views/usuarios/index.php';
         }
     }
 }
+
+            

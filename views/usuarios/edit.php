@@ -28,10 +28,10 @@ include 'views/layouts/menu.php';
             <div class="usuario-form-col">
                 <label>Permiso</label>        
                 <select name="permiso" >
-                <option value="usuario">Usuario</option>
-                <option value="admin">Admin</option>
-                <option value="propietario">Propietario</option>
-                <option value="IT">IT</option>
+                <option value="usuario" <?php echo $usuarioEditar['permiso'] == "usuario" ? 'selected' : ''; ?>>Usuario</option>
+                <option value="admin" <?php echo $usuarioEditar['permiso'] == "admin" ? 'selected' : ''; ?>>Admin</option>
+                <option value="propietario" <?php echo $usuarioEditar['permiso'] == "propietario" ? 'selected' : ''; ?>>Propietario</option>
+                <option value="IT" <?php echo $usuarioEditar['permiso'] == "IT" ? 'selected' : ''; ?>>IT</option>
                 </select>
             </div>
             <div class="usuario-form-col">

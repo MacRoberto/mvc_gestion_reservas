@@ -30,9 +30,9 @@ include 'views/layouts/menu.php';
 
         <label>Mondea</label>        
         <select name="moneda" >
-        <option value="MXN">MXN</option>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
+        <option value="MXN" <?php echo $habitacionEditar['moneda'] == "MXN" ? 'selected' : ''; ?>>MXN</option>
+        <option value="USD" <?php echo $habitacionEditar['moneda'] == "USD" ? 'selected' : ''; ?>>USD</option>
+        <option value="EUR" <?php echo $habitacionEditar['moneda'] == "EUR" ? 'selected' : ''; ?>>EUR</option>
         </select>
 
 

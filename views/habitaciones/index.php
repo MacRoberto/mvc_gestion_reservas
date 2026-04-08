@@ -9,9 +9,20 @@ include 'views/layouts/menu.php';
     <?php if (isset($_GET['hotel_id']) && (int) $_GET['hotel_id'] > 0) { ?>
         <p><a class="boton" href="habitaciones.php">Ver todas las habitaciones</a></p>
     <?php } ?>
-     <p>Vista base del modulo de habitaciones.</p>
 
-        <table>
+    <form action="habitaciones.php" method="GET" class="admin-buscador">
+        <select name="campo">
+            <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
+            <option value="habitacion" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'habitacion' ? 'selected' : ''; ?>>Habitacíon</option>
+            <option value="precio_noche" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'precio_noche' ? 'selected' : ''; ?>>Precio</option>
+            <option value="disponible_general" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'disponible_general' ? 'selected' : ''; ?>>Disponible</option>
+        </select>
+        <input type="text" name="busqueda" value="<?php echo isset($_GET['busqueda']) ? htmlspecialchars($_GET['busqueda']) : ''; ?>">
+        <button type="submit">Buscar</button>
+    </form>
+     
+    <div class="tabla-scroll">
+    <table class="tabla-admin">
         <tr>
             <th>idhabitacion</th>
             <th>Tipo de Habitación</th>

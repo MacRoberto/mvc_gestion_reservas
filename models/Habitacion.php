@@ -12,14 +12,28 @@ class Habitacion
         $this->conexion = $database->conectar();
     }
 
-    public function obtenerTodos()
+    public function obtenerTodos($campo = "todos", $busqueda = "")
     {
         if (!$this->conexion) {
             return array();
         }
 
-        $sql = "SELECT id, hotel_id, tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general FROM habitaciones WHERE deleted_at IS NULL ORDER BY id DESC";
+        $busquedaLike = '%' . $busqueda . '%';
+        $sql = "SELECT id, hotel_id, tipo_habitacion, descripcion, capacidad_adultos, capacidad_ninos, cantidad_camas, precio_noche, moneda, disponible_general FROM habitaciones WHERE deleted_at IS NULL";
+
+        if($busquedaLike != ""){//Solo se aplica el filtro si el usuario ingreso algo en el input
+            if ($campo != 'todos') {
+                $sql .= " AND ".$campo." LIKE :busqueda";
+            } else {
+                //Agregar campos adicionales donde se desee aplicar el filtro de busqueda
+                $sql .= " AND (tipo_habitacion LIKE :busqueda OR descripcion LIKE :busqueda)";
+            }
+        }
+        
+
+        $sql .= " ORDER BY id DESC";
         $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':busqueda', $busquedaLike);
         $consulta->execute();
 
         return $consulta->fetchAll();

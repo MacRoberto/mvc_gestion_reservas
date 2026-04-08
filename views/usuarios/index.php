@@ -6,9 +6,19 @@ include 'views/layouts/menu.php';
 
 <div class="contenedor">
     <h1><?php echo $titulo; ?></h1>
-    <p>Vista base del modulo de usuarios.</p>
 
     <p><a class="boton" href="usuarios.php?accion=nuevo">Nuevo usuario</a></p>
+
+    <form action="usuarios.php" method="GET" class="admin-buscador">
+        <select name="campo">
+            <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
+            <option value="nombre" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'nombre' ? 'selected' : ''; ?>>Nombre</option>
+            <option value="telefono" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'telefono' ? 'selected' : ''; ?>>Telefono</option>
+            <option value="email" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'email' ? 'selected' : ''; ?>>Correo electrónico</option>
+        </select>
+        <input type="text" name="busqueda" value="<?php echo isset($_GET['busqueda']) ? htmlspecialchars($_GET['busqueda']) : ''; ?>">
+        <button type="submit">Buscar</button>
+    </form>
 
     <table>
         <tr>
@@ -20,6 +30,7 @@ include 'views/layouts/menu.php';
             <th>Permiso</th>
             <th>Activo</th>
             <th>user_uuid</th>
+            <th>Acciones</th>
            
         </tr>
         <?php foreach ($usuarios as $fila) { ?>

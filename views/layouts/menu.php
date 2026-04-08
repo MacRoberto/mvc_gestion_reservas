@@ -3,5 +3,6 @@
     <a href="hoteles.php">Hoteles</a>
     <a href="habitaciones.php">Habitaciones</a>
     <a href="usuarios.php">Usuarios</a>
+    <a href="reservas.php">Reservas</a>
     <a href="login.php">Login</a>
 </div>
