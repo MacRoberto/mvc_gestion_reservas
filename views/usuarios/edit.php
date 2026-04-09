@@ -39,7 +39,6 @@ include 'views/layouts/menu.php';
                 <select name="activo">
                     <option value="0" <?php echo $usuarioEditar['activo'] == 0 ? 'selected' : ''; ?>>No</option>
                     <option value="1" <?php echo $usuarioEditar['activo'] == 1 ? 'selected' : ''; ?>>Si</option>
-                    if()
                 </select>
             </div>
         </div>
@@ -53,10 +52,6 @@ include 'views/layouts/menu.php';
 
         <div class="usuario-form-row usuario-form-row-3">
             <div class="usuario-form-col">
-                <label>Contraseña Actual</label>
-                <input type="password" id="current-pwd" name="contrasena" value="<?php echo $usuarioEditar['contrasena']; ?>" disabled>
-            </div>
-            <div class="usuario-form-col">
                 <label>Nueva Contraseña</label>
                 <input type="password" id="pwd1" name="contrasena-nueva" disabled>
             </div>
@@ -64,8 +59,16 @@ include 'views/layouts/menu.php';
                 <label>Repetir Nueva Contraseña</label>
                 <input type="password" id="pwd2" name="contrasena-nueva2" disabled>
             </div>
+            <div class="usuario-form-col">
+                <label>Contraseña Actual</label>
+                <input type="password" id="current-pwd" name="contrasena" value="<?php echo $usuarioEditar['contrasena']; ?>" disabled>
+            </div>
         </div>
-
+        <?php
+            if (isset($_GET['error']) && $_GET['error'] == 1) {
+                echo '<p id="mensaje-actualizacion" style="color: red;">Contraseña actual incorrecta</p>';
+            }
+        ?>
         <p id="mensaje-password" style="color: red; margin-top: 5px;"></p>
 
         <button type="submit" id="btn-check-pwd">Actualizar</button>

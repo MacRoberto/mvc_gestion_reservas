@@ -74,23 +74,30 @@ class Usuario
         return $consulta->fetch();
     }
 
-    public function actualizar($id,$nombre, $telefono, $email, $contrasena, $permiso, $activo, $user_uuid)
+    public function actualizar($id,$nombre, $telefono, $email, $permiso, $activo, $contrasena_nueva, $cambiar_pwd)
     {
         if (!$this->conexion) {
             return false;
         }
 
-        $sql = "UPDATE usuarios SET nombre = :nombre, telefono =:telefono, email = :email, contrasena = :contrasena, permiso = :permiso, activo = :activo, user_uuid = :user_uuid WHERE id = :id AND deleted_at IS NULL";
+        $sql_cambiar_contrasena = "";
+        if ($cambiar_pwd == 1) {
+            $sql_cambiar_contrasena = ", contrasena = :contrasena";
+        }
+        $sql = "UPDATE 
+                    usuarios 
+                SET nombre = :nombre, telefono =:telefono, email = :email ".$sql_cambiar_contrasena." , permiso = :permiso, activo = :activo WHERE id = :id AND deleted_at IS NULL";
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
         $consulta->bindParam(':nombre', $nombre);
         $consulta->bindParam(':telefono', $telefono);
         $consulta->bindParam(':email', $email);
-        $consulta->bindParam(':contrasena', md5($contrasena));
+        if ($cambiar_pwd == 1) {
+            $consulta->bindParam(':contrasena', md5($contrasena_nueva));
+        }
         $consulta->bindParam(':permiso', $permiso);
         $consulta->bindParam(':activo', $activo);
-        $consulta->bindParam(':user_uuid', $user_uuid);
 
         return $consulta->execute();
     }
@@ -110,5 +117,21 @@ class Usuario
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $consulta->execute();
+    }
+
+    public function validarContrasena($id = 0, $email, $contrasena)
+    {
+        if (!$this->conexion) {
+            return false;
+        }
+
+        $sql = "SELECT id FROM usuarios WHERE (id = :id OR email = :email) AND contrasena = :contrasena AND deleted_at IS NULL";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->bindParam(':email', $email);
+        $consulta->bindParam(':contrasena', md5($contrasena));
+        $consulta->execute();
+
+        return $consulta->fetch() !== false;
     }
 }

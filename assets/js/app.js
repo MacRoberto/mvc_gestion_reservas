@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var boton = document.getElementById('btn-check-pwd');
     var toggle = document.getElementById('toggle-change-password');
     var currentPwd = document.getElementById('current-pwd');
+    var mensajeActualizacion = document.getElementById('mensaje-actualizacion');
 
     if (!pwd1 || !pwd2 || !mensaje || !boton) {
         return;
@@ -25,12 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        if (esEdicion && currentPwd && currentPwd.value.trim() === '') {
-            mensaje.textContent = 'Debes escribir la contraseña actual.';
-            boton.disabled = true;
-            return;
+        if (mensajeActualizacion) {
+            mensajeActualizacion.textContent = '';
         }
-
+        
         if (limpio1.length < 3 || limpio2.length < 3) {
             mensaje.textContent = 'La contraseña debe tener minimo 3 digitos y no debe estar vacia.';
             boton.disabled = true;
@@ -39,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (valor1 !== valor2) {
             mensaje.textContent = 'Las contraseñas no coinciden.';
+            boton.disabled = true;
+            return;
+        }
+
+        if (esEdicion && currentPwd && currentPwd.value.trim() === '') {
+            mensaje.textContent = 'Debes escribir la contraseña actual.';
             boton.disabled = true;
             return;
         }

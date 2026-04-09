@@ -33,19 +33,22 @@ class UsuarioController
             include 'views/usuarios/edit.php';
         } elseif ($accion == 'actualizar') {
 
-            $id = isset($_GET['id']) ? $_GET['id'] : 1;
+            $id = isset($_POST['id']) ? $_POST['id'] : 0;
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
             $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+            $contrasena_nueva = isset($_POST['contrasena_nueva']) ? $_POST['contrasena_nueva'] : '';
             $permiso = isset($_POST['permiso']) ? $_POST['permiso'] : '';
             $activo = isset($_POST['activo']) ? $_POST['activo'] : '';
-            $user_uuid = isset($_POST['user_uuid']) ? $_POST['user_uuid'] : '';
-
-
-            $usuario->actualizar($id, $nombre, $telefono, $email, $contrasena,
-             $permiso, $activo, $user_uuid);
-            header('Location: usuarios.php');
+            $cambiar_pwd = isset($_POST['cambiar_password']) ? $_POST['cambiar_password'] : 0;
+            if ($cambiar_pwd == 1 && !$usuario->validarContrasena($id, "", $contrasena)) {
+                header('Location: usuarios.php?accion=editar&id=' . $id . '&error=1');
+                exit;
+            }
+            $usuario->actualizar($id, $nombre, $telefono, $email,
+            $permiso, $activo, $contrasena_nueva, $cambiar_pwd);
+            header('Location: usuarios.php?accion=editar&id=' . $id);
             exit;
         } elseif ($accion == 'eliminar') {
             $id = isset($_GET['id']) ? $_GET['id'] : 0;
