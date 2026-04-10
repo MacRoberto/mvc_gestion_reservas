@@ -87,6 +87,7 @@ class Usuario
         $sql = "UPDATE 
                     usuarios 
                 SET nombre = :nombre, telefono =:telefono, email = :email ".$sql_cambiar_contrasena." , permiso = :permiso, activo = :activo WHERE id = :id AND deleted_at IS NULL";
+        
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
@@ -126,10 +127,11 @@ class Usuario
         }
 
         $sql = "SELECT id FROM usuarios WHERE (id = :id OR email = :email) AND contrasena = :contrasena AND deleted_at IS NULL";
+        $pwdEncriptado = md5($contrasena);
         $consulta = $this->conexion->prepare($sql);
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
         $consulta->bindParam(':email', $email);
-        $consulta->bindParam(':contrasena', md5($contrasena));
+        $consulta->bindParam(':contrasena', $pwdEncriptado);
         $consulta->execute();
 
         return $consulta->fetch() !== false;

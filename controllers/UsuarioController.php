@@ -37,7 +37,7 @@ class UsuarioController
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
             $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
-            $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+            $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';//Contraseña actual del usuario en la bd
             $contrasena_nueva = isset($_POST['contrasena_nueva']) ? $_POST['contrasena_nueva'] : '';
             $permiso = isset($_POST['permiso']) ? $_POST['permiso'] : '';
             $activo = isset($_POST['activo']) ? $_POST['activo'] : '';
