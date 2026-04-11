@@ -1,4 +1,6 @@
 <?php
+//Agregar sesion_start para poder usar $_SESSION y hacer validaciones de permisos
+@session_start();
 include 'views/layouts/header.php';
 include 'views/layouts/menu.php';
 ?>
@@ -6,7 +8,13 @@ include 'views/layouts/menu.php';
 <div class="contenedor">
     <div class="admin-header">
         <h1><?php echo $titulo; ?></h1>
-        <p><a class="boton" href="hoteles.php?accion=nuevo">Nuevo hotel</a></p>
+        <?php
+            //ADMIN, PROPIETARIO, IT
+            if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') || 
+            $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'PROPIETARIO') {
+                echo '<p><a class="boton" href="hoteles.php?accion=nuevo">Nuevo hotel</a></p>';
+            }
+        ?>
     </div>
     <form action="hoteles.php" method="GET" class="admin-buscador">
         <select name="campo">
@@ -58,7 +66,14 @@ include 'views/layouts/menu.php';
                 </td>
 
                 <td>
-                    <a href="hoteles.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
+                    <?php
+                        //ADMIN, PROPIETARIO, IT
+                        if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
+                            || $_SESSION['permiso'] == 'PROPIETARIO') {
+                            echo '<a href="hoteles.php?accion=editar&id=' . $fila['id'] . '">Editar</a>';
+                        }
+                    ?>
+                    
                     <a href="habitaciones.php?hotel_id=<?php echo $fila['id']; ?>">Habitaciones</a>
                     <a href="hoteles.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
                     <a href="hoteles.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
