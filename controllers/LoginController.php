@@ -1,6 +1,6 @@
 <?php
 include_once 'models/Usuario.php';
-
+session_start();
 class LoginController
 {
     public function procesar($accion)
@@ -11,12 +11,18 @@ class LoginController
             $param_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
             $param_password = isset($_POST['password']) ? $_POST['password'] : '';
             #llamar funcion de validarContraseña y pasar params
-            if($usuario->validarContrasena(0, $param_usuario, $param_password)){
-                echo "Bienvenido";   
+            $user_login = $usuario->validarContrasena(0, $param_usuario, $param_password);
+            if($user_login){
+                $_SESSION['nombre'] = $user_login["nombre"];
+                $_SESSION['email'] = $user_login["email"];
+                $_SESSION['permiso'] = $user_login["permiso"];
+                header("Location: index.php");
             }else{
-                echo "Acceso denegado";
+                $titulo = 'Login';
+                include 'views/auth/login.php';
             }
         }else {
+            session_destroy();
             $titulo = 'Login';
             include 'views/auth/login.php';
         }

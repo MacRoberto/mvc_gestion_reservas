@@ -1,6 +1,5 @@
 <?php
 include 'views/layouts/header.php';
-include 'views/layouts/menu.php';
 ?>
 
 <div class="contenedor">

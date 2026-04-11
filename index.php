@@ -1,5 +1,9 @@
 <?php
-
+@session_start();
+if (!isset($_SESSION['nombre'])) {
+    header("Location: login.php");
+    exit();
+}
 include 'config/errors.php';
 include 'views/layouts/header.php';
 include 'views/layouts/menu.php';
@@ -14,7 +18,6 @@ include 'views/layouts/menu.php';
         <div class="tarjeta"><a href="clientes.php">Modulo de clientes</a></div>
         <div class="tarjeta"><a href="reservas.php">Modulo de reservas</a></div>
         <div class="tarjeta"><a href="usuarios.php">Modulo de usuarios</a></div>
-        <div class="tarjeta"><a href="login.php">Login</a></div>
     </div>
 </div>
 

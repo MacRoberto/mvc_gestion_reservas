@@ -95,7 +95,8 @@ class Usuario
         $consulta->bindParam(':telefono', $telefono);
         $consulta->bindParam(':email', $email);
         if ($cambiar_pwd == 1) {
-            $consulta->bindParam(':contrasena', md5($contrasena_nueva));
+            $pwdEncriptado = md5($contrasena_nueva);
+            $consulta->bindParam(':contrasena', $pwdEncriptado);
         }
         $consulta->bindParam(':permiso', $permiso);
         $consulta->bindParam(':activo', $activo);
@@ -126,7 +127,9 @@ class Usuario
             return false;
         }
 
-        $sql = "SELECT id FROM usuarios WHERE (id = :id OR email = :email) AND contrasena = :contrasena AND deleted_at IS NULL";
+        $sql = "SELECT id, nombre, telefono, email, permiso, activo, user_uuid
+                FROM usuarios
+                WHERE (id = :id OR email = :email) AND contrasena = :contrasena AND deleted_at IS NULL";
         $pwdEncriptado = md5($contrasena);
         $consulta = $this->conexion->prepare($sql);
         $consulta->bindParam(':id', $id, PDO::PARAM_INT);
@@ -134,6 +137,6 @@ class Usuario
         $consulta->bindParam(':contrasena', $pwdEncriptado);
         $consulta->execute();
 
-        return $consulta->fetch() !== false;
+        return $consulta->fetch();
     }
 }

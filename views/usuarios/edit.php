@@ -53,11 +53,11 @@ include 'views/layouts/menu.php';
         <div class="usuario-form-row usuario-form-row-3">
             <div class="usuario-form-col">
                 <label>Nueva Contraseña</label>
-                <input type="password" id="pwd1" name="contrasena-nueva" disabled>
+                <input type="password" id="pwd1" name="contrasena_nueva" disabled>
             </div>
             <div class="usuario-form-col">
                 <label>Repetir Nueva Contraseña</label>
-                <input type="password" id="pwd2" name="contrasena-nueva2" disabled>
+                <input type="password" id="pwd2" name="contrasena_nueva2" disabled>
             </div>
             <div class="usuario-form-col">
                 <label>Contraseña Actual</label>
