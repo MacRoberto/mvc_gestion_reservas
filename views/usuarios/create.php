@@ -25,6 +25,7 @@ include 'views/layouts/menu.php';
 
         <label>Permiso</label>        
         <select name="permiso" >
+            <option value="visitante">Visitante</option>
             <option value="usuario">Usuario</option>
             <option value="admin">Admin</option>
             <option value="propietario">Propietario</option>

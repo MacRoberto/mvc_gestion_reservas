@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             
             <a href="index.php">
-                <img src="path_to_your_logo.png" alt="PriceTravel" class="pt-logo">
+                <img src="../../assets/img/logo-may.png" alt="ExperienciasMay" class="pt-logo">
             </a>
 
             <div class="d-flex align-items-center gap-4 top-header">
@@ -26,7 +26,7 @@
                 <a href="#" class="text-decoration-none text-dark">Ayuda</a>
                 <div class="d-flex align-items-center">
                     <i class="fa-solid fa-phone me-2"></i>
-                    <span>Para reservar <strong>+52 55 8663 8825</strong></span>
+                    <span>Para reservar <strong>+52 998145368</strong></span>
                 </div>
                 <button class="login-btn d-flex align-items-center gap-2">
                     Iniciar sesión <i class="fa-solid fa-bars"></i>

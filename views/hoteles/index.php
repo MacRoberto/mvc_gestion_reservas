@@ -11,7 +11,7 @@ include 'views/layouts/menu.php';
         <?php
             //ADMIN, PROPIETARIO, IT
             if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') || 
-            $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'PROPIETARIO') {
+            $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'propietario') {
                 echo '<p><a class="boton" href="hoteles.php?accion=nuevo">Nuevo hotel</a></p>';
             }
         ?>
@@ -69,15 +69,22 @@ include 'views/layouts/menu.php';
                     <?php
                         //ADMIN, PROPIETARIO, IT
                         if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
-                            || $_SESSION['permiso'] == 'PROPIETARIO') {
+                            || $_SESSION['permiso'] == 'admin') {
                             echo '<a href="hoteles.php?accion=editar&id=' . $fila['id'] . '">Editar</a>';
                         }
+                        
                     ?>
                     
                     <a href="habitaciones.php?hotel_id=<?php echo $fila['id']; ?>">Habitaciones</a>
                     <a href="hoteles.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
-                    <a href="hoteles.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
+                    <?php
 
+                        if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
+                            || $_SESSION['permiso'] == 'admin') {
+                            echo '<a href="hoteles.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar este hotel?\')" >Eliminar</a>';
+                        }
+                        
+                    ?>
                 </td>
             </tr>
         <?php } ?>

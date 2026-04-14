@@ -2,43 +2,16 @@
 
 include_once 'models/Reserva.php';
 
+
 class ReservaController
 {
     public function procesar($accion)
     {
         $reserva = new Reserva();
-        switch ($accion) {
-            case 'editar':
-                
-                break;
-            case 'actualizar':
-                
-                break;
-            default:
-                $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
-                $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
-                $reservas = $reserva->obtenerTodos($campo, $busqueda);
-                
-                $titulo = 'Lista de reservas';
-                include 'views/reservas/index.php';
-            break;
-        }
-    }
-}
-<?php
-
-include_once 'models/Reserva.php';
-
-
-class ReservaController
-{
-    public function procesar($accion)
-    {
-        $reservas = new Reserva();
 
         if ($accion == 'nuevo') {
-            $reservas = new Reserva();
-            $reservas = $Reserva->obtenerTodos();
+            $reserva = new Reserva();
+            $reserva = $Reserva->obtenerTodos();
             $titulo = 'Nuevo habitacion';
             include 'views/reservas/create.php';
         } elseif ($accion == 'guardar') {
@@ -57,7 +30,7 @@ class ReservaController
             $observaciones = isset($_POST[observaciones]) ? $_POST['observaciones'] : '';
             $origen = isset($_POST['origen']) ? $_POST['origen'] : '';
 
-            $reservas ->guardar($folio, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
+            $reserva->guardar($folio, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
             $ninos, $precio_noche, $subtotal, $total, $estado_reserva, $observaciones, $origen);
             
             header('location: reservas.php');
@@ -65,7 +38,7 @@ class ReservaController
             
         } elseif ($accion == 'editar') {
             $id = isset($_GET['id']) ? $_GET['id'] : 0;
-            $reservasEditar = $reservas->obtenerPorId($id);
+            $reservasEditar = $reserva->obtenerPorId($id);
             $titulo = 'Editar reservas';
             include 'views/reservas/edit.php';
         } elseif ($accion == 'actualizar') {
@@ -84,7 +57,7 @@ class ReservaController
             $observaciones = isset($_POST[observaciones]) ? $_POST['observaciones'] : '';
             $origen = isset($_POST['origen']) ? $_POST['origen'] : '';
 
-            $reservas ->actualizar($folio, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
+            $reserva->actualizar($folio, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
             $ninos, $precio_noche, $subtotal, $total, $estado_reserva, $observaciones, $origen);
 
             header('location: reservas.php');
@@ -93,29 +66,15 @@ class ReservaController
         } elseif ($accion == 'eliminar') {
             $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-            $reservas->eliminar($id);
+            $reserva->eliminar($id);
             header('Location: reservas.php');
             exit;
         } else {
-            /*
             $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
             $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
-            $usuarios = $usuario->obtenerTodos($campo, $busqueda);//>Consultas
-            $titulo = 'Lista de usuarios';
-
-            $hotelId = isset($_GET['hotel_id']) ? (int) $_GET['hotel_id'] : 0;
-
-            if ($hotelId > 0) {
-                $hotel = new Hotel();
-                $hotelInfo = $hotel->obtenerPorId($hotelId);
-                $habitaciones = $habitacion->obtenerPorHotelId($hotelId);
-                $titulo = 'Lista de habitaciones del hotel: ' . $hotelInfo['nombre'];
-            } else {
-                $hotelId = 0;
-                $habitaciones = $habitacion->obtenerTodos();
-                $titulo = 'Lista de habitaciones';
-            }
-            */
+            $reservas = $reserva->obtenerTodos($campo, $busqueda);
+            
+            $titulo = 'Lista de reservas';
             include 'views/reservas/index.php';
         }
     }

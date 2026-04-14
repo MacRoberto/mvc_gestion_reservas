@@ -5,9 +5,11 @@ include '../layouts/header_motor.php';
 <section class="hero-banner">
         <div class="container h-100 d-flex align-items-center">
             <div class="promo-content">
+                <!-- 
                 <div class="mb-2" style="max-width: 200px;">
-                    <img src="semana-santa-badge.png" class="img-fluid" alt="Semana Santa">
-                </div>
+                    <img src="logo de promocion" class="img-fluid" alt=" ">
+                </div> 
+                -->
                 <p class="mb-0 h4">Hasta</p>
                 <div class="discount-text">67%</div>
                 <p class="h4">de descuento</p>
@@ -185,14 +187,14 @@ include '../layouts/header_motor.php';
         <div class="bank-divider d-none d-md-block"></div>
         
         <div class="d-flex flex-wrap align-items-center gap-4 flex-grow-1 justify-content-center">
-            <img src="bbva.png" class="bank-logo" alt="BBVA">
-            <img src="mercado-pago.png" class="bank-logo" alt="Mercado Pago">
-            <img src="nu.png" class="bank-logo" alt="Nu">
-            <img src="santander.png" class="bank-logo" alt="Santander">
-            <img src="banamex.png" class="bank-logo" alt="Banamex">
-            <img src="scotiabank.png" class="bank-logo" alt="Scotiabank">
-            <img src="amex.png" class="bank-logo" alt="Amex">
-            <img src="paypal.png" class="bank-logo" alt="PayPal">
+            <img src="../../assets/img/bbva.png" class="bank-logo" alt="BBVA">
+            <img src="../../assets/img//mercado-pago.png" class="bank-logo" alt="Mercado Pago">
+            <img src="../../assets/img/nu.png" class="bank-logo" alt="Nu">
+            <img src="../../assets/img/santander.png" class="bank-logo" alt="Santander">
+            <img src="../../assets/img/banamex.svg" class="bank-logo" alt="Banamex">
+            <img src="../../assets/img/scotiabank.png" class="bank-logo" alt="Scotiabank">
+            <img src="../../assets/img/amex.png" class="bank-logo" alt="Amex">
+            <img src="../../assets/img/paypal.png" class="bank-logo" alt="PayPal">
         </div>
     </div>
 
@@ -223,7 +225,7 @@ include '../layouts/header_motor.php';
         <div class="row">
             <div class="col-md-6">
                 <h2 class="fw-bold mb-3">Obtén descuentos al instante</h2>
-                <p class="mb-4"><strong>Ahorra hasta 10%</strong> en tu próximo viaje comprando con tu cuenta en PriceTravel</p>
+                <p class="mb-4"><strong>Ahorra hasta 10%</strong> en tu próximo viaje comprando con tu cuenta en ExperienciasMay</p>
                 <div class="d-flex gap-3">
                     <button class="btn-pt-primary">Iniciar sesión</button>
                     <button class="btn-pt-outline">Crear cuenta</button>
@@ -244,11 +246,11 @@ include '../layouts/header_motor.php';
                     <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
                         <a href="#" class="contact-btn"><i class="fab fa-whatsapp text-success"></i> Por WhatsApp</a>
                         <a href="#" class="contact-btn"><i class="fab fa-facebook-messenger text-primary"></i> Por Messenger</a>
-                        <div class="contact-btn"><i class="fa fa-phone"></i> Para reservar <strong>+52 55 8663 8825</strong></div>
+                        <div class="contact-btn"><i class="fa fa-phone"></i> Para reservar <strong>+52 998145368</strong></div>
                     </div>
                 </div>
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center">
-                    <h6 class="fw-bold mb-3">Descarga la app de PriceTravel</h6>
+                    <h6 class="fw-bold mb-3">Descarga la app de Experiencias May</h6>
                     <div class="d-flex gap-2 justify-content-center">
                         <img src="app-store.png" height="40" alt="App Store">
                         <img src="google-play.png" height="40" alt="Google Play">
@@ -259,11 +261,11 @@ include '../layouts/header_motor.php';
     </div>
 
     <div class="color-bar">
-        <div class="color-segment" style="background-color: #00c4f4;"></div>
-        <div class="color-segment" style="background-color: #007bff;"></div>
-        <div class="color-segment" style="background-color: #ffb400;"></div>
-        <div class="color-segment" style="background-color: #e6007e;"></div>
-        <div class="color-segment" style="background-color: #4b2c82;"></div>
+        <div class="color-segment" style="background-color: #f4c300;"></div>
+        <div class="color-segment" style="background-color: #eaff00;"></div>
+        <div class="color-segment" style="background-color: #59ff00;"></div>
+        <div class="color-segment" style="background-color: #00e2e6;"></div>
+        <div class="color-segment" style="background-color: #211dfb;"></div>
     </div>
 
     <div class="footer-main">
@@ -272,7 +274,7 @@ include '../layouts/header_motor.php';
                 <div class="col-md-3">
                     <h6>Servicio al cliente</h6>
                     <a href="#" class="footer-link">Ayuda</a>
-                    <a href="#" class="footer-link">Puntos de venta PriceTravel</a>
+                    <a href="#" class="footer-link">Puntos de venta ExperienciasMay</a>
                     <a href="#" class="footer-link">Facturación electrónica</a>
                     <a href="#" class="footer-link">Consultar reservación</a>
                     <a href="#" class="footer-link">Modificar reservación</a>
@@ -281,21 +283,20 @@ include '../layouts/header_motor.php';
                 <div class="col-md-3">
                     <h6>Acerca de nosotros</h6>
                     <a href="#" class="footer-link">Nuestra historia</a>
-                    <a href="#" class="footer-link">Sala de prensa</a>
-                    <a href="#" class="footer-link">Revista PriceTravel</a>
+                    <a href="#" class="footer-link">Revista Experiencias May</a>
                     <a href="#" class="footer-link">Destinos</a>
                 </div>
                 <div class="col-md-2">
                     <h6>Proveedores</h6>
-                    <a href="#" class="footer-link">Registrar hotel</a>
+                    <a href="#" class="footer-link">Registrar tu hotel</a>
                 </div>
                 <div class="col-md-4 contact-info">
                     <h6>Contáctanos</h6>
-                    <p><strong>México</strong> <span class="text-primary">+52 55 8663 8825</span></p>
-                    <p><strong>Colombia</strong> <span class="text-primary">+57 601 744 2024</span></p>
-                    <p><strong>Estados Unidos/Canadá</strong> <span class="text-primary">+1 855 437 8999</span></p>
-                    <p><strong>Otros países</strong> <span class="text-primary">+52 55 8663 8825</span></p>
-                    <p><strong>Correo electrónico</strong> <span class="text-primary">contact@pricetravel.com.mx</span></p>
+                    <p><strong>México</strong> <span class="text-primary">+52 998 145 5368</span></p>
+                    <p><strong>Colombia</strong> <span class="text-primary">+57 998 145 5368</span></p>
+                    <p><strong>Estados Unidos/Canadá</strong> <span class="text-primary">+1 998 145 5368</span></p>
+                    <p><strong>Otros países</strong> <span class="text-primary">+52 998 145 5368</span></p>
+                    <p><strong>Correo electrónico</strong> <span class="text-primary">contact@experienciasmay.com.mx</span></p>
                 </div>
             </div>
         </div>
@@ -317,7 +318,7 @@ include '../layouts/header_motor.php';
                         <a href="#" class="text-primary text-decoration-none small me-3">Términos y condiciones</a>
                         <a href="#" class="text-primary text-decoration-none small">Política de privacidad</a>
                     </div>
-                    <p class="copyright-text mb-0">© Price Res, SAPI de CV. 2026. Todos los derechos reservados.</p>
+                    <p class="copyright-text mb-0">© Experiencias May Res, SAPI de CV. 2026. Todos los derechos reservados.</p>
                 </div>
             </div>
         </div>

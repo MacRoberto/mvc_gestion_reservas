@@ -47,4 +47,27 @@ class Reserva
 
         return $consulta->fetchAll();
     }
+
+    public function obtenerPorId($reservaId)
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $sql = "SELECT reservas.id, reservas.folio, reservas.cliente_id, habitaciones.hotel_id, 
+        reservas.habitacion_id,fecha_entrada,fecha_salida,noches,adultos,
+        ninos, reservas.precio_noche, subtotal, total, estado_reserva, observaciones, origen,
+        clientes.nombres as nombre_cliente, clientes.apellidos, hoteles.nombre as nombre_hotel, habitaciones.tipo_habitacion 
+          FROM reservas 
+          INNER JOIN clientes on clientes.id = reservas.cliente_id 
+          INNER JOIN habitaciones on habitaciones.id = reservas.habitacion_id
+          INNER JOIN hoteles on hoteles.id = habitaciones.hotel_id  
+          WHERE reservas.deleted_at IS NULL AND reservas.id= :reserva_id";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchAll();
+    }
+
 }

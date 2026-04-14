@@ -28,6 +28,7 @@ include 'views/layouts/menu.php';
             <div class="usuario-form-col">
                 <label>Permiso</label>        
                 <select name="permiso" >
+                <option value="visitante" <?php echo $usuarioEditar['visitante'] == "visitante" ? 'selected' : ''; ?>>Visitante</option>
                 <option value="usuario" <?php echo $usuarioEditar['permiso'] == "usuario" ? 'selected' : ''; ?>>Usuario</option>
                 <option value="admin" <?php echo $usuarioEditar['permiso'] == "admin" ? 'selected' : ''; ?>>Admin</option>
                 <option value="propietario" <?php echo $usuarioEditar['permiso'] == "propietario" ? 'selected' : ''; ?>>Propietario</option>

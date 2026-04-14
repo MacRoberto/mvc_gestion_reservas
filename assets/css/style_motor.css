@@ -1,5 +1,5 @@
 :root {
-  --pt-pink: #c5006d;
+  --pt-pink: #0055c5;
   --pt-text: #4a4a4a;
 }
 body {
@@ -37,7 +37,7 @@ body {
 /*Hero*/
 
 .hero-banner {
-  background: url("your-beach-image.jpg") center/cover no-repeat;
+  background: url("../img/hero-cancun.jpg") center/cover no-repeat;
   height: 450px;
   position: relative;
   display: flex;
@@ -73,7 +73,7 @@ body {
 }
 
 .btn-search {
-  background-color: #c5006d;
+  background-color: #0055c5;
   color: white;
   font-weight: bold;
   border-radius: 8px;
@@ -267,13 +267,14 @@ body {
 .cta-banner {
   background:
     linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("mountain-landscape.jpg") center/cover;
+    url("../img/viajes.jpg") center/cover;
   border-radius: 12px;
   padding: 60px 40px;
   color: white;
 }
+
 .btn-pt-primary {
-  background-color: #c5006d;
+  background-color: #0055c5;
   border: none;
   color: white;
   font-weight: 600;
