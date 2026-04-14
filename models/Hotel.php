@@ -39,6 +39,42 @@ class Hotel
         return $consulta->fetchAll();
     }
 
+    public function obtenerTodosConImagenPrincipal()
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $sql = "SELECT
+                    h.id,
+                    h.nombre,
+                    h.ciudad,
+                    h.telefono,
+                    h.email,
+                    h.direccion,
+                    h.descripcion,
+                    h.categoria,
+                    h.hora_checkin,
+                    h.hora_checkout,
+                    h.disponible_general,
+                    (
+                        SELECT ih.url_imagen
+                        FROM imagenes_hotel ih
+                        WHERE ih.hotel_id = h.id
+                          AND ih.deleted_at IS NULL
+                          AND ih.activo = 1
+                        ORDER BY ih.principal DESC, ih.id DESC
+                        LIMIT 1
+                    ) AS imagen_principal
+                FROM hoteles h
+                WHERE h.deleted_at IS NULL ORDER BY h.id DESC LIMIT 10";
+
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->execute();
+
+        return $consulta->fetchAll();
+    }
+
     public function guardar($nombre, $ciudad,$dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible)
     {
         if (!$this->conexion) {

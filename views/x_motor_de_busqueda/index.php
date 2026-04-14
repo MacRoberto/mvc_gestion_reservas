@@ -1,5 +1,5 @@
 <?php
-include '../layouts/header_motor.php';
+include 'views/layouts/header_motor.php';
 ?>
 
 <section class="hero-banner">
@@ -147,27 +147,26 @@ include '../layouts/header_motor.php';
         </a>
 
         <div class="row g-3">
-            <?php
-            $hotels = [
-                ['name' => 'Palace Resorts 5ta noche gratis', 'logo' => 'palace-logo.png', 'img' => 'resort1.jpg'],
-                ['name' => 'RIU Hotels & Resorts', 'logo' => 'riu-logo.png', 'img' => 'resort2.jpg'],
-                ['name' => 'Barceló Hotels & Resorts', 'logo' => 'barcelo-logo.png', 'img' => 'resort3.jpg'],
-                ['name' => 'Hilton Hotels & Resorts', 'logo' => 'hilton-logo.png', 'img' => 'resort4.jpg']
-            ];
-
-            foreach ($hotels as $hotel):
-            ?>
+            <?php if (empty($hotels)): ?>
+            <div class="col-12">
+                <div class="alert alert-light border text-center mb-0">No hay hoteles registrados por el momento.</div>
+            </div>
+            <?php else: ?>
+            <?php foreach ($hotels as $hotel): ?>
             <div class="col-6 col-md-3">
                 <div class="brand-card shadow-sm">
-                    <img src="<?= $hotel['img'] ?>" class="bg-brand" alt="<?= $hotel['name'] ?>">
+                    <img src="<?= htmlspecialchars($hotel['imagen_principal'], ENT_QUOTES, 'UTF-8') ?>" class="bg-brand" alt="<?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?>">
                     <div class="brand-overlay">
-                        <img src="<?= $hotel['logo'] ?>" class="brand-logo" alt="logo">
+                        <div class="brand-logo d-flex align-items-center justify-content-center text-center fw-bold fs-5">
+                            <?= htmlspecialchars($hotel['ciudad'], ENT_QUOTES, 'UTF-8') ?>
+                        </div>
                         
-                        <p class="brand-title"><?= $hotel['name'] ?></p>
+                        <p class="brand-title"><?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?></p>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -325,5 +324,5 @@ include '../layouts/header_motor.php';
     </div>
 </footer>
 <?php
-include '../layouts/footer_motor.php';
+include 'views/layouts/footer_motor.php';
 ?>
