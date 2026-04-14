@@ -60,14 +60,14 @@ include 'views/layouts/menu.php';
                         if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
                             || $_SESSION['permiso'] == 'admin') {
                             echo '<a href="habitaciones.php?accion=editar&id=' . $fila['id'] . '">Editar</a>';
-                            echo '<a href="hoteles.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar este hotel?\')" >Eliminar</a>';
+                            echo '<a href="hoteles.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta habitación?\')" >Eliminar</a>';
                         }
                         
                     ?>
                     
                     <!-- <a href="habitaciones.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a> -->
                     <a href="habitaciones.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
-                    <a href="habitaciones.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
+                    
                 </td>
             </tr>
         <?php } ?>
