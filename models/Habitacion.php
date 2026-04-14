@@ -133,4 +133,58 @@ class Habitacion
 
         return $consulta->execute();
     }
+        public function obtenerImagenes($habitacionId)
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $sql = "SELECT id, habitacion_id, url_imagen, principal, activo, created_at, updated_at
+                FROM imagenes_habitaciones
+                WHERE habitacion_id = :habitacion_id AND deleted_at IS NULL
+                ORDER BY principal DESC, id DESC";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':habitacion_id', $habitacionId, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchAll();
+    }
+
+    public function guardarImagen($habitacionId, $urlImagen, $principal = 0, $activo = 1)
+    {
+        if (!$this->conexion) {
+            return false;
+        }
+
+        //Ajustar insert para guardar en la tabla de imagenes de habitaciones
+        $sql = "INSERT INTO imagenes_habitaciones (habitacion_id, url_imagen, principal, activo, created_at, updated_at)
+                VALUES (:habitacion_id, :url_imagen, :principal, :activo, NOW(), NOW())";
+        $consulta = $this->conexion->prepare($sql);
+
+        $consulta->bindParam(':habitacion_id', $habitacionId, PDO::PARAM_INT);
+        $consulta->bindParam(':url_imagen', $urlImagen);
+        $consulta->bindParam(':principal', $principal, PDO::PARAM_INT);
+        $consulta->bindParam(':activo', $activo, PDO::PARAM_INT);
+
+        return $consulta->execute();
+    }
+
+    public function quitarImagen($imagenId)
+    {
+        if (!$this->conexion) {
+            return false;
+        }
+
+        $fechaEliminacion = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE imagenes_habitaciones
+                SET deleted_at = :deleted_at
+                WHERE id = :id";
+
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':deleted_at', $fechaEliminacion);
+        $consulta->bindParam(':id', $imagenId, PDO::PARAM_INT);
+
+        return $consulta->execute();
+    }
 }

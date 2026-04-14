@@ -57,7 +57,31 @@ class HabitacionController
             $habitacion->eliminar($id);
             header('Location: habitaciones.php');
             exit;
-        } else {
+        } elseif ($accion == 'imagenes') {
+            $id = $_GET['id'] ?? 0;
+            $habitacionActual = $habitacion->obtenerPorId($id);
+            $imagenes = $habitacion->obtenerImagenes($id);
+            $mensaje = $_GET['mensaje'] ?? '';
+            $titulo = 'Imagenes de la habitacion';
+
+            include 'views/habitaciones/imagenes.php';
+        } elseif ($accion == 'guardar-imagenes') {
+            $id = isset($_POST['habitacion_id']) ? (int) $_POST['habitacion_id'] : 0;
+            $habitacionActual = $habitacion->obtenerPorId($id);
+
+            $mensaje = $this->guardarImagenesHabitacion($habitacion, $id);
+
+            header('Location: habitaciones.php?accion=imagenes&id=' . $id . '&mensaje=' . urlencode($mensaje));
+        }else if ($accion == 'quitar-imagen') {
+            $imagenId = $_GET['imagen_id'] ?? 0;
+            $habitacionId = $_GET['id'] ?? 0;
+
+            $habitacion->quitarImagen($imagenId);
+
+            header('Location: habitaciones.php?accion=imagenes&id=' . $habitacionId . '&mensaje=Imagen quitada correctamente');
+        }
+        
+        else {
             $hotelId = isset($_GET['hotel_id']) ? (int) $_GET['hotel_id'] : 0;
 
             if ($hotelId > 0) {
@@ -74,4 +98,77 @@ class HabitacionController
             include 'views/habitaciones/index.php';
         }
     }
+
+
+    private function guardarImagenesHabitacion($habitacion, $habitacionId)
+    {
+        if (!isset($_FILES['imagenes'])) {
+            return 'No se recibieron imagenes.';
+        }
+
+        $archivos = $_FILES['imagenes'];
+        $permitidas = array('jpg', 'jpeg', 'png');
+        $directorioRelativo = 'assets/img/habitaciones/' . $habitacionId;
+        $directorioAbsoluto = __DIR__ . '/../' . $directorioRelativo;
+
+        if (!is_dir($directorioAbsoluto) && !mkdir($directorioAbsoluto, 0777, true)) {
+            return 'No se pudo crear la carpeta del hotel.';
+        }
+
+        $imagenesActuales = $habitacion->obtenerImagenes($habitacionId);
+        $principalDisponible = count($imagenesActuales) === 0 ? 1 : 0;
+        $guardadas = 0;
+
+        for ($i = 0; $i < count($archivos['name']); $i++) {
+            if ($archivos['error'][$i] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+
+            if ($archivos['error'][$i] !== UPLOAD_ERR_OK) {
+                continue;
+            }
+
+            $nombreOriginal = $archivos['name'][$i];
+            $temporal = $archivos['tmp_name'][$i];
+            $extension = strtolower(pathinfo($nombreOriginal, PATHINFO_EXTENSION));
+
+            if (!in_array($extension, $permitidas, true)) {
+                continue;
+            }
+
+            if (@getimagesize($temporal) === false) {
+                continue;
+            }
+
+            $nombreArchivo = $this->obtenerSiguienteNombreImagen($directorioAbsoluto, $extension);
+            $rutaAbsoluta = $directorioAbsoluto . '/' . $nombreArchivo;
+            $rutaRelativa = $directorioRelativo . '/' . $nombreArchivo;
+
+            if (!move_uploaded_file($temporal, $rutaAbsoluta)) {
+                continue;
+            }
+
+            $principal = $principalDisponible === 1 && $guardadas === 0 ? 1 : 0;
+            $habitacion->guardarImagen($habitacionId, $rutaRelativa, $principal, 1);
+            $guardadas++;
+        }
+
+        if ($guardadas === 0) {
+            return 'No se pudo guardar ninguna imagen.';
+        }
+
+        return 'Se guardaron ' . $guardadas . ' imagen(es).';
+    }
+
+    private function obtenerSiguienteNombreImagen($directorio, $extension)
+    {
+        $contador = 1;
+
+        while (file_exists($directorio . '/imagen_' . $contador . '.' . $extension)) {
+            $contador++;
+        }
+
+        return 'imagen_' . $contador . '.' . $extension;
+    }
+
 }
