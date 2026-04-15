@@ -64,8 +64,6 @@ include 'views/layouts/menu.php';
                         }
                         
                     ?>
-                    
-                    <!-- <a href="habitaciones.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a> -->
                     <a href="habitaciones.php?accion=imagenes&id=<?php echo $fila['id']; ?>">Imágenes</a>
                     
                 </td>

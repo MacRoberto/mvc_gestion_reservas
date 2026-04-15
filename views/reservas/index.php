@@ -57,14 +57,33 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['estado_reserva']; ?></td>
                 <td><?php echo $fila['observaciones']; ?></td>
                 <td><?php echo $fila['origen']; ?></td>
-
                 <td>
-                <a href="reservas.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
-                <a href="reservas.php?hotel_id=<?php echo $fila['id']; ?>">Historial de pago</a>
-                <a href="reservas.php?hotel_id=<?php echo $fila['id']; ?>">Cambio de estatus</a>
-                <a href="reservas.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
+                    <?php
+                        //admin
+                        if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'admin') {
+                            echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
+                            echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
+                            echo '<a href="reservas.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta reserva?\')" >Eliminar</a>';
+                        }
+                        //propietario
+                        if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'propietario') {
+                            echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
+                            echo '<a href="reservas.php?accion=estatus&id=' . $fila['id'].'">Cambio de estatus</a>';
+                        }
+                        //IT
+                        if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'IT') {
+                            echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
+                            echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
+                            echo '<a href="reservas.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta reserva?\')" >Eliminar</a><br>';
+                            echo '<a href="reservas.php?accion=estatus&id=' . $fila['id'].'">Cambio de estatus</a>';
+                        }
+                        //usuario
+                        if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'usuario') {
+                            echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
+                            echo '<a href="reservas.php?accion=estatus&id=' . $fila['id'].'">Cambio de estatus</a>';
+                        }
+                    ?>  
                 </td>
-
             </tr>
         <?php } ?>
     </table>

@@ -19,46 +19,50 @@ include 'views/layouts/menu.php';
         <input type="text" name="busqueda" value="<?php echo isset($_GET['busqueda']) ? htmlspecialchars($_GET['busqueda']) : ''; ?>">
         <button type="submit">Buscar</button>
     </form>
-
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Telefono</th>
-            <th>Email</th>
-            <th>Contraseña</th>
-            <th>Permiso</th>
-            <th>Activo</th>
-            <th>user_uuid</th>
-            <th>Acciones</th>
-           
-        </tr>
-        <?php foreach ($usuarios as $fila) { ?>
+    <div class="tabla-scroll">
+        <table class="tabla-admin">
             <tr>
-                <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
-                <td><?php echo $fila['nombre']; ?></td>
-                <td><?php echo $fila['telefono']; ?></td>
-                <td><?php echo $fila['email']; ?></td>
-                <td><?php echo $fila['contrasena']; ?></td>
-                <td><?php echo $fila['permiso']; ?></td>
-                <td>
-                    <?php
-                        if($fila['activo'] == 0){
-                            echo 'No'; 
-                        }else{
-                            echo 'Si';
-                        } 
-                    ?>
-                </td>
-                <td><?php echo $fila['user_uuid']; ?></td>
-                <td>
-                    <a href="usuarios.php?accion=editar&id=<?php echo $fila['id']; ?>">Editar</a>
-
-                    <a href="usuarios.php?accion=eliminar&id=<?php echo $fila['id']; ?>" onclick="return confirm('¿Deseas eliminar este hotel?');">Eliminar</a>
-                </td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Contraseña</th>
+                <th>Permiso</th>
+                <th>Activo</th>
+                <th>user_uuid</th>
+                <th>Acciones</th>
+            
             </tr>
-        <?php } ?>
-    </table>
+            <?php foreach ($usuarios as $fila) { ?>
+                <tr>
+                    <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
+                    <td><?php echo $fila['nombre']; ?></td>
+                    <td><?php echo $fila['telefono']; ?></td>
+                    <td><?php echo $fila['email']; ?></td>
+                    <td><?php echo $fila['contrasena']; ?></td>
+                    <td><?php echo $fila['permiso']; ?></td>
+                    <td>
+                        <?php
+                            if($fila['activo'] == 0){
+                                echo 'No'; 
+                            }else{
+                                echo 'Si';
+                            } 
+                        ?>
+                    </td>
+                    <td><?php echo $fila['user_uuid']; ?></td>
+                    <td>
+                    <?php
+                        if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'IT') {
+                            echo ' <a href="usuarios.php?accion=editar&id=' .$fila['id']. ' ">Editar</a>';
+                            echo '<a href="usuarios.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar este usuario?\')" >Eliminar</a>';
+                        }
+                    ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </div>
 
 <?php

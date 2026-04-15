@@ -6,7 +6,7 @@
     <title>Experiencias MAY</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/style_motor.css">
+    <link rel="stylesheet" href="assets/css/style_motor.css">
 
 </head>
 <body>
@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             
             <a href="index.php">
-                <img src="../../assets/img/logo-may.png" alt="ExperienciasMay" class="pt-logo">
+                <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="pt-logo">
             </a>
 
             <div class="d-flex align-items-center gap-4 top-header">

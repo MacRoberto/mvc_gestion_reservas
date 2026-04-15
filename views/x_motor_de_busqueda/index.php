@@ -186,14 +186,14 @@ include 'views/layouts/header_motor.php';
         <div class="bank-divider d-none d-md-block"></div>
         
         <div class="d-flex flex-wrap align-items-center gap-4 flex-grow-1 justify-content-center">
-            <img src="../../assets/img/bbva.png" class="bank-logo" alt="BBVA">
-            <img src="../../assets/img//mercado-pago.png" class="bank-logo" alt="Mercado Pago">
-            <img src="../../assets/img/nu.png" class="bank-logo" alt="Nu">
-            <img src="../../assets/img/santander.png" class="bank-logo" alt="Santander">
-            <img src="../../assets/img/banamex.svg" class="bank-logo" alt="Banamex">
-            <img src="../../assets/img/scotiabank.png" class="bank-logo" alt="Scotiabank">
-            <img src="../../assets/img/amex.png" class="bank-logo" alt="Amex">
-            <img src="../../assets/img/paypal.png" class="bank-logo" alt="PayPal">
+            <img src="assets/img/bbva.png" class="bank-logo" alt="BBVA">
+            <img src="assets/img//mercado-pago.png" class="bank-logo" alt="Mercado Pago">
+            <img src="assets/img/nu.png" class="bank-logo" alt="Nu">
+            <img src="assets/img/santander.png" class="bank-logo" alt="Santander">
+            <img src="assets/img/banamex.svg" class="bank-logo" alt="Banamex">
+            <img src="assets/img/scotiabank.png" class="bank-logo" alt="Scotiabank">
+            <img src="assets/img/amex.png" class="bank-logo" alt="Amex">
+            <img src="assets/img/paypal.png" class="bank-logo" alt="PayPal">
         </div>
     </div>
 
