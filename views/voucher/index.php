@@ -1,9 +1,27 @@
-<?php
-include '../../views/layouts/header_voucher.php';
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Confirmada - Hotel Fiesta Americana Grand Coral Beach</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+<style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .voucher-container { max-width: 900px; margin: 30px auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header-status { color: #198754; font-weight: bold; }
+        .detail-label { font-weight: 600; color: #6c757d; text-transform: uppercase; font-size: 0.85rem; }
+        .info-box { background-color: #f8f9fa; border-left: 4px solid #0d6efd; padding: 15px; margin-bottom: 20px; }
+        .price-breakdown { background-color: #e9ecef; padding: 20px; border-radius: 5px; }
+        @media print { .no-print { display: none; } body { background: white; } .voucher-container { box-shadow: none; margin: 0; width: 100%; } }
+</style>
+</head>
+
+<body>
 
 <div class="container no-print mt-3 text-end">
-    <button onclick="window.print()" class="btn btn-primary"><i class="fas fa-print"></i> Print Voucher</button>
+    <button onclick="window.print()" class="btn btn-primary"><i class="fas fa-print"></i> Imprimir Voucher</button>
 </div>
 
 <div class="voucher-container">
@@ -14,9 +32,9 @@ include '../../views/layouts/header_voucher.php';
         </div>
         <div class="col-md-5 text-md-end">
             <div class="header-status">
-                <i class="fas fa-check-circle"></i> Booking Confirmed
+                <i class="fas fa-check-circle"></i> Reserva confirmada
             </div>
-            <div class="small text-muted">Confirmation: xxxxxxxxxxx</div>
+            <div class="small text-muted">Confirmacion: xxxxxxxxxxx</div>
             <div class="small text-muted">PIN: xxxx</div>
         </div>
     </div>
@@ -96,6 +114,10 @@ include '../../views/layouts/header_voucher.php';
         </div>
     </div>
 
-    <?php
-    include '../layouts/footer_voucher.php'
-    ?>
+    <footer class="mt-5 pt-3 border-top text-center text-muted small">
+        &copy; <?php echo date("Y"); ?> Hotel Fiesta Americana Grand Coral Beach | Administrado por ExperienciasMay.com
+    </footer>
+</div>
+
+</body>
+</html>
