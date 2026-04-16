@@ -75,6 +75,47 @@ class Hotel
         return $consulta->fetchAll();
     }
 
+    public function buscarDisponiblesAjax($termino)
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $termino = trim($termino);
+        if ($termino === '') {
+            return array();
+        }
+
+        $sql = "SELECT
+                    h.id,
+                    h.nombre,
+                    h.ciudad,
+                    h.direccion,
+                    h.disponible_general,
+                    (
+                        SELECT ih.url_imagen
+                        FROM imagenes_hotel ih
+                        WHERE ih.hotel_id = h.id
+                          AND ih.deleted_at IS NULL
+                          AND ih.activo = 1
+                        ORDER BY ih.principal DESC, ih.id DESC
+                        LIMIT 1
+                    ) AS imagen_principal
+                FROM hoteles h
+                WHERE h.deleted_at IS NULL
+                  AND h.disponible_general = 1
+                  AND (h.nombre LIKE :termino OR h.ciudad LIKE :termino OR h.direccion LIKE :termino)
+                ORDER BY h.nombre ASC
+                LIMIT 10";
+
+        $consulta = $this->conexion->prepare($sql);
+        $terminoLike = '%' . $termino . '%';
+        $consulta->bindParam(':termino', $terminoLike);
+        $consulta->execute();
+
+        return $consulta->fetchAll();
+    }
+
     public function guardar($nombre, $ciudad,$dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible)
     {
         if (!$this->conexion) {

@@ -70,4 +70,56 @@ class Reserva
         return $consulta->fetchAll();
     }
 
+    public function obtenerDetalleVoucher($reservaId)
+    {
+        if (!$this->conexion) {
+            return array();
+        }
+
+        $sql = "SELECT
+                    reservas.id,
+                    reservas.folio,
+                    reservas.fecha_entrada,
+                    reservas.fecha_salida,
+                    reservas.noches,
+                    reservas.adultos,
+                    reservas.ninos,
+                    reservas.precio_noche,
+                    reservas.subtotal,
+                    reservas.total,
+                    reservas.estado_reserva,
+                    reservas.observaciones,
+                    reservas.origen,
+                    clientes.nombres AS nombre_cliente,
+                    clientes.apellidos,
+                    clientes.email AS email_cliente,
+                    clientes.telefono AS telefono_cliente,
+                    hoteles.nombre AS nombre_hotel,
+                    hoteles.ciudad,
+                    hoteles.direccion,
+                    hoteles.telefono AS telefono_hotel,
+                    hoteles.email AS email_hotel,
+                    hoteles.hora_checkin,
+                    hoteles.hora_checkout,
+                    habitaciones.tipo_habitacion,
+                    habitaciones.capacidad_adultos,
+                    habitaciones.capacidad_ninos,
+                    habitaciones.cantidad_camas,
+                    habitaciones.moneda
+                FROM reservas
+                INNER JOIN clientes ON clientes.id = reservas.cliente_id
+                INNER JOIN habitaciones ON habitaciones.id = reservas.habitacion_id
+                INNER JOIN hoteles ON hoteles.id = habitaciones.hotel_id
+                WHERE reservas.deleted_at IS NULL
+                  AND reservas.id = :reserva_id";
+
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
+        $consulta->execute();
+
+        $resultado = $consulta->fetch();
+
+        return $resultado ? $resultado : array();
+    }
+
 }

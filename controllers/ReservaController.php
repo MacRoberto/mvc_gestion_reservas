@@ -1,6 +1,7 @@
 <?php
 
 include_once 'models/Reserva.php';
+include_once 'services/VoucherMailer.php';
 
 
 class ReservaController
@@ -69,6 +70,25 @@ class ReservaController
             $reserva->eliminar($id);
             header('Location: reservas.php');
             exit;
+        } elseif ($accion == 'enviar-voucher') {
+            $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+            $detalleReserva = $reserva->obtenerDetalleVoucher($id);
+
+            if (empty($detalleReserva)) {
+                header('Location: reservas.php?mensaje=' . urlencode('No se encontro la reserva para generar el voucher.') . '&tipo=error');
+                exit;
+            }
+
+            try {
+                $voucherMailer = new VoucherMailer();
+                $voucherMailer->enviarVoucherReserva($detalleReserva);
+
+                header('Location: reservas.php?mensaje=' . urlencode('Voucher enviado a ' . $detalleReserva['email_cliente']) . '&tipo=ok');
+                exit;
+            } catch (RuntimeException $e) {
+                header('Location: reservas.php?mensaje=' . urlencode($e->getMessage()) . '&tipo=error');
+                exit;
+            }
         } else {
             $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
             $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';

@@ -62,6 +62,7 @@ include 'views/layouts/menu.php';
                         //admin
                         if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'admin') {
                             echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
+                            echo '<a href="reservas.php?accion=enviar-voucher&id=' . $fila['id'] . '">Reenviar voucher</a><br>';
                             echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
                             echo '<a href="reservas.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta reserva?\')" >Eliminar</a>';
                         }
