@@ -89,7 +89,7 @@ include '../../views/layouts/header_voucher.php';
         <div class="card-body">
             <h6 class="card-title fw-bold text-warning-emphasis"><i class="fas fa-exclamation-triangle"></i> Informacion Importante</h6>
             <ul class="small mb-0">
-                <li><strong>Cancelación:</strong> No-rembolsable. [Iniciar_cita] Los cambios o las ausencias sin previo aviso se cobrarán al precio total. (US$55.44).</li>
+                <li><strong>Cancelación:</strong> No-rembolsable. Los cambios o las ausencias sin previo aviso se cobrarán al precio total. (US$55.44).</li>
                 <li><strong>Pago por adelantado:</strong> El importe total podrá cobrarse en cualquier momento.</li>
                 <li><strong>Seguridad:</strong>Trate su PIN confidencialmente para evitar cambios no autorizados.</li>
             </ul>
