@@ -1,5 +1,5 @@
 <?php
-include '../../views/layouts/header_baucher.php';
+include '../../views/layouts/header_voucher.php';
 ?>
 
 <div class="container no-print mt-3 text-end">
@@ -34,7 +34,7 @@ include '../../views/layouts/header_baucher.php';
         <div class="col-md-6">
             <div class="info-box" style="border-left-color: #dc3545;">
                 <div class="detail-label">Check-out</div>
-                <div class="fw-bold">Sunday, March 3, 2024</div>
+                <div class="fw-bold">20 de Abril del 2026</div>
                 <div class="small text-muted">11:30 - 12:00</div>
             </div>
         </div>
@@ -97,5 +97,5 @@ include '../../views/layouts/header_baucher.php';
     </div>
 
     <?php
-    include '../layouts/footer_baucher.php'
+    include '../layouts/footer_voucher.php'
     ?>
