@@ -81,7 +81,7 @@ include 'views/layouts/header_motor.php';
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
                 <div class="recent-search-card d-flex align-items-center">
-                    <img src="cancun_thumb.jpg" class="recent-img" alt="Cancún">
+                    <img src="assets/img/recent-search-01.jpg" class="recent-img" alt="Cancún">
                     <div class="ps-3 pe-2 py-2">
                         <div class="d-flex justify-content-between align-items-start">
                             <h6 class="mb-0 fw-bold text-truncate" style="max-width: 180px;">Cancún, Quintana Roo, Méxi...</h6>
@@ -95,10 +95,10 @@ include 'views/layouts/header_motor.php';
 
             <div class="col-md-6 col-lg-4">
                 <div class="recent-search-card d-flex align-items-center">
-                    <img src="valladolid_thumb.jpg" class="recent-img" alt="Valladolid">
+                    <img src="assets/img/recent-search-02.jpg" class="recent-img" alt="Sedney">
                     <div class="ps-3 pe-2 py-2 w-100">
                         <div class="d-flex justify-content-between">
-                            <h6 class="mb-0 fw-bold">Valladolid, Yucatán, México</h6>
+                            <h6 class="mb-0 fw-bold">Sedney, Australia</h6>
                             <span class="badge-hotel text-uppercase"><i class="fa-solid fa-bed"></i> Hotel</span>
                         </div>
                         <p class="mb-0 text-muted small">15 abr. - 19 abr.</p>
@@ -116,16 +116,16 @@ include 'views/layouts/header_motor.php';
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="offer-card">
-                    <img src="playa_promo.jpg" alt="Destinos de Playa">
+                    <img src="assets/img/offer-1.jpg" alt="Destinos de Europa">
                     <div class="offer-overlay">
-                        <div class="fs-5">Destinos de Playa</div>
+                        <div class="fs-5">Destinos de Europa</div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="offer-card">
-                    <img src="cancun_promo.jpg" alt="Cancún">
+                    <img src="assets/img/offer-2.webp" alt="Cancún">
                     <div class="offer-overlay">
                         <div class="fs-5">Cancún</div>
                     </div>
@@ -134,7 +134,7 @@ include 'views/layouts/header_motor.php';
 
             <div class="col-md-4">
                 <div class="offer-card">
-                    <img src="countdown_promo.jpg" alt="Cuenta Regresiva">
+                    <img src="assets/img/offer-3.png" alt="Cuenta Regresiva">
                     <div class="offer-overlay">
                         <div class="fs-5">Comienza la cuenta regresiva ⚽</div>
                     </div>
@@ -260,8 +260,8 @@ include 'views/layouts/header_motor.php';
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center">
                     <h6 class="fw-bold mb-3">Descarga la app de Experiencias May</h6>
                     <div class="d-flex gap-2 justify-content-center">
-                        <img src="app-store.png" height="40" alt="App Store">
-                        <img src="google-play.png" height="40" alt="Google Play">
+                        <img src="assets/img/app-store.png" height="40" alt="App Store">
+                        <img src="assets/img/google-play.png" height="40" alt="Google Play">
                     </div>
                 </div>
             </div>
@@ -315,9 +315,9 @@ include 'views/layouts/header_motor.php';
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <div class="d-flex gap-4 align-items-center flex-wrap">
                     <h5 class="fw-bold mb-0">Nuestras marcas</h5>
-                    <img src="pricetravel-logo.png" class="brand-logo-footer" alt="PriceTravel">
+                    <img src="assets/img/logo-may.png" class="brand-logo-footer" alt="Experiencias May">
                     <img src="tiquetes-logo.png" class="brand-logo-footer" alt="Tiquetes Baratos">
-                    <img src="priceagencies-logo.png" class="brand-logo-footer" alt="PriceAgencies">
+                    <img src="assets/img/agencias-may.png" class="brand-logo-footer" alt="Agencias May">
                     <img src="priceaffiliates-logo.png" class="brand-logo-footer" alt="PriceAffiliates">
                     <img src="connect-logo.png" class="brand-logo-footer" alt="Connect">
                 </div>

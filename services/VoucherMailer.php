@@ -46,7 +46,7 @@ class VoucherMailer
 
             $mailer->CharSet = 'UTF-8';
             $mailer->setFrom($this->config['from_email'], $this->config['from_name']);
-            $mailer->addAddress('carmela.vahe@gmail.com', trim(($reserva['nombre_cliente'] ?? '') . ' ' . ($reserva['apellidos'] ?? '')));
+            $mailer->addAddress(trim($reserva['email_cliente']), trim(($reserva['nombre_cliente'] ?? '') . ' ' . ($reserva['apellidos'] ?? '')));
             $mailer->isHTML(true);
             $mailer->Subject = 'Voucher de reserva ' . ($reserva['folio'] ?? '');
             $mailer->Body = $this->renderizarVoucherHtml($reserva);
