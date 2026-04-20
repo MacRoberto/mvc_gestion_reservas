@@ -5,7 +5,12 @@ include 'views/layouts/menu.php';
 
 <div class="contenedor">
     <h1><?php echo $titulo; ?></h1>
-     <p><a class="boton" href="habitaciones.php?accion=nuevo&hotel_id=<?php echo $hotelId; ?>">Nueva Habitacion</a></p>
+    <?php
+        if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
+            || $_SESSION['permiso'] == 'admin') {
+            echo '<p><a class="boton" href="habitaciones.php?accion=nuevo&hotel_id=' . $hotelId. '">Nueva Habitación</a></p>';
+        }
+    ?>
     <?php if (isset($_GET['hotel_id']) && (int) $_GET['hotel_id'] > 0) { ?>
         <p><a class="boton" href="habitaciones.php">Ver todas las habitaciones</a></p>
     <?php } ?>

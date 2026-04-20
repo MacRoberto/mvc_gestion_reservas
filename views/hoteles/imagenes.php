@@ -34,11 +34,20 @@ include 'views/layouts/menu.php';
                             <img src="<?php echo $imagen['url_imagen']; ?>" alt="Imagen del hotel" style="max-width: 220px; height: auto;">
                             <p><?php echo basename($imagen['url_imagen']); ?></p>
                             <p>Principal: <?php echo $imagen['principal'] == 1 ? 'Si' : 'No'; ?></p>
-                            <p>
-                                <a href="hoteles.php?accion=quitar-imagen&id=<?php echo $hotelActual['id']; ?>&imagen_id=<?php echo $imagen['id']; ?>" onclick="return confirm('¿Deseas quitar esta imagen?');">
+                        
+                                <?php
+                                 //ADMIN, PROPIETARIO, IT
+                                  if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') || 
+                                     $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'propietario') {
+                                     echo '<p><a href="hoteles.php?accion=quitar-imagen&id=<?php echo $hotelActual['id']; ?>&imagen_id=<?php echo $imagen['id']; ?>" onclick="return confirm('¿Deseas quitar esta imagen?');">
                                     Quitar imagen
-                                </a>
-                            </p>
+                                    </a>';
+                                     }
+                                ?>
+                                /*<a href="hoteles.php?accion=quitar-imagen&id=<?php echo $hotelActual['id']; ?>&imagen_id=<?php echo $imagen['id']; ?>" onclick="return confirm('¿Deseas quitar esta imagen?');">
+                                    Quitar imagen
+                                </a>*/
+                            
                         </div>
                     <?php } ?>
                 </div>

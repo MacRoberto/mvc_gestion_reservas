@@ -315,11 +315,10 @@ include 'views/layouts/header_motor.php';
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <div class="d-flex gap-4 align-items-center flex-wrap">
                     <h5 class="fw-bold mb-0">Nuestras marcas</h5>
-                    <img src="assets/img/logo-may.png" class="brand-logo-footer" alt="Experiencias May">
-                    <img src="tiquetes-logo.png" class="brand-logo-footer" alt="Tiquetes Baratos">
+                    <img src="assets/img/logo-may01.jpg" class="brand-logo-footer" alt="Experiencias May">
                     <img src="assets/img/agencias-may.png" class="brand-logo-footer" alt="Agencias May">
-                    <img src="priceaffiliates-logo.png" class="brand-logo-footer" alt="PriceAffiliates">
-                    <img src="connect-logo.png" class="brand-logo-footer" alt="Connect">
+                    <img src="assets/img/socios-may.jpg" class="brand-logo-footer" alt="Socios May">
+
                 </div>
                 <div class="text-lg-end mt-4 mt-lg-0">
                     <div class="mb-2">
