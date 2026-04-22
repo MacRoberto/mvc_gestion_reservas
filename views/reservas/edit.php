@@ -8,6 +8,7 @@ include 'views/layouts/menu.php';
 
     <form action="reservas.php?accion=actualizar" method="POST">
         <input type="hidden" name="id" value="<?php echo $reservasEditar[0]['id'];?>" >
+        <input type="hidden" name="cliente_id" value="<?php echo $reservasEditar[0]['cliente_id'];?>" >
         <!-- ,fecha_salida,noches,adultos,
         ninos, reservas.precio_noche, subtotal, total,observaciones,
          habitaciones.tipo_habitacion-->
@@ -33,8 +34,7 @@ include 'views/layouts/menu.php';
 
         <select name="tipo_habitacion">
             <?php foreach ($habitaciones as $fila) { ?>
-            <option value="<?php echo $fila['id']; ?>" ><?php echo $fila['tipo_habitacion']; ?></option>
-        
+            <option value="<?php echo $fila['id']; ?>" <?php echo $reservasEditar[0]['habitacion_id'] == $fila['id'] ? 'selected' : ''; ?> ><?php echo $fila['tipo_habitacion']; ?></option>   
             <?php } ?>
         </select>
         <!-- select -->

@@ -14,8 +14,8 @@
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             
-            <a href="index.php">
-                <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
+            <a href="motor_busqueda.php">
+                <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="pt-logo">
             </a>
 
             <div class="d-flex align-items-center gap-4 top-header">

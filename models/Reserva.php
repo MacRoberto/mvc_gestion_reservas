@@ -122,30 +122,38 @@ class Reserva
         return $resultado ? $resultado : array();
     }
 
-    public function actualizar($id_reserva, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
-            $ninos, $precio_noche, $subtotal, $total)
+    //$id_reserva, $cliente_id,$nombre, $apellidos, $habitacion_id, 
+        //    $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total
+    public function actualizar($id_reserva, $cliente_id, $nombre_p, $apellidos, $habitacion_id, 
+    $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total)
     {
+
+        //guardar($id, $nombre);
+        //funcion guardar($id, $nombre)
         if (!$this->conexion) {
             return false;
         }
 
-        $sql = "UPDATE habitaciones SET nombre = :nombre,   
-          ninos = :ninos, precio_noche = :precio_noche, subtotal = :dsubtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
+        $sql = "UPDATE clientes SET nombres = :nombre_r,   
+          apellidos = :apellidos WHERE id = :id AND deleted_at IS NULL";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':id', $cliente_id, PDO::PARAM_INT);
+        $consulta->bindParam(':nombre_r', $nombre_p);
+        $consulta->bindParam(':apellidos', $apellidos);
+        $consulta->execute();
+
+        //La informacion que no cambia el id primario, 1 -- 2
+        // 1 double beddrom
+        // 7 triple
+        $sql = "UPDATE reservas SET habitacion_id =:habitacion_id, fecha_entrada = :fecha_entrada,
+         fecha_salida = :fecha_salida, noches = :noches, precio_noche = :precio_noche, subtotal = :subtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
         $consulta = $this->conexion->prepare($sql);
 
-        $sql = "UPDATE reservas SET  cliente_id = :cliente_id, habitacion_id =:habitacion_id, fecha_entrada = :fecha_entrada,
-         fecha_salida = :fecha_salida, noches = :noches, adultos = :adultos, ninos = :ninos, precio_noche = :precio_noche, subtotal = :dsubtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
-        $consulta = $this->conexion->prepare($sql);
-
-        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
-        $consulta->bindParam(':id', $id_reserva);
-        $consulta->bindParam(':cliente_id', $cliente_id);
+        $consulta->bindParam(':id', $id_reserva, PDO::PARAM_INT);
         $consulta->bindParam(':habitacion_id', $habitacion_id);
         $consulta->bindParam(':fecha_entrada', $fecha_entrada);
         $consulta->bindParam(':fecha_salida', $fecha_salida);
         $consulta->bindParam(':noches', $noches);
-        $consulta->bindParam(':adultos', $adultos);
-        $consulta->bindParam(':ninos', $ninos);
         $consulta->bindParam(':precio_noche', $precio_noche);
         $consulta->bindParam(':subtotal', $subtotal);
         $consulta->bindParam(':total', $total);

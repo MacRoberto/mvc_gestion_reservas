@@ -47,19 +47,19 @@ class ReservaController
         } elseif ($accion == 'actualizar') {
             $id_reserva = isset($_POST['id']) ? $_POST['id']: 0;
             $cliente_id = isset($_POST['cliente_id']) ? $_POST['cliente_id']: '';
-            $habitacion_id = isset($_POST['habitacion_id']) ? $_POST['habitacion_id']: '';
+            $nombre = isset($_POST['nombre_cliente']) ? $_POST['nombre_cliente']: '';
+            $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos']: '';
+            $habitacion_id = isset($_POST['tipo_habitacion']) ? $_POST['tipo_habitacion']: '';
             $fecha_entrada = isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada']: '';
             $fecha_salida = isset($_POST['fecha_salida']) ? $_POST['fecha_salida']: '';
             $noches = isset($_POST['noches']) ? $_POST['noches']: '';
-            $adultos = isset($_POST['adultos']) ? $_POST['adultos']: '';
-            $ninos = isset($_POST['ninos']) ? $_POST['ninos']: '';
             $precio_noche = isset($_POST['precio_noche']) ? $_POST['precio_noche']: '' ;
             $subtotal = isset($_POST['subtotal']) ? $_POST['subtotal'] : '' ;
             $total = isset($_POST['total']) ? $_POST['total'] : '';
 
             //Invocar/llamar funcion
-            $reserva->actualizar($id_reserva, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
-            $ninos, $precio_noche, $subtotal, $total);
+            $reserva->actualizar($id_reserva, $cliente_id,$nombre, $apellidos, $habitacion_id, 
+            $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total);
 
             header('location: reservas.php');
             exit;
