@@ -53,13 +53,15 @@ class ReservaController
             $fecha_entrada = isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada']: '';
             $fecha_salida = isset($_POST['fecha_salida']) ? $_POST['fecha_salida']: '';
             $noches = isset($_POST['noches']) ? $_POST['noches']: '';
+            $adultos = isset($_POST['adultos']) ? $_POST['adultos']: '';
+            $ninos = isset($_POST['ninos']) ? $_POST['ninos']: '';
             $precio_noche = isset($_POST['precio_noche']) ? $_POST['precio_noche']: '' ;
             $subtotal = isset($_POST['subtotal']) ? $_POST['subtotal'] : '' ;
             $total = isset($_POST['total']) ? $_POST['total'] : '';
 
             //Invocar/llamar funcion
             $reserva->actualizar($id_reserva, $cliente_id,$nombre, $apellidos, $habitacion_id, 
-            $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total);
+            $fecha_entrada, $fecha_salida, $noches, $adultos, $ninos, $precio_noche, $subtotal, $total);
 
             header('location: reservas.php');
             exit;

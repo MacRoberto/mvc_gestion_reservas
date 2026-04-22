@@ -30,6 +30,15 @@ include 'views/layouts/menu.php';
         <label>Noches</label>
         <input type="number" name="noches" value="<?php echo $reservasEditar[0]['noches']; ?>" required>
 
+
+        <label>Adultos</label>
+        <input type="number" name="adultos" value="<?php echo $reservasEditar[0]['adultos']; ?>" required>
+
+
+        <label>Niños</label>
+        <input type="number" name="ninos" value="<?php echo $reservasEditar[0]['ninos']; ?>" required>
+
+
         <label>Tipo de Habitación</label>
 
         <select name="tipo_habitacion">

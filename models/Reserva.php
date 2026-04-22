@@ -29,6 +29,26 @@ class Reserva
           INNER JOIN habitaciones on habitaciones.id = reservas.habitacion_id
           INNER JOIN hoteles on hoteles.id = habitaciones.hotel_id  
           WHERE reservas.deleted_at IS NULL";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
+        $consulta->execute();
+
+                <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
+                <td><?php echo $fila['folio']; ?></td>
+                <td><?php echo $fila['cliente_id']; ?></td>
+                <td><?php echo $fila['habitacion_id']; ?></td>
+                <td><?php echo $fila['habitacion_id']; ?></td>
+                <td><?php echo $fila['fecha_entrada']; ?></td>
+                <td><?php echo $fila['fecha_salida']; ?></td>
+                <td><?php echo $fila['noches']; ?></td>
+                <td><?php echo $fila['adultos']; ?></td>
+                <td><?php echo $fila['ninos']; ?></td>
+                <td><?php echo $fila['precio_noche']; ?></td>
+                <td><?php echo $fila['subtotal']; ?></td>
+                <td><?php echo $fila['total']; ?></td>
+                <td><?php echo $fila['estado_reserva']; ?></td>
+                <td><?php echo $fila['observaciones']; ?></td>
+                <td><?php echo $fila['origen']; ?></td>
 
         if($busquedaLike != ""){//Solo se aplica el filtro si el usuario ingreso algo en el input
             if ($campo != 'todos') {
@@ -125,7 +145,7 @@ class Reserva
     //$id_reserva, $cliente_id,$nombre, $apellidos, $habitacion_id, 
         //    $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total
     public function actualizar($id_reserva, $cliente_id, $nombre_p, $apellidos, $habitacion_id, 
-    $fecha_entrada, $fecha_salida, $noches, $precio_noche, $subtotal, $total)
+    $fecha_entrada, $fecha_salida, $noches, $adultos, $ninos, $precio_noche, $subtotal, $total)
     {
 
         //guardar($id, $nombre);
@@ -146,7 +166,7 @@ class Reserva
         // 1 double beddrom
         // 7 triple
         $sql = "UPDATE reservas SET habitacion_id =:habitacion_id, fecha_entrada = :fecha_entrada,
-         fecha_salida = :fecha_salida, noches = :noches, precio_noche = :precio_noche, subtotal = :subtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
+         fecha_salida = :fecha_salida, noches = :noches, adultos = :adultos, ninos = :ninos, precio_noche = :precio_noche, subtotal = :subtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
         $consulta = $this->conexion->prepare($sql);
 
         $consulta->bindParam(':id', $id_reserva, PDO::PARAM_INT);
@@ -154,6 +174,8 @@ class Reserva
         $consulta->bindParam(':fecha_entrada', $fecha_entrada);
         $consulta->bindParam(':fecha_salida', $fecha_salida);
         $consulta->bindParam(':noches', $noches);
+        $consulta->bindParam(':adultos', $adultos);
+        $consulta->bindParam(':ninos', $ninos);
         $consulta->bindParam(':precio_noche', $precio_noche);
         $consulta->bindParam(':subtotal', $subtotal);
         $consulta->bindParam(':total', $total);
