@@ -6,8 +6,15 @@ include 'views/layouts/menu.php';
 
 <div class="contenedor">
     <h1><?php echo $titulo; ?></h1>
+            <?php
+            //ADMIN, PROPIETARIO, IT
+            if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') || 
+            $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'propietario') {
+                echo '<p><a class="boton" href="usuarios.php?accion=nuevo">Nuevo usuario</a></p>';
+            }
+        ?>
 
-    <p><a class="boton" href="usuarios.php?accion=nuevo">Nuevo usuario</a></p>
+    
 
     <form action="usuarios.php" method="GET" class="admin-buscador">
         <select name="campo">

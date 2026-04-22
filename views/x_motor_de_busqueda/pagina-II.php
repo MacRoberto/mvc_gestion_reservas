@@ -89,3 +89,7 @@ $hotels = [
         </div>
     </div>
 </div>
+
+<?php
+include 'views/layouts/footer_motor.php';
+?>

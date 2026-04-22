@@ -122,4 +122,35 @@ class Reserva
         return $resultado ? $resultado : array();
     }
 
+    public function actualizar($id_reserva, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
+            $ninos, $precio_noche, $subtotal, $total)
+    {
+        if (!$this->conexion) {
+            return false;
+        }
+
+        $sql = "UPDATE habitaciones SET nombre = :nombre,   
+          ninos = :ninos, precio_noche = :precio_noche, subtotal = :dsubtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
+        $consulta = $this->conexion->prepare($sql);
+
+        $sql = "UPDATE reservas SET  cliente_id = :cliente_id, habitacion_id =:habitacion_id, fecha_entrada = :fecha_entrada,
+         fecha_salida = :fecha_salida, noches = :noches, adultos = :adultos, ninos = :ninos, precio_noche = :precio_noche, subtotal = :dsubtotal, total = :total WHERE id = :id AND deleted_at IS NULL";
+        $consulta = $this->conexion->prepare($sql);
+
+        $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+        $consulta->bindParam(':id', $id_reserva);
+        $consulta->bindParam(':cliente_id', $cliente_id);
+        $consulta->bindParam(':habitacion_id', $habitacion_id);
+        $consulta->bindParam(':fecha_entrada', $fecha_entrada);
+        $consulta->bindParam(':fecha_salida', $fecha_salida);
+        $consulta->bindParam(':noches', $noches);
+        $consulta->bindParam(':adultos', $adultos);
+        $consulta->bindParam(':ninos', $ninos);
+        $consulta->bindParam(':precio_noche', $precio_noche);
+        $consulta->bindParam(':subtotal', $subtotal);
+        $consulta->bindParam(':total', $total);
+
+        return $consulta->execute();
+    }
+
 }

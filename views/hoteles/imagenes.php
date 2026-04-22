@@ -39,15 +39,11 @@ include 'views/layouts/menu.php';
                                  //ADMIN, PROPIETARIO, IT
                                   if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') || 
                                      $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'propietario') {
-                                     echo '<p><a href="hoteles.php?accion=quitar-imagen&id=<?php echo $hotelActual['id']; ?>&imagen_id=<?php echo $imagen['id']; ?>" onclick="return confirm('¿Deseas quitar esta imagen?');">
+                                     echo '<p><a href="hoteles.php?accion=quitar-imagen&id='.$hotelActual['id']. '&imagen_id='.$imagen['id'] .'" onclick="return confirm(\'¿Deseas quitar esta imagen?\');">
                                     Quitar imagen
                                     </a>';
                                      }
-                                ?>
-                                /*<a href="hoteles.php?accion=quitar-imagen&id=<?php echo $hotelActual['id']; ?>&imagen_id=<?php echo $imagen['id']; ?>" onclick="return confirm('¿Deseas quitar esta imagen?');">
-                                    Quitar imagen
-                                </a>*/
-                            
+                                ?>                            
                         </div>
                     <?php } ?>
                 </div>
@@ -59,3 +55,4 @@ include 'views/layouts/menu.php';
 <?php
 include 'views/layouts/footer.php';
 ?>
++
