@@ -9,6 +9,10 @@
     <style>
         /* General Reset & Base Styles */
         * { box-sizing: border-box; }
+        .em-logo {
+            height: 80px;
+            }
+
         body { 
             background-color: #f4f7f6; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -143,6 +147,9 @@
             .voucher-container { box-shadow: none; margin: 0; width: 100%; max-width: none; }
         }
     </style>
+
+
+
 </head>
 
 <body>
@@ -154,6 +161,7 @@
             <p class="text-muted">Cancún, México</p>
         </div>
         <div class="status-info">
+            <img src="../../assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
             <div class="header-status">
                 <i class="fas fa-check-circle"></i> Reserva confirmada
             </div>
