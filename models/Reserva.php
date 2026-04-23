@@ -23,32 +23,12 @@ class Reserva
         $sql = "SELECT reservas.id, reservas.folio, reservas.cliente_id, habitaciones.hotel_id, 
         reservas.habitacion_id,fecha_entrada,fecha_salida,noches,adultos,
         ninos, reservas.precio_noche, subtotal, total, estado_reserva, observaciones, origen,
-        clientes.nombres as nombre_cliente, clientes.apellidos, hoteles.nombre as nombre_hotel, habitaciones.tipo_habitacion 
+        clientes.nombres as nombre_cliente, clientes.apellidos, clientes.email, hoteles.nombre as nombre_hotel, habitaciones.tipo_habitacion 
           FROM reservas 
           INNER JOIN clientes on clientes.id = reservas.cliente_id 
           INNER JOIN habitaciones on habitaciones.id = reservas.habitacion_id
           INNER JOIN hoteles on hoteles.id = habitaciones.hotel_id  
           WHERE reservas.deleted_at IS NULL";
-        $consulta = $this->conexion->prepare($sql);
-        $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
-        $consulta->execute();
-
-                <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
-                <td><?php echo $fila['folio']; ?></td>
-                <td><?php echo $fila['cliente_id']; ?></td>
-                <td><?php echo $fila['habitacion_id']; ?></td>
-                <td><?php echo $fila['habitacion_id']; ?></td>
-                <td><?php echo $fila['fecha_entrada']; ?></td>
-                <td><?php echo $fila['fecha_salida']; ?></td>
-                <td><?php echo $fila['noches']; ?></td>
-                <td><?php echo $fila['adultos']; ?></td>
-                <td><?php echo $fila['ninos']; ?></td>
-                <td><?php echo $fila['precio_noche']; ?></td>
-                <td><?php echo $fila['subtotal']; ?></td>
-                <td><?php echo $fila['total']; ?></td>
-                <td><?php echo $fila['estado_reserva']; ?></td>
-                <td><?php echo $fila['observaciones']; ?></td>
-                <td><?php echo $fila['origen']; ?></td>
 
         if($busquedaLike != ""){//Solo se aplica el filtro si el usuario ingreso algo en el input
             if ($campo != 'todos') {
