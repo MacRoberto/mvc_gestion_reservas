@@ -11,8 +11,9 @@ include 'views/layouts/menu.php';
         <select name="campo">
             <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
             <option value="folio" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'folio' ? 'selected' : ''; ?>>Folio</option>
-            <option value="nombres" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'nombres' ? 'selected' : ''; ?>>Nombre del cliente</option>
-            <option value="email" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'email' ? 'selected' : ''; ?>>Correo del cliente</option>
+            <option value="clientes.nombres" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'clientes.nombres' ? 'selected' : ''; ?>>Nombre del cliente</option>
+             <option value="apellidos" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'apellidos' ? 'selected' : ''; ?>>Apellidos</option>
+            <option value="clientes.email" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'clientes.email' ? 'selected' : ''; ?>>Correo del cliente</option>
         </select>
         <input type="text" name="busqueda" value="<?php echo isset($_GET['busqueda']) ? htmlspecialchars($_GET['busqueda']) : ''; ?>">
         <button type="submit">Buscar</button>
@@ -24,6 +25,7 @@ include 'views/layouts/menu.php';
             <th>ID</th>
             <th>Folio</th>
             <th>Cliente</th>
+            <th>Correo</th>
             <th>Hotel</th>
             <th>Habitacion</th>
             <th>Fecha de Llegada</th>
@@ -44,6 +46,7 @@ include 'views/layouts/menu.php';
                 <td><?php echo $fila['id']; //nombres que vienen de la bd ?></td>
                 <td><?php echo $fila['folio']; ?></td>
                 <td><?php echo $fila['nombre_cliente']." ".$fila['apellidos'];; ?></td>
+                <td><?php echo $fila['email'] ?></td>
                 <td><?php echo $fila['nombre_hotel'] ?></td>
                 <td><?php echo $fila['tipo_habitacion']; ?></td>
                 <td><?php echo $fila['fecha_entrada']; ?></td>
@@ -64,7 +67,7 @@ include 'views/layouts/menu.php';
                             echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
                             echo '<a href="reservas.php?accion=enviar-voucher&id=' . $fila['id'] . '">Reenviar voucher</a><br>';
                             echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
-                            echo '<a href="reservas.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta reserva?\')" >Eliminar</a>';
+                         
                         }
                         //propietario
                         if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'propietario') {
@@ -75,7 +78,6 @@ include 'views/layouts/menu.php';
                         if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'IT') {
                             echo '<a href="reservas.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
                             echo '<a href="reservas.php?accion=historial&id=' . $fila['id'].'">Historial de pago</a><br>';
-                            echo '<a href="reservas.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta reserva?\')" >Eliminar</a><br>';
                             echo '<a href="reservas.php?accion=estatus&id=' . $fila['id'].'">Cambio de estatus</a>';
                         }
                         //usuario

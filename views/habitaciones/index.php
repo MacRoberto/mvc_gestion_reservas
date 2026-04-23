@@ -18,7 +18,7 @@ include 'views/layouts/menu.php';
     <form action="habitaciones.php" method="GET" class="admin-buscador">
         <select name="campo">
             <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
-            <option value="habitacion" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'habitacion' ? 'selected' : ''; ?>>Habitacíon</option>
+            <option value="tipo_habitacion" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'tipo_habitacion' ? 'selected' : ''; ?>>Habitacíon</option>
             <option value="precio_noche" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'precio_noche' ? 'selected' : ''; ?>>Precio</option>
             <option value="disponible_general" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'disponible_general' ? 'selected' : ''; ?>>Disponible</option>
         </select>

@@ -83,7 +83,9 @@ class HabitacionController
         
         else {
             $hotelId = isset($_GET['hotel_id']) ? (int) $_GET['hotel_id'] : 0;
-
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : "todos";
+            $busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : "";
+            
             if ($hotelId > 0) {
                 $hotel = new Hotel();
                 $hotelInfo = $hotel->obtenerPorId($hotelId);
@@ -91,7 +93,7 @@ class HabitacionController
                 $titulo = 'Lista de habitaciones del hotel: ' . $hotelInfo['nombre'];
             } else {
                 $hotelId = 0;
-                $habitaciones = $habitacion->obtenerTodos();
+                $habitaciones = $habitacion->obtenerTodos($campo, $busqueda);
                 $titulo = 'Lista de habitaciones';
             }
 

@@ -2,6 +2,7 @@
 
 include_once 'models/Reserva.php';
 include_once 'models/Habitacion.php';
+include_once 'models/Pago.php';
 include_once 'services/VoucherMailer.php';
 
 
@@ -11,6 +12,7 @@ class ReservaController
     {
         $reserva = new Reserva();
         $habitacion = new Habitacion();
+        $pago = new Pago();
         if ($accion == 'nuevo') {
             $reserva = new Reserva();
             $reserva = $Reserva->obtenerTodos();
@@ -91,6 +93,13 @@ class ReservaController
                 header('Location: reservas.php?mensaje=' . urlencode($e->getMessage()) . '&tipo=error');
                 exit;
             }
+        }elseif($accion == 'historial'){
+            //recuperar la informacion enviado desde la vista
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            //Almacenar en la variable $detallePago el resultado de la funcion obtenerDetallePago
+            $detallePago = $pago->obtenerDetallePago($id);
+            $titulo = 'Historial de Pago';
+            include 'views/reservas/historialPago.php';
         } else {
             $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
             $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
