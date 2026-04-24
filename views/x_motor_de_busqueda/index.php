@@ -25,35 +25,92 @@ include 'views/layouts/header_motor.php';
                 <div class="col-md-4">
                     <div class="search-input-group d-flex align-items-center">
                         <i class="fa-solid fa-location-dot me-3 text-secondary"></i>
-                        <div class="w-100">
+                        <div class="w-100 hotel-search-field">
                             <span class="label-xs">Destino, hotel, punto de interés.</span>
                             <input required 
                                 type="text"
                                 id="hotel-search-input"
+                                data-hotel-search-input
                                 name="destino"
                                 class="form-control border-0 p-0 shadow-none"
                                 placeholder="Destino, hotel, punto de interés."
-                                autocomplete="off"
-                                onchange="buscarHotelesDisponiblesAjax(this.value)">
-                            <div id="hotel-search-results" class="ajax-search-results d-none"></div>
+                                autocomplete="off">
+                            <div id="hotel-search-results" data-hotel-search-results class="ajax-search-results d-none"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="search-input-group d-flex align-items-center">
                         <i class="fa-solid fa-calendar-days me-3 text-secondary"></i>
-                        <div class="w-100">
+                        <div class="w-100 search-home-date-picker" data-date-picker-main>
                             <span class="label-xs">Fechas</span>
-                            <input required name="checkin" type="text" class="form-control border-0 p-0 shadow-none" value="15 abr 2026 - 19 abr 2026">
+                            <button type="button" class="search-home-date-trigger" data-date-trigger aria-expanded="false">
+                                <span class="search-home-date-display" data-date-display>15 abr 2026 - 19 abr 2026</span>
+                            </button>
+                            <input required type="hidden" name="checkin" value="2026-04-15" data-checkin-input>
+                            <input type="hidden" name="checkout" value="2026-04-19" data-checkout-input>
+                            <div class="search-filter-calendar-popover search-home-calendar-popover d-none" data-date-popover>
+                                <div class="search-filter-calendar-header">
+                                    <button type="button" class="search-filter-calendar-nav" data-calendar-nav="prev" aria-label="Mes anterior">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="search-filter-calendar-nav" data-calendar-nav="next" aria-label="Mes siguiente">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="search-filter-calendar-months" data-calendar-months></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="search-input-group d-flex align-items-center">
                         <i class="fa-solid fa-user-group me-3 text-secondary"></i>
-                        <div class="w-100">
+                        <div class="w-100 search-guest-picker" data-guest-picker>
                             <span class="label-xs">Huéspedes</span>
-                            <input required name="huespedes" type="text" class="form-control border-0 p-0 shadow-none" value="1 adulto, 1 habitación">
+                            <button type="button" class="search-guest-trigger" data-guest-trigger aria-expanded="false">
+                                <span class="search-guest-display" data-guest-display>1 adulto, 1 habitación</span>
+                            </button>
+                            <input required type="hidden" name="huespedes" value="1 adulto, 1 habitación" data-guest-input>
+                            <div class="search-guest-popover search-guest-popover-inline d-none" data-guest-popover>
+                                <div class="search-guest-row" data-guest-key="adultos">
+                                    <div>
+                                        <span class="search-guest-title">Adultos</span>
+                                        <span class="search-guest-subtitle">Edad 18 o más</span>
+                                    </div>
+                                    <div class="search-guest-counter">
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="minus" aria-label="Quitar adultos">-</button>
+                                        <span class="search-guest-counter-value" data-guest-value>1</span>
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="plus" aria-label="Agregar adultos">+</button>
+                                    </div>
+                                </div>
+                                <div class="search-guest-row" data-guest-key="menores">
+                                    <div>
+                                        <span class="search-guest-title">Niños</span>
+                                        <span class="search-guest-subtitle">Edad 0 a 17</span>
+                                    </div>
+                                    <div class="search-guest-counter">
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="minus" aria-label="Quitar niños">-</button>
+                                        <span class="search-guest-counter-value" data-guest-value>0</span>
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="plus" aria-label="Agregar niños">+</button>
+                                    </div>
+                                </div>
+                                <div class="search-guest-row" data-guest-key="habitaciones">
+                                    <div>
+                                        <span class="search-guest-title">Habitaciones</span>
+                                        <span class="search-guest-subtitle">Selecciona cuántas necesitas</span>
+                                    </div>
+                                    <div class="search-guest-counter">
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="minus" aria-label="Quitar habitaciones">-</button>
+                                        <span class="search-guest-counter-value" data-guest-value>1</span>
+                                        <button type="button" class="search-guest-counter-btn" data-guest-action="plus" aria-label="Agregar habitaciones">+</button>
+                                    </div>
+                                </div>
+                                <div class="search-guest-actions">
+                                    <button type="button" class="search-guest-cancel" data-guest-cancel>Cancelar</button>
+                                    <button type="button" class="search-guest-apply" data-guest-apply>Aplicar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -244,157 +301,6 @@ include 'views/layouts/header_motor.php';
 </div>
 </section>
 
-<script>
-var ajaxHotelSearchTimeout = null;
-var ajaxHotelSearchController = null;
-
-function escaparHtmlAjaxHotel(valor) {
-    return String(valor || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
-function obtenerImagenHotelAjax(urlImagen, nombreHotel) {
-    if (urlImagen) {
-        return urlImagen;
-    }
-
-    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">'
-        + '<rect width="120" height="120" fill="#dfe7ef"/>'
-        + '<rect x="12" y="16" width="96" height="88" rx="12" fill="#9fb3c8"/>'
-        + '<path d="M20 82L45 55L63 72L78 60L100 82V98H20Z" fill="#6f8aa6"/>'
-        + '<circle cx="82" cy="38" r="10" fill="#ffd166"/>'
-        + '<text x="60" y="111" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#355070">'
-        + escaparHtmlAjaxHotel(nombreHotel || 'Hotel')
-        + '</text></svg>'
-    );
-}
-
-function ocultarResultadosHotelesAjax() {
-    var resultados = document.getElementById('hotel-search-results');
-    if (!resultados) {
-        return;
-    }
-
-    resultados.classList.add('d-none');
-    resultados.innerHTML = '';
-}
-
-function pintarResultadosHotelesAjax(hoteles) {
-    var resultados = document.getElementById('hotel-search-results');
-    var input = document.getElementById('hotel-search-input');
-
-    if (!resultados || !input) {
-        return;
-    }
-
-    if (!hoteles || hoteles.length === 0) {
-        resultados.innerHTML = '<div class="ajax-search-empty">No se encontraron hoteles disponibles.</div>';
-        resultados.classList.remove('d-none');
-        return;
-    }
-
-    resultados.innerHTML = hoteles.map(function (hotel) {
-        var ubicacion = [hotel.ciudad, hotel.pais].filter(Boolean).join(', ');
-
-        return ''
-            + '<button type="button" class="ajax-search-item" data-hotel-id="' + escaparHtmlAjaxHotel(hotel.id) + '" data-hotel-name="' + escaparHtmlAjaxHotel(hotel.nombre) + '">'
-            + '<img src="' + escaparHtmlAjaxHotel(obtenerImagenHotelAjax(hotel.imagen_principal, hotel.nombre)) + '" alt="' + escaparHtmlAjaxHotel(hotel.nombre) + '">'
-            + '<div class="ajax-search-item-body">'
-            + '<strong>' + escaparHtmlAjaxHotel(hotel.nombre) + '</strong>'
-            + '<span>' + escaparHtmlAjaxHotel(ubicacion || hotel.direccion || 'Disponible') + '</span>'
-            + '</div>'
-            + '</button>';
-    }).join('');
-
-    resultados.classList.remove('d-none');
-
-    resultados.querySelectorAll('.ajax-search-item').forEach(function (item) {
-        item.addEventListener('click', function () {
-            input.value = this.getAttribute('data-hotel-name') || '';
-            ocultarResultadosHotelesAjax();
-        });
-    });
-}
-
-async function ejecutarBusquedaHotelesAjax(valor) {
-    var termino = (valor || '').trim();
-
-    if (termino.length < 2) {
-        ocultarResultadosHotelesAjax();
-        return;
-    }
-
-    if (ajaxHotelSearchController) {
-        ajaxHotelSearchController.abort();
-    }
-
-    ajaxHotelSearchController = new AbortController();
-
-    try {
-        var respuesta = await fetch('ajax.php?accion=buscar-hoteles&termino=' + encodeURIComponent(termino), {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            signal: ajaxHotelSearchController.signal
-        });
-
-        if (!respuesta.ok) {
-            throw new Error('No se pudo consultar la disponibilidad.');
-        }
-
-        var data = await respuesta.json();
-        pintarResultadosHotelesAjax(data.hoteles || []);
-    } catch (error) {
-        if (error.name === 'AbortError') {
-            return;
-        }
-
-        var resultados = document.getElementById('hotel-search-results');
-        if (resultados) {
-            resultados.innerHTML = '<div class="ajax-search-empty">Ocurrio un error al consultar hoteles.</div>';
-            resultados.classList.remove('d-none');
-        }
-    }
-}
-
-function buscarHotelesDisponiblesAjax(valor) {
-    clearTimeout(ajaxHotelSearchTimeout);
-    ajaxHotelSearchTimeout = setTimeout(function () {
-        ejecutarBusquedaHotelesAjax(valor);
-    }, 250);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    var input = document.getElementById('hotel-search-input');
-    var resultados = document.getElementById('hotel-search-results');
-
-    if (!input || !resultados) {
-        return;
-    }
-
-    input.addEventListener('input', function () {
-        buscarHotelesDisponiblesAjax(this.value);
-    });
-
-    input.addEventListener('focus', function () {
-        if (this.value.trim().length >= 2) {
-            buscarHotelesDisponiblesAjax(this.value);
-        }
-    });
-
-    document.addEventListener('click', function (evento) {
-        if (!resultados.contains(evento.target) && evento.target !== input) {
-            ocultarResultadosHotelesAjax();
-        }
-    });
-});
-</script>
 <?php
 include 'views/layouts/footer_motor.php';
 ?>

@@ -5,11 +5,44 @@ include_once 'config/database.php';
 class Reserva
 {
     private $conexion;
+    private const FOLIO_PREFIX = 'RSV-';
+    private const FOLIO_RANDOM_LENGTH = 16;
 
     public function __construct()
     {
         $database = new Database();
         $this->conexion = $database->conectar();
+    }
+
+    private function generarFolio()
+    {
+        $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $maxIndice = strlen($caracteres) - 1;
+
+        do {
+            $aleatorio = '';
+            for ($i = 0; $i < self::FOLIO_RANDOM_LENGTH; $i++) {
+                $aleatorio .= $caracteres[random_int(0, $maxIndice)];
+            }
+
+            $folio = self::FOLIO_PREFIX . $aleatorio;
+        } while ($this->folioExiste($folio));
+
+        return $folio;
+    }
+
+    private function folioExiste($folio)
+    {
+        if (!$this->conexion) {
+            return false;
+        }
+
+        $sql = "SELECT COUNT(*) FROM reservas WHERE folio = :folio";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':folio', $folio);
+        $consulta->execute();
+
+        return (int) $consulta->fetchColumn() > 0;
     }
 
     public function obtenerTodos($campo = "todos", $busqueda = "")
@@ -163,4 +196,33 @@ class Reserva
         return $consulta->execute();
     }
 
+    public function guardar($clienteId, $habitacionId, $fechaEntrada, $fechaSalida, $noches, $adultos, $ninos, $precioNoche, $subtotal, $total, $estadoReserva = 'pendiente', $observaciones = null, $origen = 'web')
+    {
+        if (!$this->conexion) {
+            return 0;
+        }
+
+        $folio = $this->generarFolio();
+
+        $sql = "INSERT INTO reservas (folio, cliente_id, habitacion_id, fecha_entrada, fecha_salida, noches, adultos, ninos, precio_noche, subtotal, total, estado_reserva, observaciones, origen, created_at, updated_at)
+                VALUES (:folio, :cliente_id, :habitacion_id, :fecha_entrada, :fecha_salida, :noches, :adultos, :ninos, :precio_noche, :subtotal, :total, :estado_reserva, :observaciones, :origen, NOW(), NOW())";
+        $consulta = $this->conexion->prepare($sql);
+        $consulta->bindParam(':folio', $folio);
+        $consulta->bindParam(':cliente_id', $clienteId, PDO::PARAM_INT);
+        $consulta->bindParam(':habitacion_id', $habitacionId, PDO::PARAM_INT);
+        $consulta->bindParam(':fecha_entrada', $fechaEntrada);
+        $consulta->bindParam(':fecha_salida', $fechaSalida);
+        $consulta->bindParam(':noches', $noches, PDO::PARAM_INT);
+        $consulta->bindParam(':adultos', $adultos, PDO::PARAM_INT);
+        $consulta->bindParam(':ninos', $ninos, PDO::PARAM_INT);
+        $consulta->bindParam(':precio_noche', $precioNoche);
+        $consulta->bindParam(':subtotal', $subtotal);
+        $consulta->bindParam(':total', $total);
+        $consulta->bindParam(':estado_reserva', $estadoReserva);
+        $consulta->bindParam(':observaciones', $observaciones);
+        $consulta->bindParam(':origen', $origen);
+        $consulta->execute();
+        $idReserva = $this->conexion->lastInsertId();
+        return (int) $idReserva;
+    }
 }
