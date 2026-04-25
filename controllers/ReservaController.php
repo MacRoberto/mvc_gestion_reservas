@@ -96,10 +96,13 @@ class ReservaController
         }elseif($accion == 'historial'){
             //recuperar la informacion enviado desde la vista
             $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos'; //recibe el nombre de la columna donde se hace el filtro.
+            $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : ''; //el valor de la busqueda.
             //Almacenar en la variable $detallePago el resultado de la funcion obtenerDetallePago
-            $detallePago = $pago->obtenerDetallePago($id);
+            $detallePago = $pago->obtenerDetallePago($id, $campo, $busqueda);
             $titulo = 'Historial de Pago';
-            include 'views/reservas/historialPago.php';
+
+            include 'views/pagos/index.php';
         } else {
             $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
             $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
