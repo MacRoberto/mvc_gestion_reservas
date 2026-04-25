@@ -12,16 +12,19 @@ class Cliente
         $this->conexion = $database->conectar();
     }
 
-     public function guardar($nombre, $ciudad, $dirreccion, $telefono, $email, $descripcion, $categoria, $hora_checkin, $hora_checkout, $disponible)
+     public function guardar($nombre, $apellidos, $telefono, $email )
     {
         if (!$this->conexion) {
             return false;
         }
 
-        $sql = "INSERT INTO clientes (camposBD..) VALUES (parmsReferencia)";
+        $sql = "INSERT INTO clientes (nombres, apellidos, telefono, email) VALUES (:nombres, :apellidos, :telefono, :email)";
         $consulta = $this->conexion->prepare($sql);
         //bindParams
-        $consulta->bindParam(':nombre', $nombre);
+        $consulta->bindParam(':nombres', $nombre);
+        $consulta->bindParam(':apellidos', $apellidos);
+        $consulta->bindParam(':telefono', $telefono);
+        $consulta->bindParam(':email', $email);
 
         $consulta->execute();
         $idCliente = $this->conexion->lastInsertId();

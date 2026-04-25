@@ -80,6 +80,14 @@ $fechaSalidaLabel = $formatearFechaLargaEsp($checkout, $checkout);
                 <input type="hidden" name="checkin" value="<?php echo htmlspecialchars($checkin, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="checkout" value="<?php echo htmlspecialchars($checkout, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="huespedes" value="<?php echo htmlspecialchars($huespedes, ENT_QUOTES, 'UTF-8'); ?>">
+                <input type="hidden" name="noches" value="<?php echo $noches; ?>">
+                <input type="hidden" name="capacidad_adultos" value="<?php echo $capacidadAdultos; ?>">
+                <input type="hidden" name="ninos" value="<?php echo $capacidadNinos; ?>">
+                <input type="hidden" name="precio_noche" value="<?php echo $precioNoche; ?>">
+                <input type="hidden" name="total" value="<?php echo $totalHabitacion; ?>">
+                <input type="hidden" name="impuestos" value="<?php echo $impuestosHabitacion; ?>">
+                
+                
                 <section class="checkout-card p-4 p-lg-5">
                     <div class="checkout-login-banner mb-4">
                         <div class="checkout-login-icon">

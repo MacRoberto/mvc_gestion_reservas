@@ -178,10 +178,16 @@ class MotorController
 
                 include 'views/x_motor_de_busqueda/pagina-formulario.php';
                 break;
-            case 'guardar'://En este punto ya se generó la reserva, se muestra el resumen de la reserva y el formulario de pago
+            case 'guardar':
+                $nombre = isset($_POST['nombres']) ?  $_POST['nombres'] : '' ;
+                $apellidos = isset($_POST['apellidos']) ?  $_POST['apellidos'] : '' ;
+                $telefono = isset($_POST['telefono']) ?  $_POST['telefono'] : '' ;
+                $correo = isset($_POST['correo']) ?  $_POST['correo'] : '' ;
+
+                //En este punto ya se generó la reserva, se muestra el resumen de la reserva y el formulario de pago
                 //Recuperar params del formulario para info del cliente
                 //Guardar info de cliente y recuperar de la consulta de guardar cliente
-                $clienteId = $cliente->guardar();
+                $clienteId = $cliente->guardar($nombre, $apellidos, $telefono, $correo);
                 //Recuperar valores del formulario
                 $habitacionId = isset($_POST['habitacion_id']) ? (int) $_POST['habitacion_id'] : 0;
                 $fechaEntrada = isset($_POST['checkin']) ? trim((string) $_POST['checkin']) : '';
@@ -192,6 +198,7 @@ class MotorController
                 $precioNoche = isset($_POST['precio_noche']) ? (float) $_POST['precio_noche'] : 0;
                 $subtotal = isset($_POST['subtotal']) ? (float) $_POST['subtotal'] : 0;
                 $total = isset($_POST['total']) ? (float) $_POST['total'] : 0;
+                
                 $observaciones = isset($_POST['solicitudes_especiales']) ? trim((string) $_POST['solicitudes_especiales']) : null;
                 //Guardar reserva y obtener ID de reserva generada
                 $reservaID = $reserva->guardar($clienteId, $habitacionId, $fechaEntrada, $fechaSalida, $noches, $adultos, $ninos, $precioNoche, $subtotal, $total, 'pendiente', $observaciones, 'web');
