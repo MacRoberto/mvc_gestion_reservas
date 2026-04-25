@@ -15,6 +15,7 @@ include 'views/layouts/menu.php';
         ?>
     </div>
     <form action="reservas.php" method="GET" class="admin-buscador">
+        <input type="hidden" name="accion" value="historial">
         <select name="campo">
             <option value="todos" <?php echo (isset($_GET['campo']) && $_GET['campo'] == 'todos') || !isset($_GET['campo']) ? 'selected' : ''; ?>>Todos</option>
             <option value="referencia" <?php echo isset($_GET['campo']) && $_GET['campo'] == 'referencia' ? 'selected' : ''; ?>>Referencia</option>

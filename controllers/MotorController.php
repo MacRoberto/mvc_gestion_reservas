@@ -3,6 +3,7 @@
 include_once 'models/Hotel.php';
 include_once 'models/Habitacion.php';
 include_once 'models/Reserva.php';
+include_once 'models/Cliente.php';
 
 class MotorController
 {
@@ -11,6 +12,7 @@ class MotorController
         $hotel = new Hotel();
         $habitacion = new Habitacion();
         $reserva = new Reserva();
+        $cliente = new Cliente();
         $formatearFechaCorta = function ($timestamp, $fallback) {
             if (!$timestamp) {
                 return $fallback;
@@ -176,9 +178,10 @@ class MotorController
 
                 include 'views/x_motor_de_busqueda/pagina-formulario.php';
                 break;
-            case 'pago'://En este punto ya se generó la reserva, se muestra el resumen de la reserva y el formulario de pago
-                //Guardar info de cliente
-                $clienteId = isset($_POST['cliente_id']) ? (int) $_POST['cliente_id'] : 0;
+            case 'guardar'://En este punto ya se generó la reserva, se muestra el resumen de la reserva y el formulario de pago
+                //Recuperar params del formulario para info del cliente
+                //Guardar info de cliente y recuperar de la consulta de guardar cliente
+                $clienteId = $cliente->guardar();
                 //Recuperar valores del formulario
                 $habitacionId = isset($_POST['habitacion_id']) ? (int) $_POST['habitacion_id'] : 0;
                 $fechaEntrada = isset($_POST['checkin']) ? trim((string) $_POST['checkin']) : '';
@@ -192,9 +195,15 @@ class MotorController
                 $observaciones = isset($_POST['solicitudes_especiales']) ? trim((string) $_POST['solicitudes_especiales']) : null;
                 //Guardar reserva y obtener ID de reserva generada
                 $reservaID = $reserva->guardar($clienteId, $habitacionId, $fechaEntrada, $fechaSalida, $noches, $adultos, $ninos, $precioNoche, $subtotal, $total, 'pendiente', $observaciones, 'web');
-                $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID);
-                include 'views/x_motor_de_busqueda/pagina-pago.php' . $reservaID;
+                
+                header("Location: motor_busqueda.php?accion=pago&folio=".$reservaID);
+                exit();
                 break;
+            case 'pago':
+                $reservaID = isset($_GET['folio']) ? (int) $_GET['folio'] : 0;
+                $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID);
+                include 'views/x_motor_de_busqueda/pagina-pago.php';
+            break;
             default:
                 $hotels = $hotel->obtenerTodosConImagenPrincipal();
                 include 'views/x_motor_de_busqueda/index.php';
