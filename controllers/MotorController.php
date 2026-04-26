@@ -13,28 +13,7 @@ class MotorController
         $habitacion = new Habitacion();
         $reserva = new Reserva();
         $cliente = new Cliente();
-        $formatearFechaCorta = function ($timestamp, $fallback) {
-            if (!$timestamp) {
-                return $fallback;
-            }
 
-            $meses = array(
-                1 => 'ene',
-                2 => 'feb',
-                3 => 'mar',
-                4 => 'abr',
-                5 => 'may',
-                6 => 'jun',
-                7 => 'jul',
-                8 => 'ago',
-                9 => 'sep',
-                10 => 'oct',
-                11 => 'nov',
-                12 => 'dic'
-            );
-
-            return date('d', $timestamp) . ' ' . $meses[(int) date('n', $timestamp)] . ' ' . date('Y', $timestamp);
-        };
         switch ($accion) {
             case 'paso2':
                 $fechaBase = new DateTimeImmutable('today');
@@ -54,9 +33,9 @@ class MotorController
 
                 $checkinTimestamp = strtotime($checkin);
                 $checkoutTimestamp = strtotime($checkout);
-                $rangoFechas = $formatearFechaCorta($checkinTimestamp, $checkin)
+                $rangoFechas = $this->formatearFechaCorta($checkinTimestamp, $checkin)
                     . ' - '
-                    . $formatearFechaCorta($checkoutTimestamp, $checkout);
+                    . $this->formatearFechaCorta($checkoutTimestamp, $checkout);
                 $noches = 1;
 
                 if ($checkinTimestamp && $checkoutTimestamp && $checkoutTimestamp > $checkinTimestamp) {
@@ -209,12 +188,67 @@ class MotorController
             case 'pago':
                 $reservaID = isset($_GET['folio']) ? (int) $_GET['folio'] : 0;
                 $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID);
-                include 'views/x_motor_de_busqueda/pagina-pago.php';
+                $reservaInfo['fecha_entrada_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_entrada']), $reservaInfo['fecha_entrada']);
+                $reservaInfo['fecha_salida_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_salida']), $reservaInfo['fecha_salida']);
+                if ($reservaInfo['estado_pago'] == 'aprobado') {
+                    include 'views/voucher/index.php';    
+                }else{
+                    include 'views/x_motor_de_busqueda/pagina-pago.php';
+                }
+                
             break;
             default:
                 $hotels = $hotel->obtenerTodosConImagenPrincipal();
                 include 'views/x_motor_de_busqueda/index.php';
                 break;
         }
+    }
+
+    public function formatearFechaCorta($timestamp, $fallback)
+    {
+        if (!$timestamp) {
+            return $fallback;
+        }
+
+        $meses = array(
+            1 => 'ene',
+            2 => 'feb',
+            3 => 'mar',
+            4 => 'abr',
+            5 => 'may',
+            6 => 'jun',
+            7 => 'jul',
+            8 => 'ago',
+            9 => 'sep',
+            10 => 'oct',
+            11 => 'nov',
+            12 => 'dic'
+        );
+
+        return date('d', $timestamp) . ' ' . $meses[(int) date('n', $timestamp)] . ' ' . date('Y', $timestamp);
+    }
+
+    public function formatearFechaLarga($timestamp, $fallback)
+    {
+        if (!$timestamp) {
+            return $fallback;
+        }
+
+        $meses = array(
+            1 => 'enero',
+            2 => 'febrero',
+            3 => 'marzo',
+            4 => 'abril',
+            5 => 'mayo',
+            6 => 'junio',
+            7 => 'julio',
+            8 => 'agosto',
+            9 => 'septiembre',
+            10 => 'octubre',
+            11 => 'noviembre',
+            12 => 'diciembre'
+        );
+
+        return date('d', $timestamp) . ' de ' . $meses[(int) date('n', $timestamp)] . ' de ' . date('Y', $timestamp);
     }
 }

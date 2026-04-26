@@ -85,7 +85,7 @@ $fechaSalidaLabel = $formatearFechaLargaEsp($checkout, $checkout);
                 <input type="hidden" name="ninos" value="<?php echo $capacidadNinos; ?>">
                 <input type="hidden" name="precio_noche" value="<?php echo $precioNoche; ?>">
                 <input type="hidden" name="total" value="<?php echo $totalHabitacion; ?>">
-                <input type="hidden" name="impuestos" value="<?php echo $impuestosHabitacion; ?>">
+                <input type="hidden" name="subtotal" value="<?php echo ($precioNoche * $noches); ?>">
                 
                 
                 <section class="checkout-card p-4 p-lg-5">

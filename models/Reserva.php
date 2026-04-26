@@ -135,16 +135,22 @@ class Reserva
                     hoteles.hora_checkin,
                     hoteles.hora_checkout,
                     habitaciones.tipo_habitacion,
+                    habitaciones.descripcion AS descripcion_habitacion,
                     habitaciones.capacidad_adultos,
                     habitaciones.capacidad_ninos,
                     habitaciones.cantidad_camas,
-                    habitaciones.moneda
+                    habitaciones.moneda,
+                    pagos.monto AS monto_pagado,
+                    pagos.fecha_pago,
+                    pagos.metodo_pago,
+                    pagos.estado AS estado_pago
                 FROM reservas
                 INNER JOIN clientes ON clientes.id = reservas.cliente_id
                 INNER JOIN habitaciones ON habitaciones.id = reservas.habitacion_id
                 INNER JOIN hoteles ON hoteles.id = habitaciones.hotel_id
+                LEFT JOIN pagos ON pagos.reserva_id = reservas.id AND pagos.estado = 'aprobado'
                 WHERE reservas.deleted_at IS NULL
-                  AND reservas.id = :reserva_id";
+                  AND reservas.id = :reserva_id ";
 
         $consulta = $this->conexion->prepare($sql);
         $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
