@@ -272,17 +272,17 @@ include 'views/layouts/header_motor.php';
     <div class="row g-4 mb-4">
         <div class="col-md-6">
             <div class="info-card bg-white d-flex align-items-start gap-3">
-                <img src="bag-icon.png" width="40" alt="Reserva">
+                <img src="assets/img/reserva-ahora-img.png" width="40" alt="Reserva">
                 <div>
                     <h5 class="fw-bold">Reserva ahora y paga después</h5>
                     <p class="text-muted small mb-1">Te damos más tiempo para pagar tu hospedaje</p>
-                    <a href="#" class="link-pt">Cómo funciona <i class="fas fa-chevron-right"></i></a>
+                    <a href="#" class="assets/img/link-pt">Cómo funciona <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="info-card bg-white d-flex align-items-start gap-3">
-                <img src="expert-icon.png" width="40" alt="Expertos">
+                <img src="assets/img/expertos.png" width="80" alt="Expertos">
                 <div>
                     <h5 class="fw-bold">Nuestros expertos a tu servicio</h5>
                     <p class="text-muted small mb-1">Atención 24 horas, 365 días del año</p>
