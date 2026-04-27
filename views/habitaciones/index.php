@@ -4,13 +4,15 @@ include 'views/layouts/menu.php';
 ?>
 
 <div class="contenedor">
-    <h1><?php echo $titulo; ?></h1>
-    <?php
-        if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
-            || $_SESSION['permiso'] == 'admin') {
-            echo '<p><a class="boton" href="habitaciones.php?accion=nuevo&hotel_id=' . $hotelId. '">Nueva Habitación</a></p>';
-        }
-    ?>
+    <div class="admin-header">
+        <h1><?php echo $titulo; ?></h1>
+        <?php
+            if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
+                || $_SESSION['permiso'] == 'admin') {
+                echo '<p><a class="boton" href="habitaciones.php?accion=nuevo&hotel_id=' . $hotelId. '">Nueva Habitación</a></p>';
+            }
+        ?>
+    </div>
     <?php if (isset($_GET['hotel_id']) && (int) $_GET['hotel_id'] > 0) { ?>
         <p><a class="boton" href="habitaciones.php">Ver todas las habitaciones</a></p>
     <?php } ?>
@@ -64,8 +66,8 @@ include 'views/layouts/menu.php';
                         //admin, propietario, IT, usuario
                         if (isset($_SESSION['permiso']) && ($_SESSION['permiso'] == 'IT') 
                             || $_SESSION['permiso'] == 'admin') {
-                            echo '<a href="habitaciones.php?accion=editar&id=' . $fila['id'] . '">Editar</a>';
-                            echo '<a href="hoteles.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta habitación?\')" >Eliminar</a>';
+                            echo '<a href="habitaciones.php?accion=editar&id=' . $fila['id'] . '">Editar</a><br>';
+                            echo '<a href="hoteles.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar esta habitación?\')" >Eliminar</a><br>';
                         }
                         
                     ?>

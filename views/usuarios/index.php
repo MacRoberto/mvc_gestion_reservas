@@ -5,6 +5,7 @@ include 'views/layouts/menu.php';
 ?>
 
 <div class="contenedor">
+    <div class="admin-header">
     <h1><?php echo $titulo; ?></h1>
             <?php
             //ADMIN, PROPIETARIO, IT
@@ -13,7 +14,7 @@ include 'views/layouts/menu.php';
                 echo '<p><a class="boton" href="usuarios.php?accion=nuevo">Nuevo usuario</a></p>';
             }
         ?>
-
+    </div>
     
 
     <form action="usuarios.php" method="GET" class="admin-buscador">
@@ -61,8 +62,8 @@ include 'views/layouts/menu.php';
                     <td>
                     <?php
                         if (isset($_SESSION['permiso']) && $_SESSION['permiso'] == 'admin' || $_SESSION['permiso'] == 'IT') {
-                            echo ' <a href="usuarios.php?accion=editar&id=' .$fila['id']. ' ">Editar</a>';
-                            echo '<a href="usuarios.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar este usuario?\')" >Eliminar</a>';
+                            echo ' <a href="usuarios.php?accion=editar&id=' .$fila['id']. ' ">Editar</a><br>';
+                            echo '<a href="usuarios.php?accion=eliminar&id=' . $fila['id'] . '" onclick = "return confirm(\'¿Deseas eliminar este usuario?\')" >Eliminar</a><br>';
                         }
                     ?>
                     </td>

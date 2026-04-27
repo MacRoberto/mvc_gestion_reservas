@@ -306,7 +306,7 @@ print_r ($reservaInfo);
 </main>
 
 <?php if ($payPalClientId !== '') { ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?php echo htmlspecialchars($payPalClientId, ENT_QUOTES, 'UTF-8'); ?>&currency=<?php echo htmlspecialchars($payPalCurrency, ENT_QUOTES, 'UTF-8'); ?>&intent=capture"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?php echo htmlspecialchars($payPalClientId, ENT_QUOTES, 'UTF-8'); ?>&currency=<?php echo htmlspecialchars($payPalCurrency, ENT_QUOTES, 'UTF-8'); ?>&intent=capture&disable-funding=card"></script>
 <?php } ?>
 
 <script>
@@ -319,6 +319,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var continueBox = document.getElementById('checkoutPaymentContinueBox');
     var paypalButtonsRendered = false;
     var paypalStatusMessage = document.getElementById('paypal-status-message');
+    var reservaId = <?php echo json_encode($reservaId); ?>;
+    var paypalAmount = <?php echo json_encode($payPalAmount); ?>;
+    var paypalCurrency = <?php echo json_encode($payPalCurrency); ?>;
 
     if (roomToggle && roomDetails) {
         var roomToggleText = roomToggle.querySelector('span');
@@ -357,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        amount: '<?php echo $payPalAmount; ?>'
+                        amount: paypalAmount
                     })
                 })
                 .then(function (response) {
@@ -384,18 +387,79 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(function (response) {
                     return response.json();
                 })
-                .then(function (data) {
-                    if (!data.ok) {
-                        throw new Error(data.mensaje || 'No se pudo capturar el pago PayPal.');
+                .then(function (captureResponse) {
+                    if (!captureResponse.ok) {
+                        throw new Error(captureResponse.mensaje || 'No se pudo capturar el pago PayPal.');
                     }
 
-                    if (paypalStatusMessage) {
-                        paypalStatusMessage.className = 'checkout-payment-status checkout-payment-status-success mt-3';
-                        paypalStatusMessage.textContent = 'Pago de prueba aprobado correctamente en PayPal Sandbox.';
-                    }
+                    var paypalCapture = (((captureResponse || {}).capture || {}).purchase_units || [])
+                        .map(function (unit) {
+                            return unit && unit.payments && Array.isArray(unit.payments.captures)
+                                ? unit.payments.captures[0]
+                                : null;
+                        })
+                        .filter(function (capture) {
+                            return capture !== null;
+                        })[0] || null;
+
+                    var respuestaPasarela = paypalCapture ? {
+                        payments: {
+                            captures: [
+                                {
+                                    id: paypalCapture.id || '',
+                                    status: paypalCapture.status || '',
+                                    amount: paypalCapture.amount || {
+                                        currency_code: paypalCurrency,
+                                        value: paypalAmount
+                                    }
+                                }
+                            ]
+                        }
+                    } : {
+                        payments: {
+                            captures: []
+                        }
+                    };
+
+                    return fetch('ajax.php?accion=procesar-pago', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            reserva_id: reservaId,
+                            metodo_pago: 'paypal',
+                            monto: paypalAmount,
+                            moneda: paypalCurrency,
+                            referencia: data.orderID,
+                            estado: 'aprobado',
+                            es_simulado: 1,
+                            fecha_pago: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                            respuesta_pasarela: respuestaPasarela
+                        })
+                    })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (paymentResponse) {
+                        if (!paymentResponse.ok) {
+                            throw new Error(paymentResponse.mensaje || 'No se pudo guardar el pago aprobado.');
+                        }
+
+                        if (paypalStatusMessage) {
+                            paypalStatusMessage.className = 'checkout-payment-status checkout-payment-status-success mt-3';
+                            paypalStatusMessage.textContent = 'Pago aprobado correctamente.';
+                        }
+
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+                    });
                 });
             },
             onError: function (error) {
+                //TODO: Si PayPal devuelve error o la captura falla, aqui mandar a llamar al backend que use Pago->guardar(...)
+                // con estado = 'rechazado' para dejar historial del intento de pago fallido.
                 if (paypalStatusMessage) {
                     paypalStatusMessage.className = 'checkout-payment-status checkout-payment-status-error mt-3';
                     paypalStatusMessage.textContent = error.message || 'Ocurrio un error al procesar PayPal.';

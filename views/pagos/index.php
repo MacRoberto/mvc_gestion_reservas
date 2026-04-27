@@ -36,7 +36,7 @@ include 'views/layouts/menu.php';
             <th>Estado</th>
             <th>Est. Simulado</th>
             <th>Fecha de Pago</th>
-            <th>Referencia</th>
+            <th style="width: 1%;">Respuesta Pasarela</th>
 
         </tr>
         <?php foreach ($detallePago as $fila) { ?>

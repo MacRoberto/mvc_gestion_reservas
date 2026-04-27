@@ -47,7 +47,7 @@
             <a href="#" class="nav-category">
                 <i class="fa-solid fa-face-smile me-2"></i> Disney
             </a>
-            <a href="#" class="nav-category">
+            <a href="#ofertas" class="nav-category">
                 <i class="fa-solid fa-fire me-2"></i> Ofertas
             </a>
         </nav>

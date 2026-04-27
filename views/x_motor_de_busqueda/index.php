@@ -137,37 +137,41 @@ include 'views/layouts/header_motor.php';
         <h2 class="fw-bold h4 mb-4">Tus búsquedas recientes</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4">
-                <div class="recent-search-card d-flex align-items-center">
-                    <img src="assets/img/recent-search-01.jpg" class="recent-img" alt="Cancún">
-                    <div class="ps-3 pe-2 py-2">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <h6 class="mb-0 fw-bold text-truncate" style="max-width: 180px;">Cancún, Quintana Roo, Méxi...</h6>
-                            <span class="badge-hotel text-uppercase ml-2"><i class="fa-solid fa-bed"></i> Hotel</span>
+                <a href="motor_busqueda.php?accion=paso2&destino=<?= htmlspecialchars('Cancún', ENT_QUOTES, 'UTF-8') ?>&checkin=<?= htmlspecialchars($checkinDefault, ENT_QUOTES, 'UTF-8') ?>&checkout=<?= htmlspecialchars($checkoutDefault, ENT_QUOTES, 'UTF-8') ?>&huespedes=1+adulto%2C+1+habitación" class="brand-card-link">   
+                    <div class="recent-search-card d-flex align-items-center">
+                        <img src="assets/img/recent-search-01.jpg" class="recent-img" alt="Cancún">
+                        <div class="ps-3 pe-2 py-2">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <h6 class="mb-0 fw-bold text-truncate" style="max-width: 180px;">Cancún, Quintana Roo, Méxi...</h6>
+                                <span class="badge-hotel text-uppercase ml-2"><i class="fa-solid fa-bed"></i> Hotel</span>
+                            </div>
+                            <p class="mb-0 text-muted small">15 abr. - 19 abr.</p>
+                            <p class="mb-0 text-muted small">1 adulto</p>
                         </div>
-                        <p class="mb-0 text-muted small">15 abr. - 19 abr.</p>
-                        <p class="mb-0 text-muted small">1 adulto</p>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-6 col-lg-4">
-                <div class="recent-search-card d-flex align-items-center">
-                    <img src="assets/img/recent-search-02.jpg" class="recent-img" alt="Sedney">
-                    <div class="ps-3 pe-2 py-2 w-100">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-0 fw-bold">Sedney, Australia</h6>
-                            <span class="badge-hotel text-uppercase"><i class="fa-solid fa-bed"></i> Hotel</span>
+                <a href="motor_busqueda.php?accion=paso2&destino=<?= htmlspecialchars('Sydney', ENT_QUOTES, 'UTF-8') ?>&checkin=<?= htmlspecialchars($checkinDefault, ENT_QUOTES, 'UTF-8') ?>&checkout=<?= htmlspecialchars($checkoutDefault, ENT_QUOTES, 'UTF-8') ?>&huespedes=1+adulto%2C+1+habitación" class="brand-card-link">   
+                    <div class="recent-search-card d-flex align-items-center">
+                        <img src="assets/img/recent-search-02.jpg" class="recent-img" alt="Sedney">
+                        <div class="ps-3 pe-2 py-2 w-100">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-0 fw-bold">Sedney, Australia</h6>
+                                <span class="badge-hotel text-uppercase"><i class="fa-solid fa-bed"></i> Hotel</span>
+                            </div>
+                            <p class="mb-0 text-muted small">15 abr. - 19 abr.</p>
+                            <p class="mb-0 text-muted small">1 adulto</p>
                         </div>
-                        <p class="mb-0 text-muted small">15 abr. - 19 abr.</p>
-                        <p class="mb-0 text-muted small">1 adulto</p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
     <section>
-        <h2 class="fw-bold h4 mb-1">Aprovecha nuestras ofertas</h2>
+        <h2 id="ofertas" class="fw-bold h4 mb-1">Aprovecha nuestras ofertas</h2>
         <p class="text-muted mb-4">Paga a meses sin intereses, reserva ya!</p>
         
         <div class="row g-4">
@@ -219,18 +223,20 @@ include 'views/layouts/header_motor.php';
             </div>
             <?php else: ?>
             <?php foreach ($hotels as $hotel): ?>
-            <div class="col-6 col-md-3">
-                <div class="brand-card shadow-sm">
-                    <img src="<?= htmlspecialchars($hotel['imagen_principal'], ENT_QUOTES, 'UTF-8') ?>" class="bg-brand" alt="<?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?>">
-                    <div class="brand-overlay">
-                        <div class="brand-logo d-flex align-items-center justify-content-center text-center fw-bold fs-5">
-                            <?= htmlspecialchars($hotel['ciudad'], ENT_QUOTES, 'UTF-8') ?>
+                <div class="col-6 col-md-3">
+                    <a href="motor_busqueda.php?accion=paso2&destino=<?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?>&checkin=<?= htmlspecialchars($checkinDefault, ENT_QUOTES, 'UTF-8') ?>&checkout=<?= htmlspecialchars($checkoutDefault, ENT_QUOTES, 'UTF-8') ?>&huespedes=1+adulto%2C+1+habitación" class="brand-card-link">
+                    <div class="brand-card shadow-sm">
+                        <img src="<?= htmlspecialchars($hotel['imagen_principal'], ENT_QUOTES, 'UTF-8') ?>" class="bg-brand" alt="<?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?>">
+                        <div class="brand-overlay">
+                            <div class="brand-logo d-flex align-items-center justify-content-center text-center fw-bold fs-5">
+                                <?= htmlspecialchars($hotel['ciudad'], ENT_QUOTES, 'UTF-8') ?>
+                            </div>
+                            
+                            <p class="brand-title"><?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?></p>
                         </div>
-                        
-                        <p class="brand-title"><?= htmlspecialchars($hotel['nombre'], ENT_QUOTES, 'UTF-8') ?></p>
                     </div>
+                    </a>
                 </div>
-            </div>
             <?php endforeach; ?>
             <?php endif; ?>
         </div>

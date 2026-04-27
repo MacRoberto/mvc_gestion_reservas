@@ -1,6 +1,7 @@
 <?php
 
 include_once 'models/Hotel.php';
+include_once 'models/Pago.php';
 include_once 'services/PayPalService.php';
 
 class AjaxController
@@ -18,6 +19,9 @@ class AjaxController
                 break;
             case 'paypal-capture-order':
                 $this->paypalCaptureOrder();
+                break;
+            case 'procesar-pago':
+                $this->procesarPago();
                 break;
             default:
                 http_response_code(404);
@@ -76,6 +80,61 @@ class AjaxController
             echo json_encode(array(
                 'ok' => true,
                 'capture' => $captura
+            ), JSON_UNESCAPED_UNICODE);
+        } catch (RuntimeException $e) {
+            http_response_code(422);
+            echo json_encode(array(
+                'ok' => false,
+                'mensaje' => $e->getMessage()
+            ), JSON_UNESCAPED_UNICODE);
+        }
+    }
+
+    private function procesarPago()
+    {
+        try {
+            $payload = $this->obtenerJsonRequest();
+            $reservaID = isset($payload['reserva_id']) ? (int) $payload['reserva_id'] : 0;
+            $metodoPago = isset($payload['metodo_pago']) ? trim((string) $payload['metodo_pago']) : '';
+            $monto = isset($payload['monto']) ? (float) $payload['monto'] : 0;
+            $moneda = isset($payload['moneda']) ? trim((string) $payload['moneda']) : 'MXN';
+            $referencia = isset($payload['referencia']) ? trim((string) $payload['referencia']) : '';
+            $estado = isset($payload['estado']) ? trim((string) $payload['estado']) : 'pendiente';
+            $esSimulado = isset($payload['es_simulado']) ? (int) $payload['es_simulado'] : 0;
+            $fechaPago = isset($payload['fecha_pago']) && trim((string) $payload['fecha_pago']) !== ''
+                ? trim((string) $payload['fecha_pago'])
+                : date('Y-m-d H:i:s');
+            $respuestaPasarela = isset($payload['respuesta_pasarela']) ? $payload['respuesta_pasarela'] : '';
+
+            if ($reservaID <= 0 || $metodoPago === '') {
+                throw new RuntimeException('Los datos del pago son invalidos.');
+            }
+
+            if (is_array($respuestaPasarela)) {
+                $respuestaPasarela = json_encode($respuestaPasarela, JSON_UNESCAPED_UNICODE);
+            }
+
+            $pago = new Pago();
+            $guardado = $pago->guardar(
+                $reservaID,
+                $metodoPago,
+                $monto,
+                $moneda,
+                $referencia,
+                $estado,
+                $esSimulado,
+                $fechaPago,
+                (string) $respuestaPasarela
+            );
+
+            if (!$guardado) {
+                throw new RuntimeException('No se pudo guardar el historial de pago.');
+            }
+
+            echo json_encode(array(
+                'ok' => true,
+                'reserva_id' => $reservaID,
+                'estado' => $estado
             ), JSON_UNESCAPED_UNICODE);
         } catch (RuntimeException $e) {
             http_response_code(422);

@@ -198,6 +198,9 @@ class MotorController
                 
             break;
             default:
+                $fechaBase = new DateTimeImmutable('today');
+                $checkinDefault = $fechaBase->modify('+1 day')->format('Y-m-d');
+                $checkoutDefault = $fechaBase->modify('+2 day')->format('Y-m-d');
                 $hotels = $hotel->obtenerTodosConImagenPrincipal();
                 include 'views/x_motor_de_busqueda/index.php';
                 break;
