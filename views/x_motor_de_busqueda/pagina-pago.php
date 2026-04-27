@@ -261,7 +261,7 @@ $reservaId = $reservaInfo['id'];
                                             <div class="checkout-detail-label">Elegiste</div>
                                             <div class="checkout-detail-value">
                                                 <?php
-                                                 echo $reservaInfo['habitaciones']."habitaciones".' '. $reservaInfo['capacidad_adultos'].' '." Adultos";
+                                                 echo $reservaInfo['capacidad_adultos'].' '." Adultos";
                                                 ?>
                                                
                                             </div>
@@ -281,11 +281,6 @@ $reservaId = $reservaInfo['id'];
                                         <div class="collapse" id="paymentRoomDetails">
                                             <div class="checkout-room-box mt-4">
                                                 <p class="mb-1">
-                                                <strong>
-                                                    <?php
-                                                    echo $reservaInfo['habitaciones']
-                                                    ?>
-                                                </strong> 
                                                 <?php
                                                     echo $reservaInfo['tipo_habitacion'];                                                    
                                                 ?>

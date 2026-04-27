@@ -106,16 +106,10 @@
             <h2 class="fw-bold mb-1">Crear Cuenta</h2>
             <p class="text-muted small mb-4">Regístrate para obtener beneficios exclusivos en tus viajes.</p>
 
-            <form action="procesar_registro.php" method="POST">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Juan" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Apellido</label>
-                        <input type="text" name="apellido" class="form-control" placeholder="Ej: Pérez" required>
-                    </div>
+            <form action="motor_busqueda.php?accion=create-account" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" placeholder="Ej: Juan" required>
                 </div>
 
                 <div class="mb-3">

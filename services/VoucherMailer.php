@@ -21,6 +21,7 @@ class VoucherMailer
         }
 
         $mailer = new PHPMailer(true);
+        $logoSrc = 'assets/img/logo-may.png';
 
         try {
             if (($this->config['mailer'] ?? 'mail') === 'smtp') {
@@ -47,9 +48,16 @@ class VoucherMailer
             $mailer->CharSet = 'UTF-8';
             $mailer->setFrom($this->config['from_email'], $this->config['from_name']);
             $mailer->addAddress(trim($reserva['email_cliente']), trim(($reserva['nombre_cliente'] ?? '') . ' ' . ($reserva['apellidos'] ?? '')));
+
+            $logoPath = realpath(__DIR__ . '/../assets/img/logo-may.png');
+            if ($logoPath && is_file($logoPath)) {
+                $mailer->addEmbeddedImage($logoPath, 'logo_experiencias_may');
+                $logoSrc = 'cid:logo_experiencias_may';
+            }
+
             $mailer->isHTML(true);
             $mailer->Subject = 'Voucher de reserva ' . ($reserva['folio'] ?? '');
-            $mailer->Body = $this->renderizarVoucherHtml($reserva);
+            $mailer->Body = $this->renderizarVoucherHtml($reserva, $logoSrc);
             $mailer->AltBody = $this->renderizarVoucherTexto($reserva);
 
             return $mailer->send();
@@ -60,10 +68,11 @@ class VoucherMailer
         }
     }
 
-    private function renderizarVoucherHtml($reserva)
+    private function renderizarVoucherHtml($reserva, $logoSrc = 'assets/img/logo-may.png')
     {
         ob_start();
-        $reservaVoucher = $reserva;
+        $reservaInfo = $reserva;
+        $reservaInfo['logo_src'] = $logoSrc;
         include __DIR__ . '/../views/voucher/index.php';
 
         return ob_get_clean();

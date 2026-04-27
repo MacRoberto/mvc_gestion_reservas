@@ -167,7 +167,13 @@
             </h1>
         </div>
         <div class="status-info">
-            <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
+            <?php
+            $logoSrc = isset($reservaInfo['logo_src']) && $reservaInfo['logo_src'] !== ''
+                ? $reservaInfo['logo_src']
+                : 'assets/img/logo-may.png';
+            ?>
+            <img src="<?php echo htmlspecialchars($logoSrc, ENT_QUOTES, 'UTF-8'); ?>" alt="ExperienciasMay" class="em-logo">
+            
             <div class="header-status">
                 <i class="fas fa-check-circle"></i> Reserva confirmada
             </div>
@@ -230,7 +236,7 @@
                 </td>
                 <td><!-- 2 Habitación estandar (2 doble cama) -->
                     <?php
-                    echo $reservaInfo['habitaciones'].$reservaInfo['tipo_habitacion']." (".$reservaInfo['descripcion_habitacion'].$reservaInfo['cantidad_camas']."cama(s)".")"; 
+                    echo $reservaInfo['tipo_habitacion']." (".$reservaInfo['descripcion_habitacion'].$reservaInfo['cantidad_camas']."cama(s)".")"; 
                     ?>
                 </td>
                 <td><!--3 Adults, 1 Child (4 years)-->

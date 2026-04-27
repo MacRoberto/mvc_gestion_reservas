@@ -5,6 +5,7 @@ include_once 'models/Habitacion.php';
 include_once 'models/Reserva.php';
 include_once 'models/Cliente.php';
 include_once 'models/Usuario.php';
+include_once 'services/VoucherMailer.php';
 
 class MotorController
 {
@@ -182,7 +183,13 @@ class MotorController
                 $observaciones = isset($_POST['solicitudes_especiales']) ? trim((string) $_POST['solicitudes_especiales']) : null;
                 //Guardar reserva y obtener ID de reserva generada
                 $reservaID = $reserva->guardar($clienteId, $habitacionId, $fechaEntrada, $fechaSalida, $noches, $adultos, $ninos, $precioNoche, $subtotal, $total, 'pendiente', $observaciones, 'web');
-                
+
+                $voucherMailer = new VoucherMailer();
+                $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID);
+                $reservaInfo['fecha_entrada_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_entrada']), $reservaInfo['fecha_entrada']);
+                $reservaInfo['fecha_salida_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_salida']), $reservaInfo['fecha_salida']);
+                $voucherMailer->enviarVoucherReserva($reservaInfo);
+
                 header("Location: motor_busqueda.php?accion=pago&folio=".$reservaID);
                 exit();
                 break;
@@ -219,7 +226,7 @@ class MotorController
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
                 $email = isset($_POST['email']) ? $_POST['email'] : '';
-                $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+                $contrasena = isset($_POST['password']) ? $_POST['password'] : '';
                 $permiso = '';//Sin permisos para usuarios que se registran desde el motor de búsqueda
                 $estatus = 1;//Activo por default al crear cuenta desde el motor de búsqueda
                 $usuario->guardar($nombre, $telefono, $email, $contrasena,
