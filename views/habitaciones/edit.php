@@ -28,7 +28,7 @@ include 'views/layouts/menu.php';
         <label>Precio por Noche</label>
         <input type="numero" name="precio_noche" value="<?php echo $habitacionEditar['precio_noche']; ?>" required>
 
-        <label>Mondea</label>        
+        <label>Moneda</label>        
         <select name="moneda" >
         <option value="MXN" <?php echo $habitacionEditar['moneda'] == "MXN" ? 'selected' : ''; ?>>MXN</option>
         <option value="USD" <?php echo $habitacionEditar['moneda'] == "USD" ? 'selected' : ''; ?>>USD</option>
