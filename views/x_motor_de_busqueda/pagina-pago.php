@@ -4,6 +4,7 @@ $payPalConfig = require 'config/paypal.php';
 $payPalClientId = isset($payPalConfig['client_id']) ? $payPalConfig['client_id'] : '';
 $payPalCurrency = isset($payPalConfig['currency']) ? $payPalConfig['currency'] : 'MXN';
 $payPalAmount = '16728.00';
+print_r ($reservaInfo);
 ?>
 
 <main class="checkout-form-page checkout-payment-page py-4 py-lg-5">
@@ -161,26 +162,40 @@ $payPalAmount = '16728.00';
                         <h2 class="checkout-side-title mb-3">Resumen de Pago</h2>
                         <div class="checkout-summary-row">
                             <span>1 Habitacion, 2 Noches</span>
-                            <strong>$25,745 MXN</strong>
+                            <strong>
+                                <?php
+                                echo number_format($reservaInfo['precio_noche']) .' '. $reservaInfo['moneda'] ;
+                                ?>
+                            </strong>
                         </div>
                         <div class="checkout-summary-row">
                             <span>Impuestos</span>
-                            <strong>$2,903 MXN</strong>
+                            <strong>
+                                <?php
+                                echo number_format($reservaInfo['total'] - $reservaInfo['subtotal']) .' '. $reservaInfo['moneda'] ;
+                                ?>
+                            </strong>
                         </div>
-                        <div class="checkout-summary-row checkout-summary-discount">
-                            <span>Descuento</span>
-                            <strong>-$11,920 MXN</strong>
-                        </div>
+                     
                         <div class="checkout-summary-total">
                             <span>Total</span>
-                            <strong>$16,728 MXN</strong>
+                            <strong>
+                                <?php
+                                Echo number_format($reservaInfo['total']) .' '. $reservaInfo['moneda'] ;
+                                ?>  
+                            </strong>
                         </div>
                     </section>
 
                     <section class="checkout-card p-4">
                         <h2 class="checkout-side-title mb-2">Detalles de la reserva</h2>
                         <p class="checkout-payment-reservation-id mb-4">
-                            <strong>No. de reservacion: 25388944.</strong> Este numero es para cualquier asunto relacionado con tu reservacion.
+                            <strong>
+                                <?php
+                                    echo "No. de reservacion:<br>" .' ' . $reservaInfo['folio'] ; 
+                                ?>
+                            </strong>
+                             Este numero es para cualquier asunto relacionado con tu reservacion.
                         </p>
 
                         <div class="accordion checkout-accordion" id="checkoutPaymentReservationAccordion">
@@ -195,8 +210,16 @@ $payPalAmount = '16728.00';
                                 </h2>
                                 <div id="paymentHotelReservationCollapse" class="accordion-collapse collapse show" data-bs-parent="#checkoutPaymentReservationAccordion">
                                     <div class="accordion-body pt-2">
-                                        <h3 class="checkout-hotel-name">Moon Palace Cancun</h3>
-                                        <p class="checkout-location mb-2">Cancun, Mexico</p>
+                                        <h3 class="checkout-hotel-name">
+                                            <?php
+                                                echo $reservaInfo['nombre_hotel'] ;
+                                            ?>
+                                        </h3>
+                                        <p class="checkout-location mb-2">
+                                            <?php
+                                                echo $reservaInfo['ciudad'] ;
+                                            ?>
+                                        </p>
                                         <div class="checkout-stars mb-4">
                                             <i class="fa-solid fa-star"></i>
                                             <i class="fa-solid fa-star"></i>
@@ -208,22 +231,40 @@ $payPalAmount = '16728.00';
                                         <div class="row g-3 mb-3">
                                             <div class="col-sm-6">
                                                 <div class="checkout-detail-label">Llegada</div>
-                                                <div class="checkout-detail-value">Mie. 13 may 2026 15:00 hrs</div>
+                                                <div class="checkout-detail-value">
+                                                    <?php
+                                                    echo $reservaInfo['fecha_entrada_formateada'] ;
+                                                    ?>
+                                                </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="checkout-detail-label">Salida</div>
-                                                <div class="checkout-detail-value">Vie. 15 may 2026 12:00 hrs (mediodia)</div>
+                                                <div class="checkout-detail-value">
+                                                    <?php
+                                                        echo $reservaInfo['fecha_salida_formateada'] ; 
+                                                    ?>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <div class="checkout-detail-label">Duracion de la estancia</div>
-                                            <div class="checkout-detail-value">2 noches</div>
+                                            <div class="checkout-detail-value">
+                                                
+                                                <?php
+                                                    echo $reservaInfo['noches'] ;
+                                                ?>
+                                            </div>
                                         </div>
 
                                         <div class="mb-4">
                                             <div class="checkout-detail-label">Elegiste</div>
-                                            <div class="checkout-detail-value">1 habitacion, 2 adultos</div>
+                                            <div class="checkout-detail-value">
+                                                <?php
+                                                 echo $reservaInfo['habitaciones']."habitaciones".' '. $reservaInfo['capacidad_adultos'].' '." Adultos";
+                                                ?>
+                                               
+                                            </div>
                                         </div>
 
                                         <button
@@ -239,7 +280,16 @@ $payPalAmount = '16728.00';
 
                                         <div class="collapse" id="paymentRoomDetails">
                                             <div class="checkout-room-box mt-4">
-                                                <p class="mb-1"><strong>1x</strong> Superior de Lujo Vista al Jardin - No Reembolsable</p>
+                                                <p class="mb-1">
+                                                <strong>
+                                                    <?php
+                                                    echo $reservaInfo['habitaciones']
+                                                    ?>
+                                                </strong> 
+                                                <?php
+                                                    echo $reservaInfo['tipo_habitacion'];                                                    
+                                                ?>
+                                                </p>
                                                 <p class="mb-1">Todo incluido</p>
                                                 <p class="mb-0">No Reembolsable</p>
                                             </div>

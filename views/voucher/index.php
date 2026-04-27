@@ -161,11 +161,17 @@
             <p class="text-muted">Cancún, México</p>
         </div>
         <div class="status-info">
-            <img src="../../assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
+            <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
             <div class="header-status">
                 <i class="fas fa-check-circle"></i> Reserva confirmada
             </div>
-            <div class="small text-muted">Confirmacion: xxxxxxxxxxx</div>
+            <div class="small text-muted">
+                Confirmacion:
+                <?php
+                echo $reservaInfo['folio'] ;
+                ?>
+                
+            </div>
             <div class="small text-muted">PIN: xxxx</div>
         </div>
     </div>
@@ -175,13 +181,30 @@
     <div class="info-grid">
         <div class="info-box">
             <div class="detail-label">Check-in</div>
-            <div class="fw-bold">Sabado 18 de abril del 2026</div>
-            <div class="small text-muted">15:00 - 20:00</div>
+            <div class="fw-bold">
+                <?php
+                echo $reservaInfo['fecha_entrada_formateada'];
+                ?>
+                Sabado 18 de abril del 2026
+            </div>
+            <div class="small text-muted">
+                <?php
+                echo $reservaInfo['hora_checkin'];
+                ?>
+            </div>
         </div>
         <div class="info-box" style="border-left-color: #dc3545;">
             <div class="detail-label">Check-out</div>
-            <div class="fw-bold">20 de Abril del 2026</div>
-            <div class="small text-muted">11:30 - 12:00</div>
+            <div class="fw-bold">
+                <?php
+                echo $reservaInfo['fecha_salida_formateada'];
+                ?>
+            </div>
+            <div class="small text-muted">
+                <?php
+                echo $reservaInfo['hora_checkout'];
+                ?>
+            </div>
         </div>
     </div>
 
@@ -195,9 +218,21 @@
         </thead>
         <tbody>
             <tr>
-                <td>Fidel Santiago Rubio</td>
-                <td>2 Habitación estandar (2 doble cama)</td>
-                <td>3 Adults, 1 Child (4 years)</td>
+                <td>
+                    <?php
+                    echo $reservaInfo['nombre_cliente'];
+                    ?>
+                </td>
+                <td><!-- 2 Habitación estandar (2 doble cama) -->
+                    <?php
+                    echo $reservaInfo['habitaciones'].$reservaInfo['tipo_habitacion']." (".$reservaInfo['descripcion_habitacion'].$reservaInfo['cantidad_camas']."cama(s)".")"; 
+                    ?>
+                </td>
+                <td><!--3 Adults, 1 Child (4 years)-->
+                    <?php
+                    echo $reservaInfo['capacidad_adultos']. " adultos,".$reservaInfo['capacidad_ninos']. " niño(s)"  ;
+                    ?>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -206,20 +241,29 @@
         <div class="contact-info">
             <h5 class="fw-bold" style="margin-top:0;">Ubicación & Contacto</h5>
             <p class="small text-muted" style="margin-bottom: 5px;">
-                <i class="fas fa-map-marker-alt" style="color:#dc3545;"></i> 
-                25 Avenida Nte. entre 4 y 6 centro, Cancún Quintana Roo, 77520, México
+                <i class="fas fa-map-marker-alt" style="color:#dc3545;"></i>
+                <?php
+                echo $reservaInfo['direccion'];
+                ?> 
             </p>
             <p class="small text-muted">
-                <i class="fas fa-phone"></i> +52 998 789 1234
+                <i class="fas fa-phone"></i> 
+                <?php
+                echo $reservaInfo['telefono_hotel'];
+                ?>
             </p>
         </div>
         <div class="price-breakdown">
             <div class="price-row">
                 <span class="fw-bold">Precio Total:</span>
-                <span class="text-primary fw-bold">US$47.79</span>
+                <span class="text-primary fw-bold">
+                    <?php
+                    Echo number_format($reservaInfo['total']) .' '. $reservaInfo['moneda'] ;
+                    ?> 
+                </span>
             </div>
             <div class="small text-muted" style="margin-top: 10px;">
-                * Desayuno: US$9 por persona/noche
+                <!-- * Desayuno: US$9 por persona/noche -->
             </div>
         </div>
     </div>
@@ -234,7 +278,7 @@
     </div>
 
     <footer>
-        &copy; <?php echo date("Y"); ?> Hotel Fiesta Americana Grand Coral Beach | Administrado por ExperienciasMay.com
+        &copy; <?php echo date("Y"). " ".$reservaInfo['nombre_hotel']. " "; ?> | Administrado por ExperienciasMay.com
     </footer>
 </div>
 
