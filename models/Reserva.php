@@ -103,7 +103,7 @@ class Reserva
         return $consulta->fetchAll();
     }
 
-    public function obtenerDetalleVoucher($reservaId)
+    public function obtenerDetalleVoucher($reservaId, $correoCliente, $identificador)
     {
         if (!$this->conexion) {
             return array();
@@ -149,12 +149,21 @@ class Reserva
                 INNER JOIN habitaciones ON habitaciones.id = reservas.habitacion_id
                 INNER JOIN hoteles ON hoteles.id = habitaciones.hotel_id
                 LEFT JOIN pagos ON pagos.reserva_id = reservas.id AND pagos.estado = 'aprobado'
-                WHERE reservas.deleted_at IS NULL
-                  AND reservas.id = :reserva_id ";
+                WHERE reservas.deleted_at IS NULL ";
+        $params = [];
+        if ($correoCliente && $identificador) {
+            $sql .= " AND clientes.email = :correo_cliente AND reservas.folio = :identificador";
+            $params[':correo_cliente'] = $correoCliente;
+            $params[':identificador'] = $identificador;
+        }
+        else {
+            $sql .= " AND reservas.id = :id";
+            $params[':id'] = $reservaId;
+        }
 
         $consulta = $this->conexion->prepare($sql);
-        $consulta->bindParam(':reserva_id', $reservaId, PDO::PARAM_INT);
-        $consulta->execute();
+        
+        $consulta->execute($params);
 
         $resultado = $consulta->fetch();
 

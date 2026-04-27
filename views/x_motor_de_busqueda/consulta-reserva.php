@@ -14,18 +14,19 @@ include 'views/layouts/header_motor.php';
                 <div class="card p-4 card-shadow border-0">
                     <h5 class="mb-4 text-muted">Mi Reserva</h5>
                     
-                    <form action="ver_reserva.php" method="POST">
+                    <form action="motor_busqueda.php" method="GET">
+                        <input type="hidden" name="accion" value="pago">
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">✔</span>
-                                <input type="text" name="reserva_id" class="form-control" placeholder="Número de Reservación: XXX-000" required>
+                                <input type="text" name="identificador" class="form-control" placeholder="Número de Reservación: RSV-000" required>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <div class="input-group">
                                 <span class="input-group-text">✉</span>
-                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                <input type="email" name="correo" class="form-control" placeholder="Email" required>
                             </div>
                         </div>
 

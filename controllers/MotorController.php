@@ -187,7 +187,10 @@ class MotorController
                 break;
             case 'pago':
                 $reservaID = isset($_GET['folio']) ? (int) $_GET['folio'] : 0;
-                $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID);
+                $correo_cliente = isset($_GET['correo']) ? trim($_GET['correo']) : '';
+                $identificador = isset($_GET['identificador']) ? trim($_GET['identificador']) : '';
+                
+                $reservaInfo = $reserva->obtenerDetalleVoucher($reservaID, $correo_cliente, $identificador);
                 $reservaInfo['fecha_entrada_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_entrada']), $reservaInfo['fecha_entrada']);
                 $reservaInfo['fecha_salida_formateada'] = $this->formatearFechaLarga(strtotime($reservaInfo['fecha_salida']), $reservaInfo['fecha_salida']);
                 if ($reservaInfo['estado_pago'] == 'aprobado') {

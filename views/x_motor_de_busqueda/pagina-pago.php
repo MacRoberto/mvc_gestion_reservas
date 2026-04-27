@@ -2,9 +2,9 @@
 include 'views/layouts/header_motor.php';
 $payPalConfig = require 'config/paypal.php';
 $payPalClientId = isset($payPalConfig['client_id']) ? $payPalConfig['client_id'] : '';
-$payPalCurrency = isset($payPalConfig['currency']) ? $payPalConfig['currency'] : 'MXN';
-$payPalAmount = '16728.00';
-print_r ($reservaInfo);
+$payPalCurrency = isset($reservaInfo['currency']) ? $reservaInfo['currency'] : 'MXN';
+$payPalAmount = $reservaInfo['total'];
+$reservaId = $reservaInfo['id'];
 ?>
 
 <main class="checkout-form-page checkout-payment-page py-4 py-lg-5">
