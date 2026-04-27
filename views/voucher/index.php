@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserva Confirmada - Hotel Fiesta Americana Grand Coral Beach</title>
+    <title> 
+                <?php
+                echo "Reserva Confirmada -".$reservaInfo['nombre_hotel'];
+                ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -157,8 +160,11 @@
 <div class="voucher-container">
     <div class="header-section">
         <div class="hotel-info">
-            <h1>Hotel Fiesta Americana Grand Coral beach</h1>
-            <p class="text-muted">Cancún, México</p>
+            <h1>
+                <?php
+                echo $reservaInfo['nombre_hotel'];
+                ?>
+            </h1>
         </div>
         <div class="status-info">
             <img src="assets/img/logo-may.png" alt="ExperienciasMay" class="em-logo">
@@ -185,7 +191,6 @@
                 <?php
                 echo $reservaInfo['fecha_entrada_formateada'];
                 ?>
-                Sabado 18 de abril del 2026
             </div>
             <div class="small text-muted">
                 <?php
