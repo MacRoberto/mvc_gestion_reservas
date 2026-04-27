@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CR Book System - Consulta</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f8f9fa; }
-        .navbar { background-color: #007bff; }
-        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    </style>
-</head>
-<body>
 
+<?php 
+include 'views/layouts/header_motor.php';
+?>
+    <link rel="stylesheet" href="assets/css/reserva-consulta.css">
     <nav class="navbar navbar-dark mb-5">
         <div class="container">
             <span class="navbar-brand mb-0 h1">CR Book System</span>
@@ -50,5 +40,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<section>
+    <div class="espacio-footer"></div>
+</section>
+<?php
+include 'views/layouts/footer_motor.php';
+?>
+
