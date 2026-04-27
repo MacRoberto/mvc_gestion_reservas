@@ -38,7 +38,7 @@
                     <a href="#" class="footer-link">Ayuda</a>
                     <a href="#" class="footer-link">Puntos de venta ExperienciasMay</a>
                     <a href="#" class="footer-link">Facturación electrónica</a>
-                    <a href="#" class="footer-link">Consultar reservación</a>
+                    <a href="motor_busqueda.php?accion=consulta-reserva" class="footer-link">Consultar reservación</a>
                     <a href="#" class="footer-link">Modificar reservación</a>
                     <a href="#" class="footer-link">Cancelar reservación</a>
                 </div>

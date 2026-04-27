@@ -197,6 +197,9 @@ class MotorController
                 }
                 
             break;
+            case 'consulta-reserva':
+                include 'views/x_motor_de_busqueda/consulta-reserva.php';
+            break;
             default:
                 $fechaBase = new DateTimeImmutable('today');
                 $checkinDefault = $fechaBase->modify('+1 day')->format('Y-m-d');
