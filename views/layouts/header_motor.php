@@ -35,7 +35,7 @@
         </div>
 
         <nav class="d-flex gap-4 pb-2">
-            <a href="#" class="nav-category">
+            <a href="motor_busqueda.php" class="nav-category">
                 <i class="fa-solid fa-bed me-2 text-primary"></i> Alojamientos
             </a>
             <a href="#" class="nav-category">

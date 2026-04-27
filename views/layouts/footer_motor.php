@@ -47,10 +47,11 @@
                     <a href="#" class="footer-link">Nuestra historia</a>
                     <a href="#" class="footer-link">Revista Experiencias May</a>
                     <a href="#" class="footer-link">Destinos</a>
+                    <a href="login.php" class="footer-link">Inicia sesión </a>
                 </div>
                 <div class="col-md-2">
                     <h6>Proveedores</h6>
-                    <a href="#" class="footer-link">Registrar tu hotel</a>
+                    <a href="login.php" class="footer-link">Registrar tu hotel</a>
                 </div>
                 <div class="col-md-4 contact-info">
                     <h6>Contáctanos</h6>
