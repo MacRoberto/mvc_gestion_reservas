@@ -103,7 +103,7 @@ class Reserva
         return $consulta->fetchAll();
     }
 
-    public function obtenerDetalleVoucher($reservaId, $correoCliente, $identificador)
+    public function obtenerDetalleVoucher($reservaId, $correoCliente = null, $identificador = null)
     {
         if (!$this->conexion) {
             return array();

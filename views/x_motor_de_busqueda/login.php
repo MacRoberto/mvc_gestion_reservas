@@ -73,10 +73,10 @@
             <h2 class="fw-bold">Login</h2>
             <p class="text-muted small">Welcome! Login to get amazing discounts and offers only for you.</p>
 
-            <form action="auth.php" method="POST" class="mt-4">
+            <form action="motor_busqueda.php?accion=signin" method="POST" class="mt-4">
                 <div class="mb-3">
-                    <label class="form-label text-muted small">User Name</label>
-                    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    <label class="form-label text-muted small">Email</label>
+                    <input type="email" name="correo" class="form-control" placeholder="Enter email" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-muted small">Password</label>

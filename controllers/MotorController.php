@@ -4,6 +4,7 @@ include_once 'models/Hotel.php';
 include_once 'models/Habitacion.php';
 include_once 'models/Reserva.php';
 include_once 'models/Cliente.php';
+include_once 'models/Usuario.php';
 
 class MotorController
 {
@@ -13,7 +14,7 @@ class MotorController
         $habitacion = new Habitacion();
         $reserva = new Reserva();
         $cliente = new Cliente();
-
+        $usuario = new Usuario();
         switch ($accion) {
             case 'paso2':
                 $fechaBase = new DateTimeImmutable('today');
@@ -202,6 +203,43 @@ class MotorController
             break;
             case 'consulta-reserva':
                 include 'views/x_motor_de_busqueda/consulta-reserva.php';
+            break;
+            case 'login': //Aquí se muestra el formulario de login
+                include 'views/x_motor_de_busqueda/login.php';
+            break;
+            case 'registro'://Aquí se muestra el formulario de registro
+                include 'views/x_motor_de_busqueda/registro.php';
+            break;
+            case 'logout'://Aquí se procesa el logout
+                @session_start();
+                session_destroy();
+                header("Location: motor_busqueda.php");
+            break;
+            case 'create-account'://Aquí se procesa el formulario de registro
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+                $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+                $email = isset($_POST['email']) ? $_POST['email'] : '';
+                $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+                $permiso = '';//Sin permisos para usuarios que se registran desde el motor de búsqueda
+                $estatus = 1;//Activo por default al crear cuenta desde el motor de búsqueda
+                $usuario->guardar($nombre, $telefono, $email, $contrasena,
+                $permiso, $estatus);
+                header("Location: motor_busqueda.php?accion=login&registro=1");
+            break;
+            case 'signin'://Aquí se procesa el formulario de login
+                @session_start();
+                $param_usuario = isset($_POST['correo']) ? trim((string) $_POST['correo']) : '';
+                $param_password = isset($_POST['password']) ? trim((string) $_POST['password']) : '';
+                #llamar funcion de validarContraseña y pasar params
+                
+                $user_login = $usuario->validarContrasena(0, $param_usuario, $param_password);
+                if($user_login){
+                    $_SESSION['nombre'] = $user_login["nombre"];
+                    $_SESSION['email'] = $user_login["email"];
+                    header("Location: motor_busqueda.php");
+                }else{
+                    header("Location: motor_busqueda.php?accion=login&error=1");
+                }
             break;
             default:
                 $fechaBase = new DateTimeImmutable('today');
