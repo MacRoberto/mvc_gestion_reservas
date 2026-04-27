@@ -3,11 +3,10 @@
 include 'views/layouts/header_motor.php';
 ?>
     <link rel="stylesheet" href="assets/css/reserva-consulta.css">
-    <nav class="navbar navbar-dark mb-5">
-        <div class="container">
-            <span class="navbar-brand mb-0 h1">CR Book System</span>
-        </div>
-    </nav>
+    
+    <section>
+    <div class="espacio"></div>
+    </section>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -41,7 +40,7 @@ include 'views/layouts/header_motor.php';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <section>
-    <div class="espacio-footer"></div>
+    <div class="espacio"></div>
 </section>
 <?php
 include 'views/layouts/footer_motor.php';
