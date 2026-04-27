@@ -299,7 +299,7 @@ include 'views/layouts/header_motor.php';
                 <p class="mb-4"><strong>Ahorra hasta 10%</strong> en tu próximo viaje comprando con tu cuenta en ExperienciasMay</p>
                 <div class="d-flex gap-3">
                     <button class="btn-pt-primary" onclick="location.href='motor_busqueda.php?accion=login'">Iniciar sesión</button>
-                    <button class="btn-pt-outline">Crear cuenta</button>
+                    <button class="btn-pt-outline" onclick="location.href='motor_busqueda.php?accion=registro'">Crear cuenta</button>
                 </div>
             </div>
         </div>

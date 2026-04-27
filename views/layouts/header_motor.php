@@ -1,3 +1,6 @@
+<?php
+@session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,9 +31,20 @@
                     <i class="fa-solid fa-phone me-2"></i>
                     <span>Para reservar <strong>+52 998145368</strong></span>
                 </div>
-                <button class="login-btn d-flex align-items-center gap-2">
-                    Iniciar sesión <i class="fa-solid fa-bars"></i>
-                </button>
+                <?php if(isset($_SESSION['nombre'])): ?>
+                    <div class="dropdown">
+                        <button class="login-btn d-flex align-items-center gap-2" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i> <?= $_SESSION['nombre'] ?>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="motor_busqueda.php?accion=logout">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <button class="login-btn d-flex align-items-center gap-2" onclick="location.href='motor_busqueda.php?accion=login'">
+                        Iniciar sesión <i class="fa-solid fa-bars"></i>
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
 

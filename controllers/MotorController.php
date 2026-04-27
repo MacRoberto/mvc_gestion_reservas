@@ -233,7 +233,7 @@ class MotorController
                 #llamar funcion de validarContraseña y pasar params
                 
                 $user_login = $usuario->validarContrasena(0, $param_usuario, $param_password);
-                if($user_login){
+                if($user_login && $user_login['permiso'] === ''){//Solo se permite el acceso a usuarios sin permisos (usuarios registrados desde el motor de búsqueda)
                     $_SESSION['nombre'] = $user_login["nombre"];
                     $_SESSION['email'] = $user_login["email"];
                     header("Location: motor_busqueda.php");
