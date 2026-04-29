@@ -95,7 +95,7 @@
                 </div>
 
                 <div class="mt-4 d-flex justify-content-between small">
-                    <span>New User? <a href="#" class="text-decoration-none">Signup</a></span>
+                    <span>New User? <a href="http://localhost/mvc_gestion_reservas/motor_busqueda.php?accion=registro#" class="text-decoration-none">Signup</a></span>
                     <a href="#" class="text-muted text-decoration-none">Forgot your password?</a>
                 </div>
             </form>

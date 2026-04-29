@@ -52,13 +52,13 @@
             <a href="motor_busqueda.php" class="nav-category">
                 <i class="fa-solid fa-bed me-2 text-primary"></i> Alojamientos
             </a>
-            <a href="#" class="nav-category">
+            <a href="https://www.skyscanner.com.mx/?gclsrc=aw.ds&&utm_source=google&utm_medium=cpc&utm_campaign=MX-Flights-Search-ES-Generics-New&utm_term=vuelos&associateID=SEM_FLI_19465_00000&campaign_id=19652262208&adgroupid=154370717508&keyword_id=kwd-10382701&gad_source=1&gad_campaignid=19652262208&gbraid=0AAAAAD3oWFgcfG8uUjkBN_CjmjdiFrbgL&gclid=Cj0KCQjwkrzPBhCqARIsAJN460nnMpa61f4FB6B1MxOZm5hVQkhgnb0OZ_fVYruVR5r96nDtRCzXFqMaAk2REALw_wcB" class="nav-category">
                 <i class="fa-solid fa-plane me-2"></i> Vuelos
             </a>
             <a href="#" class="nav-category">
                 <i class="fa-solid fa-suitcase me-2"></i> Hotel + Vuelo
             </a>
-            <a href="#" class="nav-category">
+            <a href="https://disneyworld.disney.go.com/es-mx/?ef_id=Cj0KCQjwkrzPBhCqARIsAJN460n0ZNtZJo5LrUaleD36v3MoY2q94YSr5TVnpcQWb7HmV2CqNzKV0W8aAgKGEALw_wcB:G:s&s_kwcid=AL!5071!3!787404213549!e!!g!!disney%20world!639371519!188583498223&CMP=KNC-FY26_WDW_TRA_MEX_WB2LA_RES_RSG_WDWBrand|G|5251851.CL.AM.01.01|M2SJ8KJ|BR|787404213549&keyword_id=kwd-12193621|dc|disney%20world|787404213549|e|5071:3|&gad_source=1&gad_campaignid=639371519&gbraid=0AAAAAD_M-kbiceUIi2TK6gAKx2KbBeXmI&gclid=Cj0KCQjwkrzPBhCqARIsAJN460n0ZNtZJo5LrUaleD36v3MoY2q94YSr5TVnpcQWb7HmV2CqNzKV0W8aAgKGEALw_wcB" class="nav-category">
                 <i class="fa-solid fa-face-smile me-2"></i> Disney
             </a>
             <a href="#ofertas" class="nav-category">
