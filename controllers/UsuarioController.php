@@ -1,10 +1,71 @@
+
 <?php
+
+include_once 'models/Usuario.php';
 
 class UsuarioController
 {
     public function procesar($accion)
     {
-        $titulo = 'Usuarios';
-        include 'views/usuarios/index.php';
+        $usuario = new Usuario();
+
+        if ($accion == 'nuevo') {
+            $titulo = 'Nuevo usuario';
+            include 'views/usuarios/create.php';
+        } elseif ($accion == 'guardar') {
+            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+            $telefono = isset($_POST['numero']) ? $_POST['numero'] : '';
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';
+            $permiso = isset($_POST['permiso']) ? $_POST['permiso'] : '';
+            $estatus = isset($_POST['activo']) ? $_POST['activo'] : '';
+           
+
+            $usuario->guardar($nombre, $telefono, $email, $contrasena,
+             $permiso, $estatus);
+
+            header('Location: usuarios.php');
+            exit;
+        } elseif ($accion == 'editar') {
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $usuarioEditar = $usuario->obtenerPorId($id);
+            $titulo = 'Editar usuario';
+            include 'views/usuarios/edit.php';
+        } elseif ($accion == 'actualizar') {
+
+            $id = isset($_POST['id']) ? $_POST['id'] : 0;
+            $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+            $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : '';
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : '';//Contraseña actual del usuario en la bd
+            $contrasena_nueva = isset($_POST['contrasena_nueva']) ? $_POST['contrasena_nueva'] : '';
+            $permiso = isset($_POST['permiso']) ? $_POST['permiso'] : '';
+            $activo = isset($_POST['activo']) ? $_POST['activo'] : '';
+            $cambiar_pwd = isset($_POST['cambiar_password']) ? $_POST['cambiar_password'] : 0;
+            if ($cambiar_pwd == 1 && !$usuario->validarContrasena($id, "", $contrasena)) {
+                header('Location: usuarios.php?accion=editar&id=' . $id . '&error=1');
+                exit;
+            }
+            $usuario->actualizar($id, $nombre, $telefono, $email,
+            $permiso, $activo, $contrasena_nueva, $cambiar_pwd);
+            header('Location: usuarios.php?accion=editar&id=' . $id);
+            exit;
+        } elseif ($accion == 'eliminar') {
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+
+            $usuario->eliminar($id);
+            header('Location: usuarios.php');
+            exit;
+        } else {
+
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
+            $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+            $usuarios = $usuario->obtenerTodos($campo, $busqueda);//>Consultas
+            $titulo = 'Lista de usuarios';
+
+            include 'views/usuarios/index.php';
+        }
     }
 }
+
+            

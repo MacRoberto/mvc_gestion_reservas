@@ -1,10 +1,136 @@
 <?php
 
+include_once 'models/Reserva.php';
+include_once 'models/Habitacion.php';
+include_once 'models/Pago.php';
+include_once 'services/VoucherMailer.php';
+
+
 class ReservaController
 {
     public function procesar($accion)
     {
-        $titulo = 'Reservas';
-        include 'views/reservas/index.php';
+        $reserva = new Reserva();
+        $habitacion = new Habitacion();
+        $pago = new Pago();
+        if ($accion == 'nuevo') {
+            $reserva = new Reserva();
+            $reserva = $reserva->obtenerTodos();
+            $titulo = 'Nuevo habitacion';
+            include 'views/reservas/create.php';
+        } elseif ($accion == 'guardar') {
+            $folio = isset($_POST['folio']) ? $_POST['folio']: '';
+            $cliente_id = isset($_POST['cliente_id']) ? $_POST['cliente_id']: '';
+            $habitacion_id = isset($_POST['habitacion_id']) ? $_POST['habitacion_id']: '';
+            $fecha_entrada = isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada']: '';
+            $fecha_salida = isset($_POST['fecha_salida']) ? $_POST['fecha_salida']: '';
+            $noches = isset($_POST['noches']) ? $_POST['noches']: '';
+            $adultos = isset($_POST['adultos']) ? $_POST['adultos']: '';
+            $ninos = isset($_POST['ninos']) ? $_POST['ninos']: '';
+            $precio_noche = isset($_POST['precio_noche']) ? $_POST['precio_noche']: '' ;
+            $subtotal = isset($_POST['subtotal']) ? $_POST['subtotal'] : '' ;
+            $total = isset($_POST['total']) ? $_POST['total'] : '';
+            $estado_reserva = isset($_POST['estado_reserva']) ? $_POST['estado_reserva'] : '';
+            $observaciones = isset($_POST['observaciones']) ? $_POST['observaciones'] : '';
+            $origen = isset($_POST['origen']) ? $_POST['origen'] : '';
+
+            $reserva->guardar($folio, $cliente_id, $habitacion_id, $fecha_entrada, $fecha_salida, $noches, $adultos,
+            $ninos, $precio_noche, $subtotal, $total, $estado_reserva, $observaciones, $origen);
+            
+            header('location: reservas.php');
+            exit;
+            
+        } elseif ($accion == 'editar') {
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $reservasEditar = $reserva->obtenerPorId($id);
+            $habitaciones = $habitacion->obtenerPorHotelId($reservasEditar[0]['hotel_id']);
+            $titulo = 'Editar reservas';
+            include 'views/reservas/edit.php';
+        } elseif ($accion == 'actualizar') {
+            $id_reserva = isset($_POST['id']) ? $_POST['id']: 0;
+            $cliente_id = isset($_POST['cliente_id']) ? $_POST['cliente_id']: '';
+            $nombre = isset($_POST['nombre_cliente']) ? $_POST['nombre_cliente']: '';
+            $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos']: '';
+            $habitacion_id = isset($_POST['tipo_habitacion']) ? $_POST['tipo_habitacion']: '';
+            $fecha_entrada = isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada']: '';
+            $fecha_salida = isset($_POST['fecha_salida']) ? $_POST['fecha_salida']: '';
+            $noches = isset($_POST['noches']) ? $_POST['noches']: '';
+            $adultos = isset($_POST['adultos']) ? $_POST['adultos']: '';
+            $ninos = isset($_POST['ninos']) ? $_POST['ninos']: '';
+            $precio_noche = isset($_POST['precio_noche']) ? $_POST['precio_noche']: '' ;
+            $subtotal = isset($_POST['subtotal']) ? $_POST['subtotal'] : '' ;
+            $total = isset($_POST['total']) ? $_POST['total'] : '';
+
+            //Invocar/llamar funcion
+            $reserva->actualizar($id_reserva, $cliente_id,$nombre, $apellidos, $habitacion_id, 
+            $fecha_entrada, $fecha_salida, $noches, $adultos, $ninos, $precio_noche, $subtotal, $total);
+
+            header('location: reservas.php');
+            exit;
+
+        }elseif ($accion == 'enviar-voucher') {
+            $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+            $detalleReserva = $reserva->obtenerDetalleVoucher($id);
+
+            if (empty($detalleReserva)) {
+                header('Location: reservas.php?mensaje=' . urlencode('No se encontro la reserva para generar el voucher.') . '&tipo=error');
+                exit;
+            }
+
+            try {
+                $voucherMailer = new VoucherMailer();
+                $detalleReserva['fecha_entrada_formateada'] = $this->formatearFechaLarga(strtotime($detalleReserva['fecha_entrada']), $detalleReserva['fecha_entrada']);
+                $detalleReserva['fecha_salida_formateada'] = $this->formatearFechaLarga(strtotime($detalleReserva['fecha_salida']), $detalleReserva['fecha_salida']);
+                
+                $voucherMailer->enviarVoucherReserva($detalleReserva);
+
+                header('Location: reservas.php?mensaje=' . urlencode('Voucher enviado a ' . $detalleReserva['email_cliente']) . '&tipo=ok');
+                exit;
+            } catch (RuntimeException $e) {
+                header('Location: reservas.php?mensaje=' . urlencode($e->getMessage()) . '&tipo=error');
+                exit;
+            }
+        }elseif($accion == 'historial'){
+            //recuperar la informacion enviado desde la vista
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos'; //recibe el nombre de la columna donde se hace el filtro.
+            $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : ''; //el valor de la busqueda.
+            //Almacenar en la variable $detallePago el resultado de la funcion obtenerDetallePago
+            $detallePago = $pago->obtenerDetallePago($id, $campo, $busqueda);
+            $titulo = 'Historial de Pago';
+
+            include 'views/pagos/index.php';
+        } else {
+            $campo = isset($_GET['campo']) ? $_GET['campo'] : 'todos';
+            $busqueda = isset($_GET['busqueda']) ? trim($_GET['busqueda']) : '';
+            $reservas = $reserva->obtenerTodos($campo, $busqueda);
+            
+            $titulo = 'Lista de reservas';
+            include 'views/reservas/index.php';
+        }
+    }
+
+    public function formatearFechaLarga($timestamp, $fallback)
+    {
+        if (!$timestamp) {
+            return $fallback;
+        }
+
+        $meses = array(
+            1 => 'enero',
+            2 => 'febrero',
+            3 => 'marzo',
+            4 => 'abril',
+            5 => 'mayo',
+            6 => 'junio',
+            7 => 'julio',
+            8 => 'agosto',
+            9 => 'septiembre',
+            10 => 'octubre',
+            11 => 'noviembre',
+            12 => 'diciembre'
+        );
+
+        return date('d', $timestamp) . ' de ' . $meses[(int) date('n', $timestamp)] . ' de ' . date('Y', $timestamp);
     }
 }
