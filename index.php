@@ -1,6 +1,7 @@
 <?php
 
 include 'config/errors.php';
+<<<<<<< Updated upstream
 include 'views/layouts/header.php';
 include 'views/layouts/menu.php';
 ?>
@@ -17,7 +18,11 @@ include 'views/layouts/menu.php';
         <div class="tarjeta"><a href="login.php">Login</a></div>
     </div>
 </div>
+=======
+include 'controllers/MotorController.php';
 
-<?php
-include 'views/layouts/footer.php';
-?>
+$accion = isset($_GET['accion']) ? $_GET['accion'] : 'index';
+>>>>>>> Stashed changes
+
+$controlador = new MotorController();
+$controlador->procesar($accion);
